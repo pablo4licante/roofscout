@@ -3,28 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultados | RoofScout</title>
+    <title>Buscador | RoofScout</title>
 </head>
 <body>
-    <div class="overlay" id="overlay"></div>
-    <div class="popup" id="popup">
-        <h2>Contact Seller</h2>
-        <form>
-            <label for="name">Name:</label><br>
-            <input type="text" id="name" name="name" required><br><br>
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" required><br><br>
-            <label for="message">Message:</label><br>
-            <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
-            <input type="submit" value="Send Message">
-        </form>
-    </div>
-    <script>
-        // JavaScript to toggle popup and overlay
-        function togglePopup() {
-            document.getElementById('popup').classList.toggle('active');
-            document.getElementById('overlay').classList.toggle('active');
-        }
-    </script>
+
+    <header>
+        <h1>RoofScout.</h1>
+        <nav>
+          <ul>
+            <li><a href="../index.html">Inicio</a></li>
+            <li><a href="../html/mensajes.html">Centro de Mensajes</a></li>
+            <li><a href="../html/busqueda.html">Busqueda Avanzada</a></li>
+            <li><a href="../html/perfil.html">Perfil</a></li>
+          </ul>
+        </nav>
+      </header>
+
+
+    <form action="./html/busqueda.html" method="get">
+      <input type="text" name="query" placeholder="Titulo de Anuncio"><br><br>
+
+    <p>&iquest;Qu&eacute; buscas?</p>
+        <label for="tipo">Tipo de Anuncio</label>
+        <select name="tipo" id="tipo">
+            <option value="alquiler">Alquiler</option>
+            <option value="venta">Venta</option>
+        </select><br><br>
+
+        <label for="tipo_vivienda">Tipo de Vivienda:</label>
+        <select name="tipo_vivienda" id="tipo_vivienda">
+            <option value="vivienda">Vivienda</option>
+            <option value="obra_nueva">Obra Nueva</option>
+            <option value="oficina">Oficina</option>
+            <option value="local">Local</option>
+            <option value="garaje">Garaje</option>
+        </select><br><br>
+
+        <p>Localizacion</p>
+        <label for="ciudad">Ciudad:</label>
+        <input type="text" name="ciudad" id="ciudad" placeholder="Ciudad"><br><br>
+
+        <label for="pais">País:</label>
+        <input type="text" name="pais" id="pais" placeholder="País"><br><br>
+
+        <p>Precio entre</p>        
+        <label for="precio_min">Mínimo:</label>
+        <input type="number" name="precio_min" id="precio_min" placeholder="Precio Mínimo"><br><br>
+
+        <label for="precio_max">Máximo:</label>
+        <input type="number" name="precio_max" id="precio_max" placeholder="Precio Máximo"><br><br>
+
+        <p>Fecha de publicacion</p>
+        <label for="fecha_inicio">Fecha Inicio:</label>
+        <input type="date" name="fecha_inicio" id="fecha_inicio"><br><br>
+
+        <label for="fecha_fin">Fecha Fin:</label>
+        <input type="date" name="fecha_fin" id="fecha_fin"><br><br>
+
+      <button type="submit">Buscar</button>
+
+    </form>
+
+    <h3>2 Resultado</h3>
+
+    <article class="card"></article>
+        <a href="./anuncio.html">
+          <img src="/images/1.jpg" alt="Card Image" class="card-img">
+          <div class="card-content">
+            <h3>Piso en C/ Vistahermosa 16</h3>
+            <p>Alicante, Espa&#241;a</p>
+            <h2>600€/mes</h2>
+            <p>18/08/2024</p>
+          </div>
+        </a>
+      </article>
+
+      <article class="card"></article>
+        <a href="./login.html">
+          <img src="/images/1.jpg" alt="Card Image" class="card-img">
+          <div class="card-content">
+            <h3>Piso en C/ Vistahermosa 16</h3>
+            <p>Alicante, Espa&#241;a</p>
+            <h2>600€/mes</h2>
+            <p>18/08/2024</p>
+          </div>
+        </a>
+      </article>
+
+
+      <nav>
+        <ul>
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../html/mensajes.html">Centro de Mensajes</a></li>
+          <li><a href="../html/busqueda.html">Busqueda Avanzada</a></li>
+          <li><a href="../html/perfil.html">Perfil</a></li>
+        </ul>
+      </nav>
+      <footer>
+        <p>Leyre Wollstein y Pablo Alicante <br> &copy; 2024 RoofScout. Todos los derechos reservados.</p>
+      </footer>
 </body>
 </html>
