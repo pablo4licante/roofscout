@@ -12,7 +12,7 @@ Carpeta **html**:
 - **login.html**: Tiene el formulario de inicio de sesión.
 - **registro.html**: Posee el formulario para el registro de un nuevo usuario.
 - **perfil.html**: Información del usuario que ha iniciado sesión, además de los anuncios que ha publicado.
-- **busqueda.html**: Filtro avanzado para realizar una búsqueda específica, por parámetros commo el tipo de vivienda, su precio, etc...
+- **busqueda.html**: Filtro avanzado para realizar una búsqueda específica, por parámetros como el tipo de vivienda, su precio, etc...
 - **resultado-busqueda.html**: Mismo formulario de filtro avanzado que en busqueda.html, pero mostrando los resultados obtenidos de esa búsqueda.
 - **anuncio.html**: Información de un anuncio concreto, al que se ha accedido mediante un click, por donde también se puede contactar con el anunciante e incluso enviar un mensaje.
 - **anuncio-enviarmensaje.html**: Formulario para enviar mensaje al anunciante indicando el asunto y tipo de mensaje.
