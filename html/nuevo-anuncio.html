@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Anuncio  | RoofScout</title>
+</head>
+<body>
+    <h1>RoofScout.</h1>
+        <nav>
+            <ul>
+              <li><a href="../index.html">Inicio</a></li>
+              <li><a href="../html/mensajes.html">Centro de Mensajes</a></li>
+              <li><a href="../html/busqueda.html">Busqueda Avanzada</a></li>
+              <li><a href="../html/perfil.html">Perfil</a></li>
+            </ul>
+          </nav>
+      </header>
+    <h1>Nuevo Anuncio</h1>
+    <form action="/submit-anuncio" method="post" enctype="multipart/form-data">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" required>
+        <br>
+
+        <label for="tipo">Tipo de Anuncio:</label>
+        <select id="tipo" name="tipo" required>
+          <option value="">Seleccione un tipo</option>
+          <option value="alquiler">Alquiler</option>
+          <option value="venta">Venta</option>
+        </select>
+        <br>
+
+        <label for="tipo_vivienda">Tipo de Vivienda:</label>
+        <select id="tipo_vivienda" name="tipo_vivienda" required>
+          <option value="">Seleccione un tipo de vivienda</option>
+          <option value="vivienda">Vivienda</option>
+          <option value="obra_nueva">Obra Nueva</option>
+          <option value="oficina">Oficina</option>
+          <option value="local">Local</option>
+          <option value="garaje">Garaje</option>
+        </select>
+        <br>
+
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+        <br>
+
+        <label for="foto-principal">Foto Principal:</label>
+        <input type="file" id="foto-principal" name="foto-principal" accept="image/*" required>
+        <br>
+
+        <label for="galeria-fotos">Galería de Fotos:</label>
+        <input type="file" id="galeria-fotos" name="galeria-fotos[]" accept="image/*" multiple>
+        <br>
+
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" name="precio" required>
+        <br>
+
+        <label for="ciudad">Ciudad:</label>
+        <select id="ciudad" name="ciudad" required>
+            <option value="">Seleccione una ciudad</option>
+            <option value="Madrid">Madrid</option>
+            <option value="Barcelona">Barcelona</option>
+            <option value="Valencia">Valencia</option>
+            <option value="Sevilla">Sevilla</option>
+            <option value="Zaragoza">Zaragoza</option>
+            <option value="Málaga">Málaga</option>
+            <option value="Murcia">Murcia</option>
+            <option value="Palma">Palma</option>
+            <option value="Las Palmas">Las Palmas</option>
+            <option value="Bilbao">Bilbao</option>
+        </select>
+        <br>
+
+        <label for="pais">País:</label>
+        <select id="pais" name="pais" required>
+            <option value="">Seleccione un país</option>
+            <option value="España">España</option>
+        </select>
+        <br>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <nav>
+        <ul>
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../html/mensajes.html">Centro de Mensajes</a></li>
+          <li><a href="../html/busqueda.html">Busqueda Avanzada</a></li>
+          <li><a href="../html/perfil.html">Perfil</a></li>
+        </ul>
+      </nav>
+<footer>
+  <p>Leyre Wollstein y Pablo Alicante <br> &copy; 2024 RoofScout. Todos los derechos reservados.</p>
+</footer>
+</body>
+</html>
