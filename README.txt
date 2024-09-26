@@ -33,3 +33,5 @@ Carpeta html:
 
 - mensajes.html: Centro de mensajes donde se muestran los mensajes enviados y respuestas recibidas de cada uno de los anunciantes contactados.
 
+- nuevo-anuncio.html: Pagina formulario para crea un nuevo anuncio.
+
