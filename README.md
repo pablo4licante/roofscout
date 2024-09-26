@@ -17,3 +17,4 @@ Carpeta **html**:
 - **anuncio.html**: Información de un anuncio concreto, al que se ha accedido mediante un click, por donde también se puede contactar con el anunciante e incluso enviar un mensaje.
 - **anuncio-enviarmensaje.html**: Formulario para enviar mensaje al anunciante indicando el asunto y tipo de mensaje.
 - **mensajes.html**: Centro de mensajes donde se muestran los mensajes enviados y respuestas recibidas de cada uno de los anunciantes contactados.
+- **nuevo-anuncio.html**: Pagina formulario para crear un nuevo anuncio.
