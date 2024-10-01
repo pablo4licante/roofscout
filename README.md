@@ -3,7 +3,6 @@ Roof Scout es el proyecto de Desarrollo de Aplicaciones Web (Ingenieria Multimed
 
 Accede al proyecto hosteado en [RoofScout.one](https://roofscout.one)
 
-
 En esta entrega se pueden observar los siguientes archivos:
 - **index.html**: Contiene la página inicial de la aplicación, con una búsqueda rápida, una barra de navegación que se encuentra en el resto de las páginas (con opciones como volver al inicio, visualizar el centro de mensajes, hacer una búsqueda avanzada y ver el perfil del usuario), además de los 5 últimos anuncios publicados.
 
@@ -18,3 +17,7 @@ Carpeta **html**:
 - **anuncio-enviarmensaje.html**: Formulario para enviar mensaje al anunciante indicando el asunto y tipo de mensaje.
 - **mensajes.html**: Centro de mensajes donde se muestran los mensajes enviados y respuestas recibidas de cada uno de los anunciantes contactados.
 - **nuevo-anuncio.html**: Pagina formulario para crear un nuevo anuncio.
+- **solicitar-folleto.html**: Página con un formulario para solicitar un folleto publicitario.
+- **respuesta-solicitar-folleto.html**: Página que simula la respuesta a la solicitud de un folleto publicitario.
+- **respuesta-mensaje.html**: Página que simula la respuesta de un mensaje enviado con éxito.
+
