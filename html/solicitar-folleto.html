@@ -57,7 +57,7 @@ Creado por: Pablo Alicante y Leyre Wollstein el 1/10/2024
           <br>
       
           <label for="numero">Número:</label>
-          <input type="text" id="numero" name="numero" class="form-control" required>
+          <input type="number" id="numero" name="numero" class="form-control" required>
       
           <br>
       
@@ -67,7 +67,7 @@ Creado por: Pablo Alicante y Leyre Wollstein el 1/10/2024
           <br>
       
           <label for="codigo-postal">Código Postal:</label>
-          <input type="text" id="codigo-postal" name="codigo-postal" class="form-control" required>
+          <input type="number" id="codigo-postal" name="codigo-postal" class="form-control" required>
       
           <br>
       
@@ -99,7 +99,7 @@ Creado por: Pablo Alicante y Leyre Wollstein el 1/10/2024
       
           <!-- Teléfono -->
           <label for="telefono">Teléfono (Opcional):</label>
-          <input type="tel" id="telefono" name="telefono" class="form-control">
+          <input type="number" id="telefono" name="telefono" class="form-control">
       
           <br>
       
@@ -153,43 +153,60 @@ Creado por: Pablo Alicante y Leyre Wollstein el 1/10/2024
               <option value="con-precio">Con Precio</option>
               <option value="sin-precio">Sin Precio</option>
           </select>
-      
-          <br>
-      
-          <!-- Tabla de tarifas -->
-          <h3>Tabla de Tarifas</h3>
-          <table>
-              <thead>
-                  <tr>
-                      <th>Número de Páginas</th>
-                      <th>Número de Fotos</th>
-                      <th>Impresión</th>
-                      <th>Resolución</th>
-                      <th>Precio (€)</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                      <td>10</td>
-                      <td>5</td>
-                      <td>A Color</td>
-                      <td>300 DPI</td>
-                      <td>15.00</td>
-                  </tr>
-                  <tr>
-                      <td>20</td>
-                      <td>10</td>
-                      <td>Blanco y Negro</td>
-                      <td>600 DPI</td>
-                      <td>20.00</td>
-                  </tr>
-                  <!-- Agregar más tarifas según sea necesario -->
-              </tbody>
-          </table>
-      
           <!-- Botón de envío -->
           <button type="submit">Enviar Solicitud</button>
       </form>
+
+      <!-- Tabla de tarifas -->
+      <h3>Tabla de Tarifas</h3>
+      <table>
+          <thead>
+              <tr>
+                  <th>Concepto</th>
+                  <th>Tarifa</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>Coste procesamiento y envío</td>
+                  <td>10 &euro;</td>
+              </tr>
+              <tr>
+                  <td>&lt; 5 paginas</td>
+                  <td>2 &euro; por pag.</td>
+              </tr>
+              <tr>
+                <td>entre 5 y 10 paginas</td>
+                <td>1.8 &euro; por pag.</td>
+              </tr>
+              <tr>
+                <td>&gt; 10 paginas</td>
+                <td>1.6 &euro; por pag.</td>
+              </tr>
+              <tr>
+                <td>Blanco y negro</td>
+                <td>0 &euro;</td>
+              </tr>
+              <tr>
+                <td>Blanco y negro</td>
+                <td>0 &euro;</td>
+              </tr>
+              <tr>
+                <td>Color</td>
+                <td>0.5 &euro; por foto</td>
+              </tr>
+              <tr>
+                <td>Resolucion &le; 300 dpi</td>
+                <td>0 &euro; por foto</td>
+              </tr>
+              <tr>
+                <td>Resolucion &gt; 300 dpi</td>
+                <td>0.2 &euro; por foto</td>
+              </tr>
+              <!-- Agregar más tarifas según sea necesario -->
+          </tbody>
+      </table>
+  
 
     <nav>
       <ul>
