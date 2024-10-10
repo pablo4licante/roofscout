@@ -331,3 +331,21 @@ footer {
             background-color: #38bfd7;
         }
     }
+
+    table {
+        width: 20rem;
+        border-collapse: collapse;
+      }
+      
+    th {
+        background-color: #d3d3d3; /* Fondo gris */
+        font-weight: bold; /* Texto en negrita */
+        border: 1px solid black; /* Borde negro sólido de 1px */
+        padding: 8px;
+    }
+      
+    td {
+        border: 1px solid black; /* Borde negro sólido de 1px */
+        padding: 8px;
+    }
+      
