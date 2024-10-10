@@ -3,8 +3,7 @@ form {
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    
-    width: calc(100% - 2rem);
+    width: min(40rem, 80%);
 }
 
 form p {
@@ -22,8 +21,6 @@ form label {
 form input[type="text"],
 form input[type="number"],
 form input[type="date"],
-form input[type="password"],
-form input[type="email"],
 form select {
     width: calc(100% - 20px);
     padding: 10px;
@@ -32,10 +29,6 @@ form select {
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 1em;
-}
-
-form textarea {
-    width: 100%;
 }
 
 form button {
@@ -48,7 +41,6 @@ form button {
     font-size: 1.2em;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: .8rem;
 }
 
 form button:hover {
