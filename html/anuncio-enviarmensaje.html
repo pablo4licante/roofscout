@@ -29,26 +29,25 @@ Creado por: Pablo Alicante y Leyre Wollstein el 23/09/2024
       </header>
 
 
-     <div class="photo_banner">
-      <h2>Alquiler en C/ Vistahermosa 16</h2>
-      <p>Obra nueva</p>
-    <h3>Alicante, Espa&ntilde;a</h3>
-    <img src="../images/11.jpg" alt="Foto principal">
-    <p>Esta hermosa casa familiar cuenta con 4 dormitorios, 3 baños, una sala de estar espaciosa y una cocina moderna. El patio trasero es perfecto para entretenerse con un gran patio y una piscina.</p>
-    <p>18/08/2024</p>
-    
-    <h3>600€/mes</h3>
-    
-    <p>4 Hab. | 2 Aseos | 74m2</p>
-  </div>
-
-    <div class="publisher-info" onclick="location.href='./perfil.html'" style="cursor: pointer;"></div>
-      <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/40b92106-a3e0-4718-bd89-8aa6ab3bd1b5/d5rpb6y-a9d12a13-957b-46d8-bb95-4cd1a2ac1407.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzQwYjkyMTA2LWEzZTAtNDcxOC1iZDg5LThhYTZhYjNiZDFiNVwvZDVycGI2eS1hOWQxMmExMy05NTdiLTQ2ZDgtYmI5NS00Y2QxYTJhYzE0MDcuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.uv4zuGfz1SrgZ7dDtrb09k4ZPYBUKkwbdYr9KNmEsPE" alt="Foto del Publicador" class="publisher-img">
-      <p>Juan Miranda</p>
+      <div id="photo_banner">
+        <h2>Alquiler en C/ Vistahermosa 16</h2>
+        <p>Obra nueva</p>
+      <h3>Alicante, Espa&ntilde;a</h3>
+      <img src="../images/11.jpg" alt="Foto principal">
+      <p>Esta hermosa casa familiar cuenta con 4 dormitorios, 3 baños, una sala de estar espaciosa y una cocina moderna. El patio trasero es perfecto para entretenerse con un gran patio y una piscina.</p>
+      <p>18/08/2024</p>
+      
+      <h3>600€/mes</h3>
+      
+      <p>4 Hab. | 2 Aseos | 74m2</p>
+      
     </div>
 
+  <div id="publisher_info">
+    <img src="https://picsum.photos/200" onclick="location.href='./perfil.html'" alt="Foto del Publicador" class="publisher_img">
+    <p>Juan Miranda</p>
     <form action="../html/respuesta-mensaje.html" method="post">
-
+  
         <label for="message-type">Tipo de Mensaje:</label>
         <select id="message-type" name="message-type" required>
             <option value="" disabled selected>Seleccione una opción</option>
@@ -62,6 +61,8 @@ Creado por: Pablo Alicante y Leyre Wollstein el 23/09/2024
         <br>
         <button type="submit">Enviar Mensaje</button>
     </form>
+  </div>
+
 
     <div id="galeria_fotos"> 
         <h3>Galería de Fotos</h3>
