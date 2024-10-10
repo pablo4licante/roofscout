@@ -11,6 +11,7 @@ Creado por: Pablo Alicante y Leyre Wollstein el 23/09/2024
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscador | RoofScout</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/busqueda.css" media="screen">
     <link href="../css/global.css" rel="stylesheet" media="screen">
 </head>
 <body class="inter">
@@ -26,11 +27,12 @@ Creado por: Pablo Alicante y Leyre Wollstein el 23/09/2024
         </nav>
       </header>
 
-
-    <form action="../html/resultado-busqueda.html" method="get">
+  <form action="../html/resultado-busqueda.html" method="get">
+      <label for="query">Titulo del Anuncio</label>
       <input type="text" name="query" placeholder="Titulo de Anuncio"><br><br>
 
     <p>&iquest;Qu&eacute; buscas?</p>
+    <div>
         <label for="tipo">Tipo de Anuncio</label>
         <select name="tipo" id="tipo">
             <option value="alquiler">Alquiler</option>
@@ -45,7 +47,8 @@ Creado por: Pablo Alicante y Leyre Wollstein el 23/09/2024
             <option value="local">Local</option>
             <option value="garaje">Garaje</option>
         </select><br><br>
-
+      </div>
+      <div>
         <p>Localización</p>
         <label for="ciudad">Ciudad:</label>
         <select name="ciudad" id="ciudad">
@@ -74,24 +77,27 @@ Creado por: Pablo Alicante y Leyre Wollstein el 23/09/2024
             <option value="mexico">México</option>
             <option value="argentina">Argentina</option>
         </select><br><br>
-
+      </div>
+      <div>
         <p>Precio entre</p>        
         <label for="precio_min">Mínimo:</label>
         <input type="number" name="precio_min" id="precio_min" placeholder="Precio Mínimo"><br><br>
 
         <label for="precio_max">Máximo:</label>
         <input type="number" name="precio_max" id="precio_max" placeholder="Precio Máximo"><br><br>
-
+      </div>
+      <div>
         <p>Fecha de publicacion</p>
         <label for="fecha_inicio">Fecha Inicio:</label>
         <input type="date" name="fecha_inicio" id="fecha_inicio"><br><br>
 
         <label for="fecha_fin">Fecha Fin:</label>
         <input type="date" name="fecha_fin" id="fecha_fin"><br><br>
-
+      </div>
       <button type="submit">Buscar</button>
 
     </form>
+  
 
       <footer>
         <p>Leyre Wollstein y Pablo Alicante <br> &copy; 2024 RoofScout. Todos los derechos reservados.</p>
