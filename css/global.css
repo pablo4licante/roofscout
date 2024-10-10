@@ -226,6 +226,10 @@ footer {
     text-align: center;
 }
 
+.titulo {
+    text-decoration: none;
+    color: black;
+}
 
 #galeria_fotos {
     text-align: center;
