@@ -73,9 +73,9 @@ header {
         margin-bottom: 0;
         height: 4rem;
         justify-content: center;
-        > h1 {
-            display: none;
-        }
+    > a > h1 {
+        display: none;
+    }
         > nav {
             padding: 0;
             > ul {
