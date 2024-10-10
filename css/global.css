@@ -13,6 +13,10 @@ body {
 
 }
 
+footer {
+    margin-bottom: 4rem;
+}
+
 header {
     position: sticky;
     top:0;
@@ -397,7 +401,8 @@ form select {
 }
 
 form button {
-    width: 100%;
+    
+    width: calc(100% - 20px);
     padding: 10px;
     background-color: #0097b3;
     border: none;
