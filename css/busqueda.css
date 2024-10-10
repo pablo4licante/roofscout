@@ -22,6 +22,7 @@ form input[type="text"],
 form input[type="number"],
 form input[type="date"],
 form input[type="password"],
+form input[type="email"],
 form select {
     width: calc(100% - 20px);
     padding: 10px;
@@ -30,6 +31,10 @@ form select {
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 1em;
+}
+
+form textarea {
+    width: 100%;
 }
 
 form button {
@@ -49,7 +54,7 @@ form button:hover {
     background-color: #38bfd7;
 }
 
-.enlace-registro, .enlace-login{
+.enlace-registro, .enlace-login {
     text-align: center;
     margin-top: 2rem;
 }
