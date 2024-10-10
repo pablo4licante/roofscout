@@ -10,17 +10,73 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
 header {
     background-color: white;
-    padding: 1rem;
     margin: -0.4rem;
     margin-bottom: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    padding: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+
+    > h1 {
+        padding-left: 2rem;
+    }
+    
+    > nav {
+        padding-right: 2rem;
+        > ul > li { 
+            display: inline-block;
+            margin: 0 1rem;
+            font-size: 1.2rem;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            > a {
+                text-decoration: none;
+                color: black;
+                transition: color 0.3s ease;
+            }
+        }
+        > ul > li:hover > a {
+            color: blue;
+        }
+    }
+}
+
+#tituloMovil {
+    display: none;
+}
+
+@media (max-width: 650px) {
+
+    #tituloMovil {
+        display: inline;
+    }
+    header {
+        z-index: 1000;
+        position: fixed;
+        bottom: 0;
+        margin-bottom: 0;
+        height: 4rem;
+        justify-content: center;
+        > h1 {
+            display: none;
+        }
+        > nav {
+            padding: 0;
+            > ul {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
 }
 
 .search-bar {
@@ -32,7 +88,7 @@ header {
     padding: 0.5rem 1rem;
     width: 100%;
     max-width: 400px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     margin: 1rem;
 
     > input[type="text"] {
