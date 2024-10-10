@@ -11,6 +11,7 @@ Creado por: Pablo Alicante y Leyre Wollstein el 23/09/2024
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro | RoofScout</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/busqueda.css" media="screen">
     <link href="../css/global.css" rel="stylesheet" media="screen">
   </head>
   <body class="inter">
@@ -25,16 +26,17 @@ Creado por: Pablo Alicante y Leyre Wollstein el 23/09/2024
         </ul>
       </nav>
     </header>
-
+    <h2>Registro</h2>
     <form action="/submit_registration" method="post">
       <label for="username">Nombre de usuario:</label>
-      <input type="text" id="username" name="username" required><br><br>
+      <input type="text" id="username" name="username" placeholder="Nombre de usuario" required><br><br>
 
       <label for="password">Contrase&#241;a:</label>
       <input
         type="password"
         id="password"
         name="password"
+        placeholder="Contrase&#241;a"
         required
       ><br><br>
 
@@ -43,11 +45,12 @@ Creado por: Pablo Alicante y Leyre Wollstein el 23/09/2024
         type="password"
         id="confirm_password"
         name="confirm_password"
+        placeholder="Repetir contrase&#241;a"
         required
       ><br><br>
 
       <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required ><br><br>
+      <input type="email" id="email" name="email" placeholder="Email" required><br><br>
 
       <label for="gender">Sexo:</label>
       <select id="gender" name="gender" required>
@@ -96,10 +99,10 @@ Creado por: Pablo Alicante y Leyre Wollstein el 23/09/2024
         accept="image/*"
       ><br><br>
 
-      <button type="submit">Registrarse</button>
+      <button type="submit">Crear cuenta</button>
     </form>
 
-    <p>&#191;Ya tienes cuenta? <a href="./login.html">Inicia sesi&#243;n aqu&#237;</a></p>
+    <p class="enlace-registro enlace-login">&#191;Ya tienes cuenta? <br> <a href="./login.html">Inicia sesi&#243;n aqu&#237;</a></p>
 
     
     <footer>
