@@ -210,3 +210,108 @@ nav {
 footer {
     text-align: center;
 }
+
+
+#galeria_fotos {
+    text-align: center;
+    padding: 2rem;
+
+    > h3 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .thumbnails {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .thumbnail {
+        width: 360px;
+        height: 360px;
+        object-fit: cover;
+        border-radius: 10px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .thumbnail:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.photo_banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    max-width: 600px;
+    margin: 1rem;
+
+    > h2 {
+        font-size: 1.8rem;
+        color: #333;
+        margin-bottom: 0.5rem;
+    }
+
+    > p {
+        font-size: 1rem;
+        color: #666;
+        margin: 0.5rem 0;
+    }
+
+    > h3 {
+        font-size: 1.5rem;
+        color: #0097B3;
+        margin: 0.5rem 0;
+    }
+
+    > img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        margin: 1rem 0;
+    }
+
+    > p:last-of-type {
+        font-weight: bold;
+        color: #333;
+    }
+
+    > .publisher_info {
+        width: 100%;;
+        display: flex;
+       flex-direction: row;
+        align-items: center;
+        border-radius: 10px;
+        padding: 1rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    
+        &:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+    
+        .publisher-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+    
+        p {
+            margin: 0;
+            font-size: 1rem;
+            color: #333;
+        }
+    }
+}
+
