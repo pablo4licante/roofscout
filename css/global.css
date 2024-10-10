@@ -33,7 +33,7 @@ header {
         > ul > li { 
             display: inline-block;
             margin: 0 1rem;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             width: 100%;
             height: 100%;
             position: relative;
@@ -44,7 +44,7 @@ header {
             }
         }
         > ul > li:hover > a {
-            color: blue;
+            color: #0097B3;
         }
     }
 }
@@ -146,10 +146,11 @@ nav {
 .card {
     background-color: white;
     width: 20rem;
-    height: 26rem;
+    height: 25rem;
     margin: 1rem;
     border-radius: 5%;
     overflow: hidden;
+    line-height: .8rem;
     transition: transform 0.3s ease;
 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -200,4 +201,8 @@ nav {
     .mensaje-info {
         margin: 1rem;
     }
+}
+
+footer {
+    text-align: center;
 }
