@@ -78,6 +78,8 @@ nav {
 
 footer {
     text-align: center;
+    margin-top: 4rem;
+    margin-bottom: 0;
 }
 
 table {
@@ -298,6 +300,22 @@ button:hover {
     margin-top: 2rem;
 }
 
+#grid {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+form, #tarifas {
+    margin: 2rem;
+    align-items: center;
+    
+    > h2{
+        text-align: center;
+    }
+}
+
+
 #tituloMovil {
     display: none;
 }
@@ -441,6 +459,7 @@ button:hover {
     #tituloMovil {
         display: inline;
     }
+
     header {
         z-index: 1000;
         position: fixed;
@@ -460,5 +479,21 @@ button:hover {
                 align-items: center;
             }
         }
+    }
+
+    #info-formulario-folleto {
+        text-align: center;
+    }
+
+    #grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    footer {
+        text-align: center;
+        margin-top: 4rem;
+        margin-bottom: 4rem;
     }
 }

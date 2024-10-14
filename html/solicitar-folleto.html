@@ -27,181 +27,181 @@ Creado por: Pablo Alicante y Leyre Wollstein el 1/10/2024
       </header>
 
       <h2>Solicitud de Folleto Publicitario</h2>
-      <p>Complete el siguiente formulario para solicitar su folleto publicitario impreso con las opciones disponibles.</p>
-      
-      <form action="./respuesta-solicitar-folleto.html" method="post">
-          <!-- Nombre -->
-          <label for="nombre">Nombre y Apellidos:</label>
-          <input type="text" id="nombre" name="nombre" class="form-control" maxlength="200" required>
+      <p id="info-formulario-folleto">Complete el siguiente formulario para solicitar su folleto publicitario impreso con las opciones disponibles.</p>
+      <div id="grid">
+        <form action="./respuesta-solicitar-folleto.html" method="post">
+            <!-- Nombre -->
+            <label for="nombre">Nombre y Apellidos:</label>
+            <input type="text" id="nombre" name="nombre" class="form-control" maxlength="200" required>
 
-          <br>
-      
-          <!-- Correo electrónico -->
-          <label for="email">Correo Electrónico:</label>
-          <input type="email" id="email" name="email" class="form-control" maxlength="200" required>
-      
-          <br>
-      
-          <!-- Texto adicional -->
-          <label for="texto-adicional">Texto Adicional (Opcional):</label>
-          <textarea id="texto-adicional" name="texto-adicional" class="form-control" maxlength="4000" rows="4"></textarea>
-      
-          <br>
-      
-          <!-- Dirección -->
-          <h3>Dirección Postal</h3>
-          <label for="calle">Calle:</label>
-          <input type="text" id="calle" name="calle" class="form-control" required>
-      
-          <br>
-      
-          <label for="numero">Número:</label>
-          <input type="number" id="numero" name="numero" class="form-control" required>
-      
-          <br>
-      
-          <label for="piso">Piso:</label>
-          <input type="text" id="piso" name="piso" class="form-control">
-      
-          <br>
-      
-          <label for="codigo-postal">Código Postal:</label>
-          <input type="number" id="codigo-postal" name="codigo-postal" class="form-control" required>
-      
-          <br>
-      
-          <label for="localidad">Localidad:</label>
-          <select id="localidad" name="localidad" class="form-control" required>
-              <option value="Alicante">Alicante</option>
-              <option value="Elche">Elche</option>
-              <option value="Benidorm">Benidorm</option>
-              <option value="Torrevieja">Torrevieja</option>
-              <option value="Orihuela">Orihuela</option>
-          </select>
-      
-          <br>
-      
-          <label for="provincia">Provincia:</label>
-          <select id="provincia" name="provincia" class="form-control" required>
-              <option value="Alicante">Alicante</option>
-              <option value="Valencia">Valencia</option>
-              <option value="Castellón">Castellón</option>
-          </select>
-      
-          <br>
-      
-          <label for="pais">País:</label>
-          <select id="pais" name="pais" class="form-control" required>
-              <option value="España">España</option>
-          </select>
-          <br>
-      
-          <!-- Teléfono -->
-          <label for="telefono">Teléfono (Opcional):</label>
-          <input type="number" id="telefono" name="telefono" class="form-control">
-      
-          <br>
-      
-          <!-- Color de la portada -->
-          <label for="color-portada">Color de la Portada:</label>
-          <input type="color" id="color-portada" name="color-portada" class="form-control" value="#000000">
-      
-          <br>
-      
-          <!-- Número de copias -->
-          <label for="num-copias">Número de Copias:</label>
-          <input type="number" id="num-copias" name="num-copias" class="form-control" min="1" max="99" value="1" required>
-      
-          <br>
-      
-            <!-- Resolución de las fotos -->
-            <label for="resolucion">Resolución de las fotos (DPI):</label>
-            <input type="range" id="resolucion" name="resolucion" class="form-control" min="150" max="900" step="150" value="150" oninput="document.getElementById('resolucion-valor').textContent = this.value + ' DPI'" required>
-            <span id="resolucion-valor">150 DPI</span>
-      
             <br>
-      
-          <!-- Anuncio del usuario -->
-          <label for="anuncio">Anuncio del Usuario (Obligatorio):</label>
-          <select id="anuncio" name="anuncio" class="form-control" required>
-              <option value="anuncio1">Anuncio 1</option>
-              <option value="anuncio2">Anuncio 2</option>
-              <!-- Opciones de anuncios del usuario -->
-          </select>
-      
-          <br>
-      
-          <!-- Fecha de recepción -->
-          <label for="fecha-recepcion">Fecha de Recepción (Opcional):</label>
-          <input type="date" id="fecha-recepcion" name="fecha-recepcion" class="form-control">
-      
-          <br>
-      
-          <!-- Impresión a color -->
-          <label for="impresion-color">Impresión a Color:</label>
-          <select id="impresion-color" name="impresion-color" class="form-control" required>
-              <option value="blanco-negro">Blanco y Negro</option>
-              <option value="color">A Todo Color</option>
-          </select>
-      
-          <br>
-      
-          <!-- Impresión del precio -->
-          <label for="impresion-precio">¿Imprimir Precio del Anuncio?:</label>
-          <select id="impresion-precio" name="impresion-precio" class="form-control" required>
-              <option value="con-precio">Con Precio</option>
-              <option value="sin-precio">Sin Precio</option>
-          </select>
-          <!-- Botón de envío -->
-          <button type="submit">Enviar Solicitud</button>
-      </form>
-
-      <!-- Tabla de tarifas -->
-      <h2>Tarifas</h2>
-      <table>
-          <thead>
-              <tr>
-                  <th>Concepto</th>
-                  <th>Tarifa</th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr>
-                  <td>Coste procesamiento y envío</td>
-                  <td>10 &euro;</td>
-              </tr>
-              <tr>
-                  <td>&lt; 5 p&aacute;ginas</td>
-                  <td>2 &euro; por p&aacute;g.</td>
-              </tr>
-              <tr>
-                <td>entre 5 y 10 p&aacute;ginas</td>
-                <td>1.8 &euro; por p&aacute;g.</td>
-              </tr>
-              <tr>
-                <td>&gt; 10 p&aacute;ginas</td>
-                <td>1.6 &euro; por p&aacute;g.</td>
-              </tr>
-              <tr>
-                <td>Blanco y negro</td>
-                <td>0 &euro;</td>
-              </tr>
-              <tr>
-                <td>Color</td>
-                <td>0.5 &euro; por foto</td>
-              </tr>
-              <tr>
-                <td>Resoluci&oacute;n &le; 300 dpi</td>
-                <td>0 &euro; por foto</td>
-              </tr>
-              <tr>
-                <td>Resoluci&oacute;n &gt; 300 dpi</td>
-                <td>0.2 &euro; por foto</td>
-              </tr>
-              <!-- Agregar más tarifas según sea necesario -->
-          </tbody>
-      </table>
-  
+        
+            <!-- Correo electrónico -->
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" id="email" name="email" class="form-control" maxlength="200" required>
+        
+            <br>
+        
+            <!-- Texto adicional -->
+            <label for="texto-adicional">Texto Adicional (Opcional):</label>
+            <textarea id="texto-adicional" name="texto-adicional" class="form-control" maxlength="4000" rows="4"></textarea>
+        
+            <br>
+        
+            <!-- Dirección -->
+            <h3>Dirección Postal</h3>
+            <label for="calle">Calle:</label>
+            <input type="text" id="calle" name="calle" class="form-control" required>
+        
+            <br>
+        
+            <label for="numero">Número:</label>
+            <input type="number" id="numero" name="numero" class="form-control" required>
+        
+            <br>
+        
+            <label for="piso">Piso:</label>
+            <input type="text" id="piso" name="piso" class="form-control">
+        
+            <br>
+        
+            <label for="codigo-postal">Código Postal:</label>
+            <input type="number" id="codigo-postal" name="codigo-postal" class="form-control" required>
+        
+            <br>
+        
+            <label for="localidad">Localidad:</label>
+            <select id="localidad" name="localidad" class="form-control" required>
+                <option value="Alicante">Alicante</option>
+                <option value="Elche">Elche</option>
+                <option value="Benidorm">Benidorm</option>
+                <option value="Torrevieja">Torrevieja</option>
+                <option value="Orihuela">Orihuela</option>
+            </select>
+        
+            <br>
+        
+            <label for="provincia">Provincia:</label>
+            <select id="provincia" name="provincia" class="form-control" required>
+                <option value="Alicante">Alicante</option>
+                <option value="Valencia">Valencia</option>
+                <option value="Castellón">Castellón</option>
+            </select>
+        
+            <br>
+        
+            <label for="pais">País:</label>
+            <select id="pais" name="pais" class="form-control" required>
+                <option value="España">España</option>
+            </select>
+            <br>
+        
+            <!-- Teléfono -->
+            <label for="telefono">Teléfono (Opcional):</label>
+            <input type="number" id="telefono" name="telefono" class="form-control">
+        
+            <br>
+        
+            <!-- Color de la portada -->
+            <label for="color-portada">Color de la Portada:</label>
+            <input type="color" id="color-portada" name="color-portada" class="form-control" value="#000000">
+        
+            <br>
+        
+            <!-- Número de copias -->
+            <label for="num-copias">Número de Copias:</label>
+            <input type="number" id="num-copias" name="num-copias" class="form-control" min="1" max="99" value="1" required>
+        
+            <br>
+        
+              <!-- Resolución de las fotos -->
+              <label for="resolucion">Resolución de las fotos (DPI):</label>
+              <input type="range" id="resolucion" name="resolucion" class="form-control" min="150" max="900" step="150" value="150" oninput="document.getElementById('resolucion-valor').textContent = this.value + ' DPI'" required>
+              <span id="resolucion-valor">150 DPI</span>
+        
+              <br>
+        
+            <!-- Anuncio del usuario -->
+            <label for="anuncio">Anuncio del Usuario (Obligatorio):</label>
+            <select id="anuncio" name="anuncio" class="form-control" required>
+                <option value="anuncio1">Anuncio 1</option>
+                <option value="anuncio2">Anuncio 2</option>
+                <!-- Opciones de anuncios del usuario -->
+            </select>
+        
+            <br>
+        
+            <!-- Fecha de recepción -->
+            <label for="fecha-recepcion">Fecha de Recepción (Opcional):</label>
+            <input type="date" id="fecha-recepcion" name="fecha-recepcion" class="form-control">
+        
+            <br>
+        
+            <!-- Impresión a color -->
+            <label for="impresion-color">Impresión a Color:</label>
+            <select id="impresion-color" name="impresion-color" class="form-control" required>
+                <option value="blanco-negro">Blanco y Negro</option>
+                <option value="color">A Todo Color</option>
+            </select>
+        
+            <br>
+        
+            <!-- Impresión del precio -->
+            <label for="impresion-precio">¿Imprimir Precio del Anuncio?:</label>
+            <select id="impresion-precio" name="impresion-precio" class="form-control" required>
+                <option value="con-precio">Con Precio</option>
+                <option value="sin-precio">Sin Precio</option>
+            </select>
+            <!-- Botón de envío -->
+            <button type="submit">Enviar Solicitud</button>
+        </form>
+        <div id="tarifas">
+          <h2>Tarifas</h2>
+          <table>
+              <thead>
+                  <tr>
+                      <th>Concepto</th>
+                      <th>Tarifa</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>Coste procesamiento y envío</td>
+                      <td>10 &euro;</td>
+                  </tr>
+                  <tr>
+                      <td>&lt; 5 p&aacute;ginas</td>
+                      <td>2 &euro; por p&aacute;g.</td>
+                  </tr>
+                  <tr>
+                    <td>entre 5 y 10 p&aacute;ginas</td>
+                    <td>1.8 &euro; por p&aacute;g.</td>
+                  </tr>
+                  <tr>
+                    <td>&gt; 10 p&aacute;ginas</td>
+                    <td>1.6 &euro; por p&aacute;g.</td>
+                  </tr>
+                  <tr>
+                    <td>Blanco y negro</td>
+                    <td>0 &euro;</td>
+                  </tr>
+                  <tr>
+                    <td>Color</td>
+                    <td>0.5 &euro; por foto</td>
+                  </tr>
+                  <tr>
+                    <td>Resoluci&oacute;n &le; 300 dpi</td>
+                    <td>0 &euro; por foto</td>
+                  </tr>
+                  <tr>
+                    <td>Resoluci&oacute;n &gt; 300 dpi</td>
+                    <td>0.2 &euro; por foto</td>
+                  </tr>
+                  <!-- Agregar más tarifas según sea necesario -->
+              </tbody>
+          </table>
+        </div>
+      </div>
      <footer>
         <p>Leyre Wollstein y Pablo Alicante <br> &copy; 2024 RoofScout. Todos los derechos reservados.</p>
       </footer>
