@@ -20,6 +20,7 @@ body {
 
 footer {
     margin-bottom: 4rem;
+    color: var(--font-color);
 }
 
 header {
