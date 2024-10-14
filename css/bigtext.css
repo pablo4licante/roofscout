@@ -1,0 +1,13 @@
+@import "./global.css";
+
+:root {
+    --text-big: 2.7em;
+    --text-medium: 1.7rem;
+    --text-small: 1.5em;
+    --text-extra-small: 1.2em;
+}
+
+.card {
+    height:fit-content;
+    line-height: 1.2rem;
+}

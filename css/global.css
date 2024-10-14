@@ -8,6 +8,10 @@
     --secondary-font-color: #555;
     --button-font-color: white;
 
+    --text-big: 2.5em;
+    --text-medium: 1.5rem;
+    --text-small: 1.2em;
+    --text-extra-small: 1em;
 }
 
 body {
@@ -15,11 +19,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    color: var(--font-color);
 }
 
 footer {
     margin-bottom: 4rem;
+    font-size: var(--text-extra-small)
 }
 
 header {
@@ -45,7 +50,7 @@ header {
         > ul > li { 
             display: inline-block;
             margin: 0 1rem;
-            font-size: 1.5rem;
+            font-size: var(--text-medium);
             width: 100%;
             height: 100%;
             position: relative;
@@ -61,11 +66,11 @@ header {
     }
 }
 
-
 h1 {
     font-weight: 700;
-    font-size: 2.5em;
+    font-size: var(--text-big);
     margin-left: 2rem;
+    color: var(--font-color);
 }
 
 
@@ -86,6 +91,7 @@ footer {
     text-align: center;
     margin-top: 4rem;
     margin-bottom: 0;
+    color: var(--font-color);
 }
 
 table {
@@ -115,7 +121,7 @@ form {
 }
 
 form p {
-    font-size: 1.2em;
+    font-size: var(--text-extra-small);
     color: var(--font-color);
 }
 
@@ -142,7 +148,9 @@ form select {
     border: 1px solid var(--secondary-background-color);
     border-radius: 4px;
     box-sizing: border-box;
-    font-size: 1em;
+    font-size: var(--text-extra-small);
+    background-color: var(--element-background-color);
+    color: var(--font-color);
 }
 
 form button {
@@ -153,7 +161,7 @@ form button {
     border: none;
     border-radius: 4px;
     color: var(--button-font-color);
-    font-size: 1.2em;
+    font-size: var(--text-small);
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -176,6 +184,11 @@ button {
 
 button:hover {
     background-color: var(--secondary-color);
+}
+
+h2 {
+    color: var(--font-color);
+    font-size: var(--text-medium);
 }
 
 .inter {
@@ -203,9 +216,11 @@ button:hover {
         outline: none;
         flex: 1;
         padding: 0.5rem;
-        font-size: 1rem;
+        font-size: var(--text-extra-small);
         border-radius: 25px;
         margin-bottom: 0;
+        background-color: var(--element-background-color);
+        color: var(--font-color)
     }
 
     > button {
@@ -219,7 +234,7 @@ button:hover {
         border-radius: 50%;
         cursor: pointer;
         transition: background-color 0.3s ease;
-        font-size: 1rem;
+        font-size: var(--text-small);
         cursor: pointer;
 
         display: flex;
@@ -241,7 +256,7 @@ button:hover {
     margin: 1rem;
     border-radius: 5%;
     overflow: hidden;
-    line-height: .8rem;
+    line-height: 0.8rem;
     transition: transform 0.3s ease;
 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -250,8 +265,21 @@ button:hover {
     > a { 
         text-decoration: none;
         color: var(--font-color); 
+        font-size: var(--text-extra-small);
         display: flex;
         flex-direction: column;
+
+        > p {
+            font-size: var(--text-extra-small);
+        }
+
+        > h3 {
+            font-size: var(--text-small);
+        }
+
+        > h2 {
+            font-size: var(--text-medium);
+        }
 
         > *:not(.card-img) {
             margin-left: 1rem;
@@ -323,6 +351,7 @@ form, #tarifas {
 
 #tituloMovil {
     display: none;
+    color: var(--font-color);
 }
 
 #galeria {
@@ -336,7 +365,7 @@ form, #tarifas {
     padding: 2rem;
 
     > h3 {
-        font-size: 2rem;
+        font-size: var(--text-medium);
         margin-bottom: 1rem;
     }
 
@@ -374,19 +403,19 @@ form, #tarifas {
     margin: 1rem;
 
     > h2 {
-        font-size: 1.8rem;
+        font-size: var(--text-medium);
         color: var(--font-color);
         margin-bottom: 0.5rem;
     }
 
     > p {
-        font-size: 1rem;
+        font-size: var(--text-extra-small);
         color: var(--secondary-font-color);
         margin: 0.5rem 0;
     }
 
     > h3 {
-        font-size: 1.5rem;
+        font-size: var(--text-small);
         color: var(--primary-color);
         margin: 0.5rem 0;
     }
@@ -436,7 +465,7 @@ form, #tarifas {
 
     p {
         margin: 0;
-        font-size: 1rem;
+        font-size: var(--text-extra-small);
         color: var(--font-color);
         font-weight: bold;
         margin-top: 0.3rem;
