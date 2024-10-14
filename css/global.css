@@ -24,7 +24,8 @@ body {
 
 footer {
     margin-bottom: 4rem;
-    font-size: var(--text-extra-small)
+    font-size: var(--text-extra-small);
+    color: var(--font-color);
 }
 
 header {
