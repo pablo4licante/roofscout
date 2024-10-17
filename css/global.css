@@ -340,6 +340,8 @@ h2 {
 
 .info {
     max-width: 30rem;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
@@ -348,9 +350,14 @@ h2 {
         text-align: center;
     }
 
-    > .seccion > table {
-        width: 20rem;
-        align-self: center;
+    > .seccion {
+        width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+        > table {
+            width: 100%;
+        }
     }
 }
 
