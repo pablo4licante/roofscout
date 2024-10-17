@@ -112,7 +112,6 @@ td {
     padding: 8px;
 }
 
-
 form {
     padding: 2rem;
     background-color: var(--background-color);
@@ -332,6 +331,32 @@ h2 {
 .enlace-registro, .enlace-login {
     text-align: center;
     margin-top: 2rem;
+}
+
+.seccion {
+    background-color: var(--background-color);
+    width: 30rem;
+}
+
+.info {
+    max-width: 30rem;
+    justify-content: center;
+    align-items: center;
+
+    > p {
+        margin-top: 2rem;
+        text-align: center;
+    }
+
+    > .seccion > table {
+        width: 20rem;
+        align-self: center;
+    }
+}
+
+.enlace-accesibilidad {
+    text-decoration: none;
+    color: #0097B3;
 }
 
 #grid {
