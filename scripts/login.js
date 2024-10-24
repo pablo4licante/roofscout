@@ -36,13 +36,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const usernamePattern = /^[a-zA-Z][a-zA-Z0-9]{2,14}$/;
         if (!usernamePattern.test(username.value)) {
-            errorMessage += '<li>El nombre de usuario debe tener entre 3 y 15 caracteres, solo contener letras y números, y no puede comenzar con un número.</li>';
+            errorMessage += '<li>El nombre de usuario es incorrecto.</li>';
             username.style.border = `${borderWidth} solid ${invalidColor}`; 
         }
 
         const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d_-]{6,15}$/;
         if (!passwordPattern.test(password.value)) {
-            errorMessage += '<li>La contraseña debe tener entre 6 y 15 caracteres, contener al menos una letra mayúscula, una letra minúscula y un número, y solo puede contener letras, números, guiones y guiones bajos.</li>';
+            errorMessage += '<li>La contraseña es incorrecta.</li>';
             password.style.border = `${borderWidth} solid ${invalidColor}`; 
         }
 
