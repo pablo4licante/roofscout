@@ -1,5 +1,3 @@
-@import "./global.css";
-
 :root {
     --primary-color: #b7b7b7; 
     --secondary-color: #d8d8d8; 
@@ -13,6 +11,10 @@
 
 *>img {
     filter:grayscale();
+}
+
+article {
+    page-break-inside: avoid;
 }
 
 header {

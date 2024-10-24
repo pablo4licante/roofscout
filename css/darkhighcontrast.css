@@ -1,5 +1,5 @@
-@import "./global.css";
 @import "./highcontrast.css";
+@import "./darktheme.css";
 
 :root {
     --background-color: #000000;

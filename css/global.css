@@ -363,7 +363,7 @@ h2 {
 
 .enlace-accesibilidad {
     text-decoration: none;
-    color: #0097B3;
+    color: var(--primary-color);
 }
 
 #grid {
