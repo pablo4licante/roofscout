@@ -1,0 +1,22 @@
+:root {
+    --primary-color: #b7b7b7; 
+    --secondary-color: #d8d8d8; 
+    --background-color: #f9f9f9;
+    --element-background-color: white;
+    --secondary-background-color: #d3d3d3;
+    --font-color: black;
+    --secondary-font-color: #555;
+    --button-font-color: white;
+}
+
+*>img {
+    filter:grayscale();
+}
+
+article {
+    page-break-inside: avoid;
+}
+
+header {
+    display: none;
+}

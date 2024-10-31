@@ -3,6 +3,27 @@ Roof Scout es el proyecto de Desarrollo de Aplicaciones Web (Ingenieria Multimed
 
 Accede al proyecto hosteado en [RoofScout.one](https://roofscout.one)
 
+## Importante!
+Para que la aplicacion funcione se ha de realizar las siguientes configuraciones en el servidor
+
+En `.httpd.conf`:
+```
+Alias /roofscout "C:\xampp\htdocs\roofscout"
+
+<Directory "C:\xampp\htdocs\roofscout">
+    Options Indexes FollowSymLinks Includes ExecCGI
+    AllowOverride All
+    Require all granted
+</Directory>
+```
+
+y 
+
+```
+DocumentRoot "C:/xampp/htdocs/roofscout"
+<Directory "C:/xampp/htdocs/roofscout">
+```
+
 En esta entrega se pueden observar los siguientes archivos:
 - **index.html**: Contiene la página inicial de la aplicación, con una búsqueda rápida, una barra de navegación que se encuentra en el resto de las páginas (con opciones como volver al inicio, visualizar el centro de mensajes, hacer una búsqueda avanzada y ver el perfil del usuario), además de los 5 últimos anuncios publicados.
 
