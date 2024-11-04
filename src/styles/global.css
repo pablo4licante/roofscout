@@ -303,11 +303,12 @@ h2 {
         &:hover h3 {
             color: var(--primary-color);
         }
-
+        
         > .card-img {
-            flex: 1;
-            width: 20rem;
+            height: 14rem;
+            object-fit: cover;
         }
+               
     }
 
     &:hover {
