@@ -1,6 +1,6 @@
 <article class="card">
     <a href="html/anuncio/<?php echo htmlspecialchars($anuncio['id']); ?>">
-        <img src="/images/<?php echo htmlspecialchars('aqui iria la imagen'); ?>" alt="Card Image" class="card-img">
+            <img alt="Card Image" class="card-img" src="./src/assets/images/<?php echo rand(1, 11); ?>.jpg">
         <div class="card-content">
             <h3><?php echo htmlspecialchars($anuncio['titulo']); ?></h3>
             <p><?php echo htmlspecialchars($anuncio['ciudad']); ?>, <?php echo htmlspecialchars($anuncio['pais']); ?>
