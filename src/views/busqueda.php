@@ -7,23 +7,23 @@ $ciudades = ["Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza", "Málaga"
 $paises = ["España", "Francia", "Alemania", "Italia", "Portugal", "Reino Unido", "Estados Unidos", "Canadá", "México", "Argentina"];
 ?>
 
-<form action="#resultado-busqueda" method="get">
+<form method="get">
     <label for="query">Titulo del Anuncio</label>
     <input type="text" name="query" placeholder="Titulo de Anuncio"><br><br>
 
     <p>¿Qué buscas?</p>
     <div>
-        <label for="tipo">Tipo de Anuncio</label>
-        <select name="tipo" id="tipo">
+        <label for="tipo_anuncio">Tipo de Anuncio</label>
+        <select name="tipo_anuncio" id="tipo_anuncio">
             <?php foreach ($tipos_anuncio as $value => $label): ?>
-                <option value="<?php echo $value; ?>"><?php echo $label; ?></option>
+                <option value="<?php echo $label; ?>"><?php echo $label; ?></option>
             <?php endforeach; ?>
         </select><br><br>
 
         <label for="tipo_vivienda">Tipo de Vivienda:</label>
         <select name="tipo_vivienda" id="tipo_vivienda">
             <?php foreach ($tipos_vivienda as $value => $label): ?>
-                <option value="<?php echo $value; ?>"><?php echo $label; ?></option>
+                <option value="<?php echo $label; ?>"><?php echo $label; ?></option>
             <?php endforeach; ?>
         </select><br><br>
     </div>
@@ -33,14 +33,14 @@ $paises = ["España", "Francia", "Alemania", "Italia", "Portugal", "Reino Unido"
         <label for="ciudad">Ciudad:</label>
         <select name="ciudad" id="ciudad">
             <?php foreach ($ciudades as $value => $label): ?>
-                <option value="<?php echo $value; ?>"><?php echo $label; ?></option>
+                <option value="<?php echo $label; ?>"><?php echo $label; ?></option>
             <?php endforeach; ?>
         </select><br><br>
 
         <label for="pais">País:</label>
         <select name="pais" id="pais">
             <?php foreach ($paises as $value => $label): ?>
-                <option value="<?php echo $value; ?>"><?php echo $label; ?></option>
+                <option value="<?php echo $label; ?>"><?php echo $label; ?></option>
             <?php endforeach; ?>
         </select><br><br>
     </div>
@@ -67,8 +67,8 @@ $paises = ["España", "Francia", "Alemania", "Italia", "Portugal", "Reino Unido"
 </form>
 
 
-<div id="resultados-busqueda">
-    <h3>Mostrando <?php echo sizeof($anuncios); ?></h3>
+<h3>Mostrando <?php echo sizeof($anuncios); ?> resultados</h3>
+<div id="galeria">
     <?php foreach ($anuncios as $anuncio): ?>
         <?php include('./src/views/templates/card.inc.php'); ?>
     <?php endforeach; ?>
