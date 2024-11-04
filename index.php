@@ -25,13 +25,14 @@
         '/user/(\d+)' => function($id) {
             echo "User ID: $id";
         },
+        '/anuncio/(\d+)' => function($id) {
+            $controller = new AnuncioController();
+            $controller->detalleAnuncio($id);
+        },
         '/busqueda' => function($queryParams) {
-
-            $pais = $queryParams['pais'] ?? 'Todos los países';
-            $ciudad = $queryParams['ciudad'] ?? 'Todas las ciudades';
             
             $controller = new AnuncioController();
-            $controller->busqueda();
+            $controller->busqueda($queryParams);
         }
     ];
     
