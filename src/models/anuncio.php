@@ -16,4 +16,18 @@ class Anuncio {
             return []; // Devuelve un array vacío en caso de error
         }
     }
+
+    public static function getResultados() {
+        
+        $sql = "SELECT * FROM anuncios ORDER BY fecha_publi DESC";
+        
+        $db = DB::getConnection();
+        $stmt = $db->prepare($sql);
+
+        if ($stmt->execute()) {
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return []; // Devuelve un array vacío en caso de error
+        }
+    }
 }

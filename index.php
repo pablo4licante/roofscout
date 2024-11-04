@@ -30,8 +30,8 @@
             $pais = $queryParams['pais'] ?? 'Todos los países';
             $ciudad = $queryParams['ciudad'] ?? 'Todas las ciudades';
             
-            echo "Resultados de búsqueda para: ";
-            echo "País: $pais, Ciudad: $ciudad";
+            $controller = new AnuncioController();
+            $controller->busqueda();
         }
     ];
     
