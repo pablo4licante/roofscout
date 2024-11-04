@@ -7,4 +7,9 @@ class AnuncioController {
         $anuncios = Anuncio::getUltimos();
         include_once './src/views/inicio.php';
     }
+
+    public function busqueda() {
+        $anuncios = Anuncio::getResultados();
+        include_once './src/views/busqueda.php';
+    }
 }
