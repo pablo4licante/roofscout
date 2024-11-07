@@ -1,7 +1,7 @@
 <?php
 
-require_once('./src/models/anuncio.php'); 
-require_once('./src/models/usuario.php');
+require_once('./src/models/anuncioModel.php'); 
+require_once('./src/models/usuarioModel.php');
 
 class AnuncioController {
     public function inicio() {

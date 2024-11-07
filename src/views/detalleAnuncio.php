@@ -34,23 +34,22 @@
     <p><?php echo $publicador['nombre'] ?></p>
     <div id="enviar-mensaje">
         <?php
-        if ($enviarMensaje == false):
-            <input type="submit" name="botonMostrar" value="Enviar mensaje"/>;
-        else if ($enviarMensaje == true):
+        if ($enviarMensaje == false): ?>
+            <input type="submit" name="botonMostrar" value="Enviar mensaje"/>
+        <?php else: ?>
             <form method="post">
                 <label for="tipo_mensaje">Tipo de Mensaje: </label>
                 <select name="tipo_mensaje" id="tipo_mensaje">
-                    <?php foreach ($tipo_mensaje as $value => $label): ?>
+                    <?php foreach ($tipo_mensaje as $label): ?>
                         <option value="<?php echo $label; ?>"><?php echo $label; ?></option>
                     <?php endforeach; ?>
                 </select><br><br>
                 <label for="message">Mensaje:</label>
                 <textarea id="message" name="message" rows="4" cols="50" required></textarea>
                 <br>
-                <input type="submit">Enviar Mensaje</input>
-            </form> ;
-        endif;
-        ?>  
+                <input type="submit" value="Enviar Mensaje"/>
+            </form>
+        <?php endif; ?>  
     </div>
 </div>
 

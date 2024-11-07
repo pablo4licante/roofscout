@@ -8,6 +8,7 @@
 <?php
 
     require_once './src/controllers/anuncioController.php';
+    require_once './src/controllers/authController.php';
 
     $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -34,6 +35,22 @@
             
             $controller = new AnuncioController();
             $controller->busqueda($queryParams);
+        },
+        '/login' => function() {
+            $controller = new AuthController();
+            $controller->login();
+        },
+        '/auth-login' => function() {
+            $controller = new AuthController();
+            $controller->controlAcceso();
+        },
+        '/registro' => function() {
+            $controller = new AuthController();
+            $controller->register();
+        },
+        '/auth-registro' => function() {
+            $controller = new AuthController();
+            $controller->controlRegistro();
         }
     ];
     
