@@ -1,12 +1,21 @@
 <?php
 
-require_once('./src/models/anuncio.php'); 
-require_once('./src/models/usuario.php');
+require_once('./src/models/anuncioModel.php'); 
+require_once('./src/models/usuarioModel.php');
+require_once('./src/models/mensajeModel.php');
 
 class MensajeController {
-    public function escribirMensaje($id) {
-        $anuncio = Anuncio::getAnuncio($id);
-        $publicador = Usuario::getUsuario($anuncio['usuario']);
-        include_once './src/views/detalleAnuncio.php';
+    public function escribirMensaje() {
+        $mensaje = $_POST['mensaje'];
+        $tipo_mensaje = $_POST['tipo_mensaje'];
+        $anuncio_id = $_POST['anuncio_id'];
+        $anuncio = Anuncio::getAnuncio($anuncio_id);
+        $receptor = Usuario::getUsuario($anuncio['usuario']);
+        $emisor = "pablo@example.com"; // TODO cambiar por el usuario logueado $_SESSION['usuario']
+
+        if(Mensaje::nuevoMensaje($emisor, $receptor['email'], $mensaje, $anuncio_id, $tipo_mensaje))
+            header('Location: /anuncio/' . $anuncio_id .'?mensaje=ok');
+        else
+            header('Location: /anuncio/' . $anuncio_id .'?mensaje=error');
     }
 }

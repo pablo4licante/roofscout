@@ -55,22 +55,22 @@ function getPostValue($field) {
 <h2>Registro</h2>
 <form action="" method="post">
     <label for="email">Email:</label>
-    <input type="text" id="email" name="email" placeholder="Email">
+    <input type="text" id="email" name="email" placeholder="Email" value="<?= getPostValue('email') ?>">
     <br>
     <span style="color:red;"><?= $errors['email'] ?? '' ?></span><br><br>
 
     <label for="nombre">Nombre de usuario:</label>
-    <input type="text" id="nombre" name="nombre" placeholder="Nombre de usuario">
+    <input type="text" id="nombre" name="nombre" placeholder="Nombre de usuario" value="<?= getPostValue('nombre') ?>">
     <br>
     <span style="color:red;"><?= $errors['nombre'] ?? '' ?></span><br><br>
 
     <label for="password">Contraseña:</label>
-    <input type="password" id="password" name="password" placeholder="Contraseña">
+    <input type="password" id="password" name="password" placeholder="Contraseña" value="<?= getPostValue('password') ?>">
     <br>
     <span style="color:red;"><?= $errors['password'] ?? '' ?></span><br><br>
 
     <label for="confirm_password">Repetir contraseña:</label>
-    <input type="password" id="confirm_password" name="confirm_password" placeholder="Repetir contraseña">
+    <input type="password" id="confirm_password" name="confirm_password" placeholder="Repetir contraseña" value="<?= getPostValue('confirm_password') ?>">
     <br>
     <span style="color:red;"><?= $errors['confirm_password'] ?? '' ?></span><br><br>
 
@@ -121,8 +121,8 @@ function getPostValue($field) {
         <option value="argentina" <?= isset($_POST['pais']) && $_POST['pais'] === 'argentina' ? 'selected' : '' ?>>Argentina</option>
     </select>
     <br>
-
     <span style="color:red;"><?= $errors['pais'] ?? '' ?></span><br><br>
+    
     <label for="foto_perfil">Foto de perfil:</label>
     <input type="file" id="foto_perfil" name="foto_perfil" accept="image/*">
     <br>
