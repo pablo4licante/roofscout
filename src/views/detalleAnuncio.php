@@ -1,3 +1,11 @@
+<?php
+    $tipo_mensaje = ["Mas informacion", "Solicitar cita", "Hacer oferta"];
+
+    if(isset($_POST['botonMostrar'])) {
+        $enviarMensaje = true;
+    }
+?>
+
 <div id="photo_banner">
     <h2><?php echo $anuncio['titulo'] ?></h2>
     <p><?php echo $anuncio['tipo_vivienda'] ?></p>
@@ -24,7 +32,26 @@
     <img src="https://picsum.photos/200" onclick="location.href='./perfil.html'" alt="Foto del Publicador"
         class="publisher_img">
     <p><?php echo $publicador['nombre'] ?></p>
-    <button onclick="location.href='./anuncio-enviarmensaje.html'">Enviar Mensaje</button>
+    <div id="enviar-mensaje">
+        <?php
+        if ($enviarMensaje == false):
+            <input type="submit" name="botonMostrar" value="Enviar mensaje"/>;
+        else if ($enviarMensaje == true):
+            <form method="post">
+                <label for="tipo_mensaje">Tipo de Mensaje: </label>
+                <select name="tipo_mensaje" id="tipo_mensaje">
+                    <?php foreach ($tipo_mensaje as $value => $label): ?>
+                        <option value="<?php echo $label; ?>"><?php echo $label; ?></option>
+                    <?php endforeach; ?>
+                </select><br><br>
+                <label for="message">Mensaje:</label>
+                <textarea id="message" name="message" rows="4" cols="50" required></textarea>
+                <br>
+                <input type="submit">Enviar Mensaje</input>
+            </form> ;
+        endif;
+        ?>  
+    </div>
 </div>
 
 

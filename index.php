@@ -26,6 +26,7 @@
             echo "User ID: $id";
         },
         '/anuncio/(\d+)' => function($id) {
+            $enviarMensaje = false;
             $controller = new AnuncioController();
             $controller->detalleAnuncio($id);
         },
