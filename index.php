@@ -4,13 +4,13 @@
   Creado por: Pablo Alicante y Leyre Wollstein el 27/10/2024
 --> 
 
-
 <?php
 
     require_once './src/controllers/anuncioController.php';
     require_once './src/controllers/authController.php';
     require_once './src/controllers/mensajeController.php';
     require_once './src/controllers/folletoController.php';
+    require_once './src/controllers/usuarioController.php';
 
     $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -72,6 +72,29 @@
         '/nuevo-anuncio' => function() {
             $controller = new AnuncioController();
             $controller->nuevoAnuncio();
+        },
+        '/mandar-nuevo-anuncio' => function() {
+            $controller = new AnuncioController();
+            $controller->mandarNuevoAnuncio();
+        },
+        '/ver-anuncio/(\d+)' => function($id) {
+            $controller = new AnuncioController();
+            $controller->verAnuncio($id);
+        },
+        '/agregar-foto/(\d+)' => function($id) {
+            $controller = new AnuncioController();
+            $controller->agregarFoto($id);
+        },
+        '/perfil' => function() {
+            $controller = new UsuarioController();
+            $controller->perfil();
+        },
+        '/mensajes' => function() {
+            $controller = new MensajeController();
+            $controller->misMensajes();
+        },
+        '/declaracion-accesibilidad' => function() {
+            include_once './src/views/declaracionAccesibilidad.php';
         }
     ];
     

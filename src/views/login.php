@@ -1,3 +1,10 @@
+
+<?php
+if (isset($_GET['registered']) && $_GET['registered'] === 'true') {
+  echo '<div class="mensaje-ok">Registro exitoso. Ahora puedes iniciar sesión.</div>';
+}
+?>
+
 <h2>Inicio de Sesión</h2>
 
 <div class="login-container">

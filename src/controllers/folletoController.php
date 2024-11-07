@@ -2,11 +2,11 @@
 require_once('./src/models/folletoModel.php');
 
 class FolletoController {
-    public static function solicitarFolleto() {
+    public function solicitarFolleto() {
         include_once('./src/views/solicitarFolleto.php');
     }
 
-    public static function mandarSolicitudFolleto() {
+    public function mandarSolicitudFolleto() {
         $nombre = $_POST['nombre'];
         $email = $_POST['email'];
         $calle = $_POST['calle'];
@@ -50,7 +50,7 @@ class FolletoController {
         '&precio=' . urlencode($precio));
     }
 
-    public static function respuestaSolicitarFolleto() {
+    public function respuestaSolicitarFolleto() {
         include_once('./src/views/respuestaSolicitudFolleto.php');
     }
 }

@@ -21,6 +21,29 @@ class AnuncioController {
     }
 
     public function nuevoAnuncio() {
-        include_once './src/views/nuevoAnuncio.php';
+        include_once './src/views/crearAnuncio.php';
+    }
+
+    public function mandarNuevoAnuncio() {
+        $anuncioId = Anuncio::nuevoAnuncio($_POST);
+
+        if ($anuncioId) {
+            header("Location: /anuncio/$anuncioId?created=true");
+            exit();
+        } else {
+            // Handle the error appropriately
+            echo "Error al crear el anuncio.";
+        }
+    }
+
+    public function verAnuncio($id): void {
+        $anuncio = Anuncio::getAnuncio($id);
+        $publicador = Usuario::getUsuario($anuncio['usuario']);
+        include_once './src/views/verAnuncio.php';
+    }
+
+    public function agregarFoto($id) {
+        $anuncio = Anuncio::getAnuncio($id);
+        include_once './src/views/agregarFotoAnuncio.php';
     }
 }

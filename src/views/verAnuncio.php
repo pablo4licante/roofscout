@@ -37,28 +37,7 @@
 </div>
 
 <div id="publisher_info">
-    <img src="https://picsum.photos/200" onclick="location.href='./perfil.html'" alt="Foto del Publicador"
-        class="publisher_img">
-    <p><?php echo $publicador['nombre'] ?></p>
-    <div id="enviar-mensaje">
-        <?php if ($enviarMensaje == false): ?>
-            <button onclick="location.href='?enviarMensaje=true'">Enviar Mensaje</button>
-        <?php else: ?>
-            <form method="post" action="/enviar-mensaje">
-                <label for="tipo_mensaje">Tipo de Mensaje: </label>
-                <select name="tipo_mensaje" id="tipo_mensaje">
-                    <?php foreach ($tipo_mensaje as $label): ?>
-                        <option value="<?php echo $label; ?>"><?php echo $label; ?></option>
-                    <?php endforeach; ?>
-                </select><br><br>
-                <label for="mensaje">Mensaje:</label>
-                <textarea id="mensaje" name="mensaje" rows="4" cols="50" required></textarea>
-                <input type="hidden" name="anuncio_id" value="<?php echo $anuncio['id']; ?>">
-                <br>
-                <button type="submit">Enviar Mensaje</button>
-            </form>
-        <?php endif; ?>  
-    </div>
+    <button onclick="window.location.href='/agregar-foto/<?php echo $anuncio['id']?>'">Agregar Fotos</button>
 </div>
 
 

@@ -13,13 +13,13 @@ $tipos_vivienda = [
 ?>
 
 <h1>Nuevo Anuncio</h1>
-<form action="" method="post" enctype="multipart/form-data">
+<form action="/mandar-nuevo-anuncio" method="post" enctype="multipart/form-data">
     <label for="titulo">Título:</label>
     <input type="text" id="titulo" name="titulo" required>
     <br>
 
-    <label for="tipo">Tipo de Anuncio:</label>
-    <select id="tipo" name="tipo" required>
+    <label for="tipo_anuncio">Tipo de Anuncio:</label>
+    <select id="tipo_anuncio" name="tipo_anuncio" required>
         <option value="">Seleccione un tipo</option>
         <?php foreach ($tipos as $valor => $nombre): ?>
             <option value="<?php echo $valor; ?>"><?php echo $nombre; ?></option>
@@ -68,6 +68,26 @@ $tipos_vivienda = [
             <option value="<?php echo $pais; ?>"><?php echo $pais; ?></option>
         <?php endforeach; ?>
     </select>
+    <br>
+
+    <label for="superficie">Superficie (m²):</label>
+    <input type="number" id="superficie" name="superficie" required>
+    <br>
+
+    <label for="habitaciones">Habitaciones:</label>
+    <input type="number" id="habitaciones" name="habitaciones" required>
+    <br>
+
+    <label for="aseos">Aseos:</label>
+    <input type="number" id="aseos" name="aseos" required>
+    <br>
+
+    <label for="planta">Planta:</label>
+    <input type="number" id="planta" name="planta" required>
+    <br>
+
+    <label for="anyo_construccion">Año de Construcción:</label>
+    <input type="number" id="anyo_construccion" name="anyo_construccion" required>
     <br>
 
     <button type="submit">Enviar</button>

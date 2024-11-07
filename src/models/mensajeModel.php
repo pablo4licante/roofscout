@@ -44,4 +44,17 @@ class Mensaje {
             return []; // Devuelve un array vacío en caso de error
         }
     }
+
+    public static function getMensajesByEmisor($emisor) { 
+        $sql = "SELECT * FROM mensajes WHERE emisor = :emisor ORDER BY fecha_hora DESC";
+        $db = DB::getConnection();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':emisor', $emisor, PDO::PARAM_STR);
+        
+        if ($stmt->execute()) {
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return []; // Devuelve un array vacío en caso de error
+        }
+    }
 }
