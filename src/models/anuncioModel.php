@@ -102,4 +102,27 @@ class Anuncio {
             return []; // Devuelve un array vacío en caso de error
         }
     }
+
+    public static function nuevoAnuncio($data) {
+        $sql = "INSERT INTO anuncios (titulo, descripcion, tipo_anuncio, tipo_vivienda, ciudad, pais, precio, fecha_publi) 
+                VALUES (:titulo, :descripcion, :tipo_anuncio, :tipo_vivienda, :ciudad, :pais, :precio, :fecha_publi)";
+        
+        $db = DB::getConnection();
+        $stmt = $db->prepare($sql);
+        
+        $stmt->bindValue(':titulo', $data['titulo'], PDO::PARAM_STR);
+        $stmt->bindValue(':descripcion', $data['descripcion'], PDO::PARAM_STR);
+        $stmt->bindValue(':tipo_anuncio', $data['tipo_anuncio'], PDO::PARAM_STR);
+        $stmt->bindValue(':tipo_vivienda', $data['tipo_vivienda'], PDO::PARAM_STR);
+        $stmt->bindValue(':ciudad', $data['ciudad'], PDO::PARAM_STR);
+        $stmt->bindValue(':pais', $data['pais'], PDO::PARAM_STR);
+        $stmt->bindValue(':precio', $data['precio'], PDO::PARAM_INT);
+        $stmt->bindValue(':fecha_publi', $data['fecha_publi'], PDO::PARAM_STR);
+        
+        if ($stmt->execute()) {
+            return $db->lastInsertId();
+        } else {
+            return false; // Devuelve false en caso de error
+        }
+    }
 }

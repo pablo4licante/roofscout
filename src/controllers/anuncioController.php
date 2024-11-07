@@ -19,4 +19,8 @@ class AnuncioController {
         $publicador = Usuario::getUsuario($anuncio['usuario']);
         include_once './src/views/detalleAnuncio.php';
     }
+
+    public function nuevoAnuncio() {
+        include_once './src/views/nuevoAnuncio.php';
+    }
 }

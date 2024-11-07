@@ -10,6 +10,7 @@
     require_once './src/controllers/anuncioController.php';
     require_once './src/controllers/authController.php';
     require_once './src/controllers/mensajeController.php';
+    require_once './src/controllers/folletoController.php';
 
     $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -55,6 +56,22 @@
         '/enviar-mensaje' => function() {
             $controller = new MensajeController();
             $controller->escribirMensaje();
+        },
+        '/solicitar-folleto' => function() {
+            $controller = new FolletoController();
+            $controller->solicitarFolleto();
+        },
+        '/mandar-solicitud-folleto' => function() {
+            $controller = new FolletoController();
+            $controller->mandarSolicitudFolleto();
+        },
+        '/respuesta-solicitar-folleto' => function() { // TODO implementar respuesta solicitud folleto
+            $controller = new FolletoController();
+            $controller->respuestaSolicitarFolleto();
+        },
+        '/nuevo-anuncio' => function() {
+            $controller = new AnuncioController();
+            $controller->nuevoAnuncio();
         }
     ];
     
