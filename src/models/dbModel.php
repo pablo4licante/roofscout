@@ -8,7 +8,7 @@ class DB {
         $host = 'localhost';    
         $dbname = 'roofscout'; 
         $port = '6900'; 
-        $username = 'root';             
+        $username = 'root';     // TODO: Crear usuario con password        
         $password = '';
 
         try {
@@ -25,4 +25,5 @@ class DB {
         }
         return self::$instance->connection;
     }
+
 }
