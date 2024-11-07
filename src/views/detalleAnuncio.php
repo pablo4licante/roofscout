@@ -1,10 +1,13 @@
 <?php
     $tipo_mensaje = ["Mas informacion", "Solicitar cita", "Hacer oferta"];
-
-    if(isset($_POST['botonMostrar'])) {
-        $enviarMensaje = true;
-    }
+    $enviarMensaje = $_GET['enviarMensaje'] ?? false;
 ?>
+
+<?php if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'ok'): ?>
+    <div class="mensaje-ok">Mensaje enviado correctamente</div>
+<?php elseif (isset($_GET['mensaje']) && $_GET['mensaje'] == 'error'): ?>
+    <div class="mensaje-error">Error al enviar el mensaje</div>
+<?php endif; ?>
 
 <div id="photo_banner">
     <h2><?php echo $anuncio['titulo'] ?></h2>
@@ -33,21 +36,21 @@
         class="publisher_img">
     <p><?php echo $publicador['nombre'] ?></p>
     <div id="enviar-mensaje">
-        <?php
-        if ($enviarMensaje == false): ?>
-            <input type="submit" name="botonMostrar" value="Enviar mensaje"/>
+        <?php if ($enviarMensaje == false): ?>
+            <button onclick="location.href='?enviarMensaje=true'">Enviar Mensaje</button>
         <?php else: ?>
-            <form method="post">
+            <form method="post" action="/enviar-mensaje">
                 <label for="tipo_mensaje">Tipo de Mensaje: </label>
                 <select name="tipo_mensaje" id="tipo_mensaje">
                     <?php foreach ($tipo_mensaje as $label): ?>
                         <option value="<?php echo $label; ?>"><?php echo $label; ?></option>
                     <?php endforeach; ?>
                 </select><br><br>
-                <label for="message">Mensaje:</label>
-                <textarea id="message" name="message" rows="4" cols="50" required></textarea>
+                <label for="mensaje">Mensaje:</label>
+                <textarea id="mensaje" name="mensaje" rows="4" cols="50" required></textarea>
+                <input type="hidden" name="anuncio_id" value="<?php echo $anuncio['id']; ?>">
                 <br>
-                <input type="submit" value="Enviar Mensaje"/>
+                <button type="submit">Enviar Mensaje</button>
             </form>
         <?php endif; ?>  
     </div>

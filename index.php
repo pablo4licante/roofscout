@@ -9,6 +9,7 @@
 
     require_once './src/controllers/anuncioController.php';
     require_once './src/controllers/authController.php';
+    require_once './src/controllers/mensajeController.php';
 
     $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -21,13 +22,12 @@
         },
         '/about' => function() {
             echo "<h1>This is the About page!</h1>";
-            echo "<p>Bienvenido a la página de About.</p>";
+            echo "<p>Bienvenido a la página de About.</p>"; // TODO implementar about / declaracion de accesibilidad
         },
         '/user/(\d+)' => function($id) {
-            echo "User ID: $id";
+            echo "User ID: $id"; // TODO implementar pagina de usuario
         },
         '/anuncio/(\d+)' => function($id) {
-            $enviarMensaje = false;
             $controller = new AnuncioController();
             $controller->detalleAnuncio($id);
         },
@@ -51,6 +51,10 @@
         '/auth-registro' => function() {
             $controller = new AuthController();
             $controller->controlRegistro();
+        },
+        '/enviar-mensaje' => function() {
+            $controller = new MensajeController();
+            $controller->escribirMensaje();
         }
     ];
     
@@ -76,7 +80,8 @@
 
     if (!$matched) {
         http_response_code(404);
-        echo "404 - Page not found";
+        header("Location: /");
+        exit();
     }
 
     include_once('./src/views/templates/footer.inc.php');
