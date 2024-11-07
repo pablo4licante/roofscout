@@ -1,5 +1,7 @@
 <?php
 
+require_once("./src/models/dbModel.php");
+
 class Mensaje {
     public static function nuevoMensaje($emisor, $receptor, $mensaje, $anuncio, $tipo_mensaje) {
         $sql = "INSERT INTO mensajes (emisor, receptor, mensaje, anuncio, fecha_hora, tipo_mensaje) VALUES (:emisor, :receptor, :mensaje, :anuncio, NOW(), :tipo_mensaje)";
