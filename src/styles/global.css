@@ -168,6 +168,17 @@ form select {
     color: var(--font-color);
 }
 
+form input:disabled,
+textarea:disabled,
+form select:disabled {
+    background-color: var(--secondary-background-color);
+}
+
+form input[type="file"] {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
 form button {
     
     width: calc(100% - 20px);

@@ -24,7 +24,7 @@ class AuthController {
 
             header('Location: /');
         } else {
-            header('Location: /login');
+            header('Location: /login?registered=true');
             echo 'Error en las credenciales';
         }
     }

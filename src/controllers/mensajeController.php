@@ -18,4 +18,11 @@ class MensajeController {
         else
             header('Location: /anuncio/' . $anuncio_id .'?mensaje=error');
     }
+
+    public function misMensajes() {
+        $email = 'pablo@example.com'; // TODO cambiar por el usuario logueado $_SESSION['usuario']
+        $mensajes_recibidos = Mensaje::getMensajesByReceptor($email);
+        $mensajes_enviados = Mensaje::getMensajesByEmisor($email);
+        include_once './src/views/mensajes.php';
+    }
 }

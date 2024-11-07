@@ -104,8 +104,8 @@ class Anuncio {
     }
 
     public static function nuevoAnuncio($data) {
-        $sql = "INSERT INTO anuncios (titulo, descripcion, tipo_anuncio, tipo_vivienda, ciudad, pais, precio, fecha_publi) 
-                VALUES (:titulo, :descripcion, :tipo_anuncio, :tipo_vivienda, :ciudad, :pais, :precio, :fecha_publi)";
+        $sql = "INSERT INTO anuncios (titulo, descripcion, tipo_anuncio, tipo_vivienda, ciudad, pais, precio, fecha_publi, superficie, habitaciones, aseos, planta, anyo_construccion, usuario) 
+            VALUES (:titulo, :descripcion, :tipo_anuncio, :tipo_vivienda, :ciudad, :pais, :precio, NOW(), :superficie, :habitaciones, :aseos, :planta, :anyo_construccion, :usuario)";
         
         $db = DB::getConnection();
         $stmt = $db->prepare($sql);
@@ -117,12 +117,16 @@ class Anuncio {
         $stmt->bindValue(':ciudad', $data['ciudad'], PDO::PARAM_STR);
         $stmt->bindValue(':pais', $data['pais'], PDO::PARAM_STR);
         $stmt->bindValue(':precio', $data['precio'], PDO::PARAM_INT);
-        $stmt->bindValue(':fecha_publi', $data['fecha_publi'], PDO::PARAM_STR);
-        
+        $stmt->bindValue(':superficie', $data['superficie'], PDO::PARAM_INT);
+        $stmt->bindValue(':habitaciones', $data['habitaciones'], PDO::PARAM_INT);
+        $stmt->bindValue(':aseos', $data['aseos'], PDO::PARAM_INT);
+        $stmt->bindValue(':planta', $data['planta'], PDO::PARAM_INT);
+        $stmt->bindValue(':anyo_construccion', $data['anyo_construccion'], PDO::PARAM_INT);
+        $stmt->bindValue(':usuario', 'pablo@example.com', PDO::PARAM_STR);
         if ($stmt->execute()) {
             return $db->lastInsertId();
         } else {
-            return false; // Devuelve false en caso de error
+            return false;
         }
     }
 }
