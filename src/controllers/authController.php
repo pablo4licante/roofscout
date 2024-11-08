@@ -22,9 +22,9 @@ class AuthController {
             //session_start();
             //$_SESSION['email'] = $email;
 
-            header('Location: /');
+            header('Location: /?logged=true');
         } else {
-            header('Location: /login?registered=true');
+            header('Location: /login');
             echo 'Error en las credenciales';
         }
     }
@@ -41,7 +41,7 @@ class AuthController {
 
         if (Usuario::nuevoUsuario($email, $password, $nombre, $sexo, $fecha_nacimiento, $ciudad, $pais, $foto_perfil)) {
     
-            header('Location: /login');
+            header('Location: /login?registered=true');
         } else {
             echo 'Error en las credenciales';
             header('Location: /registro');

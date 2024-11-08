@@ -37,7 +37,7 @@
 </div>
 
 <div id="publisher_info">
-    <img src="https://picsum.photos/200" onclick="location.href='./perfil.html'" alt="Foto del Publicador"
+    <img src="https://picsum.photos/200" onclick="location.href='/perfil'" alt="Foto del Publicador"
         class="publisher_img">
     <p><?php echo $publicador['nombre'] ?></p>
     <div id="enviar-mensaje">
