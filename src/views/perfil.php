@@ -16,3 +16,9 @@
 <h2>Mis anuncios</h2>
   <button onclick="location.href='/nuevo-anuncio'">Crear anuncio</button>
   <button onclick="location.href='/solicitar-folleto'">Solicitar folleto</button>
+
+  <div id="galeria">
+    <?php foreach ($anuncios as $anuncio): ?>
+        <?php include('./src/views/templates/card.inc.php'); ?>
+    <?php endforeach; ?>
+</div>

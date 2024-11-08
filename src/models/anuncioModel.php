@@ -129,4 +129,18 @@ class Anuncio {
             return false;
         }
     }
+
+    public static function getAnunciosPorUsuario($email) {
+        $sql = "SELECT * FROM anuncios WHERE usuario = :email ORDER BY fecha_publi DESC";
+        
+        $db = DB::getConnection();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+        
+        if ($stmt->execute()) {
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return []; // Devuelve un array vacío en caso de error
+        }
+    }
 }
