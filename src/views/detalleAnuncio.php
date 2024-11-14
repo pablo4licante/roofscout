@@ -1,18 +1,14 @@
 <?php
     $tipo_mensaje = ["Mas informacion", "Solicitar cita", "Hacer oferta"];
     $enviarMensaje = $_GET['enviarMensaje'] ?? false;
-    $created = $_GET['created'] ?? false;
 ?>
 
-<?php if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'ok'): ?>
-    <div class="mensaje-ok">Mensaje enviado correctamente</div>
-<?php elseif (isset($_GET['mensaje']) && $_GET['mensaje'] == 'error'): ?>
-    <div class="mensaje-error">Error al enviar el mensaje</div>
-<?php endif; ?>
-
-<?php if ($created): ?>
-    <div class="mensaje-ok">Anuncio creado correctamente</div>
-<?php endif; ?>
+<?php
+if (isset($_SESSION['flashdata'])) {
+  echo '<div class="mensaje-ok">' . htmlspecialchars($_SESSION['flashdata']) . '</div>';
+  unset($_SESSION['flashdata']);
+}
+?>
 
 <div id="photo_banner">
     <h2><?php echo $anuncio['titulo'] ?></h2>
@@ -46,6 +42,14 @@
 
 </div>
 
+<?php if($publicador['email'] == $_SESSION['user']): ?>
+        
+    <div id="publisher_info">
+    <button onclick="window.location.href='/agregar-foto/<?php echo $anuncio['id']?>'">Agregar Fotos</button>
+    </div>
+
+<?php else: ?>
+
 <div id="publisher_info">
     <img src="https://picsum.photos/200" onclick="location.href='/perfil'" alt="Foto del Publicador"
         class="publisher_img">
@@ -70,6 +74,8 @@
         <?php endif; ?>  
     </div>
 </div>
+<?php endif; ?>
+
 
 <?php if($fotos && count($fotos) > 0): ?>
     <div id="galeria_fotos">

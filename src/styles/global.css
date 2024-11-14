@@ -132,7 +132,6 @@ form {
     background-color: var(--background-color);
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: min(40rem, 80%);
 }
 
 form p {
@@ -166,6 +165,18 @@ form select {
     font-size: var(--text-extra-small);
     background-color: var(--element-background-color);
     color: var(--font-color);
+}
+
+form input[type="checkbox"] {
+    margin-right: 0.5rem;
+    accent-color: var(--primary-color);
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.3);
+    }
 }
 
 form input:disabled,
@@ -391,7 +402,7 @@ h2 {
 }
 
 .login-container {
-    width: min(30rem, 80%);
+    width: min(30rem, 90%);
 }
 
 .enlace-registro, .enlace-login {
@@ -456,6 +467,10 @@ h2 {
     color: var(--primary-color);
 }
 
+.busqueda-form {
+    width: min(40rem, 90%);
+}
+
 
 #grid {
     display: flex;
@@ -490,6 +505,13 @@ form, #tarifas {
     flex-wrap: wrap;
     justify-content: center;
 }
+
+.galeria {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 
 #galeria_fotos {
     text-align: center;

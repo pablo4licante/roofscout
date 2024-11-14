@@ -7,7 +7,7 @@
       <li><a href="/" class="fa fa-home"> <span class="sr-only">Inicio</span></a></li>
       <li><a href="/busqueda" class="fa fa-search"> <span class="sr-only">Busqueda Avanzada</span></a></li>
       <?php
-      if (isset($_GET['logged']) && $_GET['logged'] == 'true') {
+      if (isset($_SESSION['user'])) {
         echo '<li><a href="/mensajes" class="fa fa-envelope"> <span class="sr-only">Mensajes</span></a></li>
           <li><a href="/perfil" class="fa fa-user"> <span class="sr-only">Perfil Usuario</span></a></li>';
       } else {

@@ -22,14 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <h2>Inicio de Sesión</h2>
 
 <?php
-if (isset($_GET['registered']) && $_GET['registered'] === 'true') {
-  echo '<div class="mensaje-ok">Registro exitoso. Ahora puedes iniciar sesión.</div>';
-}
-?>
-
-<?php
-if (isset($_GET['error']) && $_GET['error'] === 'true') {
-  echo '<div class="mensaje-error">Usuario o contrase&ntilde;a incorrectos.</div>';
+if (isset($_SESSION['flashdata'])) {
+  echo '<div class="mensaje-ok">' . htmlspecialchars($_SESSION['flashdata']) . '</div>';
+  unset($_SESSION['flashdata']);
 }
 ?>
 
@@ -43,6 +38,9 @@ if (isset($_GET['error']) && $_GET['error'] === 'true') {
   <input type="password" id="password" name="password" placeholder="Contrase&ntilde;a" value="<?= htmlspecialchars($_POST['password'] ?? '') ?>"><br>
   <span style="color:red;"><?= $errors['password'] ?? '' ?></span><br><br>
   
+<label for="remember">Recuérdame:</label>
+<input type="checkbox" id="remember" name="remember" <?= isset($_POST['remember']) ? 'checked' : '' ?>><br><br>
+
   <button type="submit">Acceder</button>
   </form>
 

@@ -13,7 +13,7 @@ function getPostValue($field) {
     return isset($_GET[$field]) ? htmlspecialchars($_GET[$field]) : '';
 }
 ?>
-
+<div class="busqueda-form">
 <form method="get">
     <label for="query">Titulo del Anuncio</label>
     <input  value="<?= getPostValue("query")?>" type="text" name="query" placeholder="Titulo de Anuncio"><br><br>
@@ -72,6 +72,7 @@ function getPostValue($field) {
 
     <button type="submit">Buscar</button>
 </form>
+</div>
 
 
 <h3>Mostrando <?php echo sizeof($anuncios); ?> resultados</h3>
