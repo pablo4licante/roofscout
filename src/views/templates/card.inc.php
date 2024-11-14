@@ -10,7 +10,8 @@
             <?php else: ?>
                 <h2><?php echo number_format(htmlspecialchars($anuncio['precio']), 0, '', '.'); ?> &euro;</h2>
             <?php endif; ?>
-            <p><?php echo htmlspecialchars($anuncio['fecha_publi']); ?></p>
+            <p><?php echo date('d M Y', strtotime($anuncio['fecha_publi'])); ?></p>
+
         </div>
     </a>
 </article>
