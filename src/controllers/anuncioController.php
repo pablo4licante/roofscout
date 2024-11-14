@@ -11,8 +11,30 @@ class AnuncioController {
     }
 
     public function busqueda($queryParams) {
-        $anuncios = Anuncio::getResultados($queryParams);
-        include_once './src/views/busqueda.php';
+
+        if(isset($queryParams["precio_min"]) && $queryParams["precio_min"] != "" && !is_numeric($queryParams["precio_min"])) {
+            echo "<div class='mensaje-error'>El precio mínimo debe ser un número entero.</div>";
+            echo "<button onclick=\"window.location.href='/busqueda'\">Volver a la busqueda</button>";
+        }
+
+        elseif(isset($queryParams["precio_max"]) && $queryParams["precio_max"] != "" && !is_numeric($queryParams["precio_max"])) {
+            echo "<div class='mensaje-error'>El precio máximo debe ser un número entero.</div>";
+            echo "<button onclick=\"window.location.href='/busqueda'\">Volver a la busqueda</button>";
+        }
+
+        elseif(isset($queryParams["fecha_inicio"]) && $queryParams["fecha_inicio"] != "" && !preg_match("/^\d{4}-\d{2}-\d{2}$/", $queryParams["fecha_inicio"])) {
+            echo "<div class='mensaje-error'>La fecha de inicio debe tener el formato AAAA-MM-DD.</div>";
+            echo "<button onclick=\"window.location.href='/busqueda'\">Volver a la busqueda</button>";
+        }
+
+        elseif(isset($queryParams["fecha_fin"]) && $queryParams["fecha_fin"] != "" && !preg_match("/^\d{4}-\d{2}-\d{2}$/", $queryParams["fecha_fin"])) {
+            echo "<div class='mensaje-error'>La fecha de fin debe tener el formato AAAA-MM-DD.</div>";
+            echo "<button onclick=\"window.location.href='/busqueda'\">Volver a la busqueda</button>";
+        }
+        else {
+            $anuncios = Anuncio::getResultados($queryParams);
+            include_once './src/views/busqueda.php';
+        }
     }
 
     public function detalleAnuncio($id) {

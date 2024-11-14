@@ -1,10 +1,14 @@
 <h2>B&uacute;squeda</h2>
 <?php
 // Opciones para los selectores tambien se pueden cargar desde una base de datos
+
+use function PHPSTORM_META\type;
+
 $tipos_anuncio = ["Alquiler", "Venta"];
 $tipos_vivienda = ["Vivienda", "Obra Nueva", "Oficina", "Local", "Garaje"];
 $ciudades = ["Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza", "Málaga", "Murcia", "Palma", "Bilbao", "Alicante"];
 $paises = ["España", "Francia", "Alemania", "Italia", "Portugal", "Reino Unido", "Estados Unidos", "Canadá", "México", "Argentina"];
+
 function getPostValue($field) {
     return isset($_GET[$field]) ? htmlspecialchars($_GET[$field]) : '';
 }
