@@ -4,7 +4,7 @@
     <p><strong>Nombre:</strong> <?php echo $usuario['nombre']; ?></p>
     <p><strong>Email:</strong> <?php echo $usuario['email']; ?></p>
     <p><strong>Sexo:</strong> <?php echo $usuario['sexo']; ?></p>
-    <p><strong>Fecha de Nacimiento:</strong> <?php echo $usuario['fecha_nacimiento']; ?></p>
+    <p><strong>Fecha de Nacimiento:</strong> <?php echo date('d M Y', strtotime($usuario['fecha_nacimiento'])); ?></p>
     <p><strong>País:</strong> <?php echo $usuario['pais']; ?></p>
     <p><strong>Ciudad:</strong> <?php echo $usuario['ciudad']; ?></p>
 </div>
