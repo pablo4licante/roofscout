@@ -11,6 +11,7 @@
     require_once './src/controllers/mensajeController.php';
     require_once './src/controllers/folletoController.php';
     require_once './src/controllers/usuarioController.php';
+    require_once './src/controllers/fotoController.php';
 
     $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -95,6 +96,10 @@
         },
         '/declaracion-accesibilidad' => function() {
             include_once './src/views/declaracionAccesibilidad.php';
+        },
+        '/foto/(\d+)' => function($id) {
+            $controller = new FotoController();
+            $controller->detalleFoto($id);
         }
     ];
     

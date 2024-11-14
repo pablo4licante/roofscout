@@ -2,6 +2,7 @@
 
 require_once('./src/models/anuncioModel.php'); 
 require_once('./src/models/usuarioModel.php');
+require_once('./src/models/fotoModel.php'); 
 
 class AnuncioController {
     public function inicio() {
@@ -17,6 +18,7 @@ class AnuncioController {
     public function detalleAnuncio($id) {
         $anuncio = Anuncio::getAnuncio($id);
         $publicador = Usuario::getUsuario($anuncio['usuario']);
+        $fotos = Foto::getFotosPorAnuncio($id);
         include_once './src/views/detalleAnuncio.php';
     }
 
