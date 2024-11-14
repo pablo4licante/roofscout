@@ -22,7 +22,7 @@ class AuthController {
             //session_start();
             //$_SESSION['email'] = $email;
 
-            header('Location: /?logged=true');
+            header('Location: /perfil?logged=true');
         } else {
             header('Location: /login?error=true');
         }
