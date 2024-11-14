@@ -132,7 +132,7 @@ form {
     background-color: var(--background-color);
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: min(40rem, 80%);
+    
 }
 
 form p {
@@ -375,6 +375,10 @@ h2 {
 .titulo {
     text-decoration: none;
     color: var(--font-color);
+}
+
+.login-container {
+    width: min(30rem, 80%);
 }
 
 .enlace-registro, .enlace-login {
