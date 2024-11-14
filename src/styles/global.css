@@ -274,6 +274,19 @@ h2 {
     }    
 }
 
+.botones-perfil {
+    display: flex;
+    flex-direction: row;
+    
+    > button {
+        margin: 1rem;
+        padding: 1rem;
+    }
+}
+
+.titulo-anuncios-perfil {
+    margin-top: 3rem;
+}
 
 .card {
     background-color: var(--element-background-color);
