@@ -18,7 +18,17 @@
     <h2><?php echo $anuncio['titulo'] ?></h2>
     <p><?php echo $anuncio['tipo_vivienda'] ?></p>
     <h3><?php echo $anuncio['ciudad'] ?>, <?php echo htmlspecialchars($anuncio['pais'])?></h3>
-    <img src="/src/assets/images/11.jpg" alt="Foto principal">
+    <?php if ($fotos): ?>
+        <?php foreach ($fotos as $foto): ?>
+            <?php if ($foto['principal']): ?>
+                <img src="<?php echo $foto['url']; ?>" onclick="location.href='/foto/<?php echo $foto['id'] ?>'" alt="<?php echo $foto['alt']; ?>" class="publisher_img">
+            <?php endif; ?>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <div class="mensaje-error">
+            <p>No hay foto principal.</p>
+        </div>
+    <?php endif; ?>
     <p><?php echo $anuncio['descripcion'] ?></p>
     
     <!-- Formateo de la fecha de YYYY-MM-DD a DD MM YYYY -->
@@ -61,13 +71,19 @@
     </div>
 </div>
 
-
-<div id="galeria_fotos">
-    <h3>Galería de Fotos</h3>
-    <div class="thumbnails">
-        <img src="/src/assets/images/1.jpg" alt="Thumbnail 1" class="thumbnail">
-        <img src="/src/assets/images/2.jpg" alt="Thumbnail 2" class="thumbnail">
-        <img src="/src/assets/images/3.jpg" alt="Thumbnail 3" class="thumbnail">
-        <img src="/src/assets/images/5.jpg" alt="Thumbnail 4" class="thumbnail">
+<?php if($fotos && count($fotos) > 0): ?>
+    <div id="galeria_fotos">
+        <h3>Galería de Fotos</h3>
+        <div class="thumbnails">
+            <?php foreach ($fotos as $foto): ?>
+                <a href="/foto/<?php echo $foto['id']; ?>">
+                    <img src="<?php echo $foto['url']; ?>" alt="<?php echo $foto['alt']; ?>" class="thumbnail">
+                </a>
+            <?php endforeach; ?>
+        </div>
     </div>
-</div>
+<?php else: ?>
+    <div class="photo-info-panel">
+        <p>No hay mas fotos disponibles.</p>
+    </div>    
+<?php endif; ?>
