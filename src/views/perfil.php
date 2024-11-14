@@ -9,13 +9,17 @@
     <p><strong>Ciudad:</strong> <?php echo $usuario['ciudad']; ?></p>
 </div>
 
-<button onclick="location.href='/'">Cerrar Sesión</button>
-<button onclick="location.href='/perfil'">Editar Perfil</button>
-<button onclick="location.href='/'">Darse de Baja</button>
+    <div class="botones-perfil">
+        <button onclick="location.href='/'">Cerrar Sesión</button>
+        <button onclick="location.href='/perfil'">Editar Perfil</button>
+        <button onclick="location.href='/'">Darse de Baja</button>
+    </div>
 
-<h2>Mis anuncios</h2>
-  <button onclick="location.href='/nuevo-anuncio'">Crear anuncio</button>
-  <button onclick="location.href='/solicitar-folleto'">Solicitar folleto</button>
+<h2 class="titulo-anuncios-perfil">Mis anuncios</h2>
+    <div class="botones-perfil">
+        <button onclick="location.href='/nuevo-anuncio'">Crear anuncio</button>
+        <button onclick="location.href='/solicitar-folleto'">Solicitar folleto</button>
+    </div>
 
   <div id="galeria">
     <?php foreach ($anuncios as $anuncio): ?>
