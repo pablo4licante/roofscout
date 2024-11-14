@@ -15,16 +15,22 @@ class AuthController {
     public function controlAcceso() {
         $email = $_POST['email'];
         $password = $_POST['password'];
-
+        $remember = $_POST['remember'];
+        
         if (Usuario::checkCredentials($email, $password)) {
             
-            //TODO
-            //session_start();
-            //$_SESSION['email'] = $email;
+            $_SESSION['user'] = $email;
 
+            if($remember == 'on') {
+                setcookie('user', $email, time() + (86400 * 90), "/");
+                setcookie('password', $password, time() + (86400 * 90), "/"); // TODO de verdad hay que guardarse la contrasenya??
+            }
+
+            $_SESSION["ultimaConexion"] = Usuario::getUltimaConexion();
             header('Location: /perfil?logged=true');
         } else {
-            header('Location: /login?error=true');
+            $_SESSION['flashdata'] =  'No se ha podido inciar sesion. Comprueba tus credenciales.';
+            header('Location: /login');
         }
     }
 
@@ -39,11 +45,22 @@ class AuthController {
         $foto_perfil = $_POST['foto_perfil'];
 
         if (Usuario::nuevoUsuario($email, $password, $nombre, $sexo, $fecha_nacimiento, $ciudad, $pais, $foto_perfil)) {
-    
-            header('Location: /login?registered=true');
+            $_SESSION['flashdata'] = $nombre . ', hemos creado tu cuenta con exito!';
+            header('Location: /login');
         } else {
-            echo 'Error en las credenciales';
+            $_SESSION['flashdata'] = 'Error de credenciales.';
             header('Location: /registro');
         }
+    }
+
+    public function cerrarSesion() {
+        // Delete cookies
+        setcookie('user', '', time() - 3600, '/');
+        setcookie('password', '', time() - 3600, '/');
+        
+        // Delete session
+        unset($_SESSION['user']);
+        session_destroy();
+        header('Location: /');
     }
 }

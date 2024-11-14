@@ -1,6 +1,8 @@
 <article class="card">
     <a href="anuncio/<?php echo htmlspecialchars($anuncio['id']); ?>">
-            <img alt="Card Image" class="card-img" src="./src/assets/images/<?php echo rand(1, 11); ?>.jpg">
+
+        <img class="card-img" src="<?php echo htmlspecialchars($anuncio['url']); ?>"  alt="<?php echo htmlspecialchars($anuncio['alt']); ?>">
+
         <div class="card-content">
             <h3><?php echo htmlspecialchars($anuncio['titulo']); ?></h3>
             <p><?php echo htmlspecialchars($anuncio['ciudad']); ?>, <?php echo htmlspecialchars($anuncio['pais']); ?>
@@ -11,7 +13,6 @@
                 <h2><?php echo number_format(htmlspecialchars($anuncio['precio']), 0, '', '.'); ?> &euro;</h2>
             <?php endif; ?>
             <p><?php echo date('d M Y', strtotime($anuncio['fecha_publi'])); ?></p>
-
         </div>
     </a>
 </article>

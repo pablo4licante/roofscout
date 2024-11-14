@@ -11,16 +11,20 @@ class MensajeController {
         $anuncio_id = $_POST['anuncio_id'];
         $anuncio = Anuncio::getAnuncio($anuncio_id);
         $receptor = Usuario::getUsuario($anuncio['usuario']);
-        $emisor = "pablo@example.com"; // TODO cambiar por el usuario logueado $_SESSION['usuario']
+        $emisor = $_SESSION['user']; // TODO cambiar por el usuario logueado $_SESSION['usuario']
 
-        if(Mensaje::nuevoMensaje($emisor, $receptor['email'], $mensaje, $anuncio_id, $tipo_mensaje))
-            header('Location: /anuncio/' . $anuncio_id .'?mensaje=ok');
-        else
-            header('Location: /anuncio/' . $anuncio_id .'?mensaje=error');
+        if(Mensaje::nuevoMensaje($emisor, $receptor['email'], $mensaje, $anuncio_id, $tipo_mensaje)) {
+            $_SESSION['flashdata'] = 'Mensaje enviado con exito!';
+            header('Location: /anuncio/' . $anuncio_id);
+        }
+        else {
+            $_SESSION['flashdata'] = 'No se ha podido enviar el mensaje.';
+            header('Location: /anuncio/' . $anuncio_id);
+        }
     }
 
     public function misMensajes() {
-        $email = 'pablo@example.com'; // TODO cambiar por el usuario logueado $_SESSION['usuario']
+        $email = $_SESSION['user']; // TODO cambiar por el usuario logueado $_SESSION['usuario']
         $mensajes_recibidos = Mensaje::getMensajesByReceptor($email);
         $mensajes_enviados = Mensaje::getMensajesByEmisor($email);
         include_once './src/views/mensajes.php';

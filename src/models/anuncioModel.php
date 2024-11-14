@@ -4,7 +4,11 @@ require_once("./src/models/dbModel.php");
 class Anuncio {
     public static function getUltimos($limit = 5) {
 
-        $sql = "SELECT * FROM anuncios ORDER BY fecha_publi DESC LIMIT :limit";
+        $sql = "SELECT a.*, f.url, f.alt 
+                FROM anuncios a 
+                LEFT JOIN fotos f ON a.id = f.anuncio AND f.principal = 1 
+                ORDER BY a.fecha_publi DESC 
+                LIMIT :limit";
         
         $db = DB::getConnection();
         $stmt = $db->prepare($sql);
@@ -19,8 +23,10 @@ class Anuncio {
 
     public static function getResultados($queryParams) {
         
-        $sql = "SELECT * FROM anuncios ";
-        
+        $sql = "SELECT a.*, f.url, f.alt
+            FROM anuncios a 
+            LEFT JOIN fotos f ON a.id = f.anuncio AND f.principal = 1 ";
+
         $conditions = [];
         $params = [];
 
@@ -90,12 +96,14 @@ class Anuncio {
     }
 
     public static function getAnuncio($id) {
-        $sql = "SELECT * FROM anuncios WHERE id = :id";
+        $sql = "SELECT a.*, f.url, f.alt 
+            FROM anuncios a 
+            LEFT JOIN fotos f ON a.id = f.anuncio AND f.principal = 1 
+            WHERE a.id = :id";
         
         $db = DB::getConnection();
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-        
         if ($stmt->execute()) {
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } else {
@@ -131,7 +139,11 @@ class Anuncio {
     }
 
     public static function getAnunciosPorUsuario($email) {
-        $sql = "SELECT * FROM anuncios WHERE usuario = :email ORDER BY fecha_publi DESC";
+        $sql = "SELECT a.*, f.url, f.alt 
+                FROM anuncios a 
+                LEFT JOIN fotos f ON a.id = f.anuncio AND f.principal = 1 
+                WHERE a.usuario = :email 
+                ORDER BY a.fecha_publi DESC";
         
         $db = DB::getConnection();
         $stmt = $db->prepare($sql);

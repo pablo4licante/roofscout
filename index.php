@@ -78,10 +78,6 @@
             $controller = new AnuncioController();
             $controller->mandarNuevoAnuncio();
         },
-        '/ver-anuncio/(\d+)' => function($id) {
-            $controller = new AnuncioController();
-            $controller->verAnuncio($id);
-        },
         '/agregar-foto/(\d+)' => function($id) {
             $controller = new AnuncioController();
             $controller->agregarFoto($id);
@@ -100,9 +96,63 @@
         '/foto/(\d+)' => function($id) {
             $controller = new FotoController();
             $controller->detalleFoto($id);
+        },
+        '/cerrar-sesion' => function() {
+            $controller = new AuthController();
+            $controller->cerrarSesion();
+        },
+        '/seleccion-tema' => function() {
+            $controller = new UsuarioController();
+            $controller->paginaTemas();
+        },
+        '/aplicar-seleccion-tema' => function() {
+            $controller = new UsuarioController();
+            $controller->seleccionarTema($_POST['temaId']);
         }
     ];
-    
+
+    session_start();
+    if (isset($_COOKIE['user'])) {
+        $_SESSION['user'] = $_COOKIE['user'];
+    }
+
+    if (isset($_SESSION['user'])) {
+        $_SESSION['tema'] = Usuario::getTema();
+    }
+
+    $protectedRoutes = [
+        '/nuevo-anuncio',
+        '/mandar-nuevo-anuncio',
+        '/perfil',
+        '/user/(\d+)',
+        '/anuncio/(\d+)',
+        '/enviar-mensaje',
+        '/solicitar-folleto',
+        '/mandar-solicitud-folleto',
+        '/respuesta-solicitar-folleto',
+        '/foto/(\d+)',
+        '/mensajes',
+        '/agregar-foto/(\d+)'
+    ];
+
+    $isProtected = false;
+    foreach ($protectedRoutes as $protectedRoute) {
+        $pattern = '@^' . preg_replace('/\(\d+\)/', '(\d+)', $protectedRoute) . '$@';
+        if (preg_match($pattern, $path)) {
+            $isProtected = true;
+            break;
+        }
+    }
+    if ($isProtected) {
+        if (!isset($_SESSION['user'])) {
+            $_SESSION['flashdata'] = 'Para acceder debes iniciar sesion.';
+            header("Location: /login");
+            exit();
+        }
+    } else {
+        Usuario::updateUltimaConexion();
+    }
+
     include_once('./src/views/templates/cabecera.inc.php');
     include_once('./src/views/templates/navegacion.inc.php');
     
@@ -128,7 +178,13 @@
         header("Location: /");
         exit();
     }
+    $controller = new anuncioController();
+    $controller->ultimosVistos();
+    if (!empty($anunciosVisitados)) {
+        setrawcookie('ultimosVistos', json_encode($anunciosVisitados), time() + (7 * 24 * 60 * 60), "/");
+    }
 
+    include_once('./src/views/templates/ultimoAnunciosVisitados.inc.php');
     include_once('./src/views/templates/footer.inc.php');
 ?>
 

@@ -41,6 +41,21 @@ class AnuncioController {
         $anuncio = Anuncio::getAnuncio($id);
         $publicador = Usuario::getUsuario($anuncio['usuario']);
         $fotos = Foto::getFotosPorAnuncio($id);
+
+        $ultimosVistos = isset($_COOKIE['ultimosVistos']) ? explode(',', $_COOKIE['ultimosVistos']) : [];
+
+        if (($key = array_search($id, $ultimosVistos)) !== false) {
+            unset($ultimosVistos[$key]);
+        }
+
+        array_unshift($ultimosVistos, $id);
+
+        if (count($ultimosVistos) > 4) {
+            array_pop($ultimosVistos);
+        }
+
+        setcookie('ultimosVistos', implode(',', $ultimosVistos), time() + (86400 * 7), "/");
+
         include_once './src/views/detalleAnuncio.php';
     }
 
@@ -52,22 +67,28 @@ class AnuncioController {
         $anuncioId = Anuncio::nuevoAnuncio($_POST);
 
         if ($anuncioId) {
-            header("Location: /anuncio/$anuncioId?created=true");
+            $_SESSION['flashdata'] = 'Anuncio creado con exito!';
+            header("Location: /anuncio/$anuncioId");
             exit();
         } else {
-            // Handle the error appropriately
-            echo "Error al crear el anuncio.";
+            return false;
         }
-    }
-
-    public function verAnuncio($id): void {
-        $anuncio = Anuncio::getAnuncio($id);
-        $publicador = Usuario::getUsuario($anuncio['usuario']);
-        include_once './src/views/verAnuncio.php';
     }
 
     public function agregarFoto($id) {
         $anuncio = Anuncio::getAnuncio($id);
         include_once './src/views/agregarFotoAnuncio.php';
+    }
+
+    public function ultimosVistos() {
+        $ids = isset($_COOKIE['ultimosVistos']) ? $_COOKIE['ultimosVistos'] : null;
+        $anunciosVisitados = [];
+        if ($ids) {
+            $idsArray = explode(',', $ids);
+            foreach ($idsArray as $id) {
+                $anunciosVisitados[] = Anuncio::getAnuncio($id);
+            }
+        }
+        include_once './src/views/templates/ultimoAnunciosVisitados.inc.php';
     }
 }
