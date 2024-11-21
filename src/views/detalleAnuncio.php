@@ -48,6 +48,7 @@ if (isset($_SESSION['flashdata'])) {
 
     <?php if ($publicador['email'] == $_SESSION['user']): ?>
         <button onclick="window.location.href='/agregar-foto/<?php echo $anuncio['id'] ?>'">Agregar Fotos</button>
+        <button onclick="window.location.href='/mensajes-anuncio/<?php echo $anuncio['id'] ?>'">Agregar Fotos</button>
     <?php else: ?>
         <div id="enviar-mensaje">
             <?php if ($enviarMensaje == false): ?>

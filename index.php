@@ -116,6 +116,10 @@
         '/auth-modificar' => function() {
             $controller = new AuthController();
             $controller->controlModificar();
+        },
+        '/mensajes-anuncio/(\d+)' => function($idAnuncio) {
+            $controller = new MensajeController();
+            $controller->mensajesPorAnuncio($idAnuncio);
         }
     ];
 
@@ -142,7 +146,8 @@
         '/mensajes',
         '/agregar-foto/(\d+)',
         '/mis-datos',
-        '/auth-modificar'
+        '/auth-modificar',
+        '/mensajes-anuncio/(\d+)'
     ];
 
     $isProtected = false;

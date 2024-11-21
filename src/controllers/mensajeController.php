@@ -11,7 +11,7 @@ class MensajeController {
         $anuncio_id = $_POST['anuncio_id'];
         $anuncio = Anuncio::getAnuncio($anuncio_id);
         $receptor = Usuario::getUsuario($anuncio['usuario']);
-        $emisor = $_SESSION['user']; // TODO cambiar por el usuario logueado $_SESSION['usuario']
+        $emisor = $_SESSION['user'];
 
         if(Mensaje::nuevoMensaje($emisor, $receptor['email'], $mensaje, $anuncio_id, $tipo_mensaje)) {
             $_SESSION['flashdata'] = 'Mensaje enviado con exito!';
@@ -24,9 +24,21 @@ class MensajeController {
     }
 
     public function misMensajes() {
-        $email = $_SESSION['user']; // TODO cambiar por el usuario logueado $_SESSION['usuario']
+        $email = $_SESSION['user']; 
         $mensajes_recibidos = Mensaje::getMensajesByReceptor($email);
         $mensajes_enviados = Mensaje::getMensajesByEmisor($email);
         include_once './src/views/mensajes.php';
+    }
+
+    public function mensajesPorAnuncio($idAnuncio) {
+        
+        $anuncio = Anuncio::getAnuncio($idAnuncio);
+        if($_SESSION['user'] == $anuncio['usuario']) {
+            $mensajes = Mensaje::getMensajesByAnuncio($idAnuncio);
+            include_once './src/views/mensajes_anuncio.php';
+        }
+        else {
+            header('Location: /anuncio/' . $idAnuncio);
+        }
     }
 }
