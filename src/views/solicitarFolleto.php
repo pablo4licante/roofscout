@@ -1,13 +1,9 @@
 <?php
-// TODO cambiar datos por datos de la DB
-$localidades = ["Alicante", "Elche", "Benidorm", "Torrevieja", "Orihuela"];
-$provincias = ["Alicante", "Valencia", "Castellón"];
-$anuncios = ["anuncio1" => "Anuncio 1", "anuncio2" => "Anuncio 2"];
-
 $mostrarTabla = isset($_GET['mostrarTabla']) && $_GET['mostrarTabla'] === 'true';
 
 // Función para generar la tabla de costos
-function generarTablaCostos() {
+function generarTablaCostos()
+{
     $numPaginas = range(1, 15);
     $numFotos = range(3, 45, 3);
 
@@ -49,7 +45,8 @@ function generarTablaCostos() {
     return $html;
 }
 
-function calcularCostos($numPaginas, $numFotos, $resolucion, $impresionColor) {
+function calcularCostos($numPaginas, $numFotos, $resolucion, $impresionColor)
+{
     $precio = 10.0;
 
     // Cálculo de precios según el número de páginas
@@ -132,7 +129,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-function getPostValue($field) {
+function getPostValue($field)
+{
     return isset($_POST[$field]) ? htmlspecialchars($_POST[$field]) : '';
 }
 ?>
@@ -141,7 +139,7 @@ function getPostValue($field) {
 <p id="info-formulario-folleto">Complete el siguiente formulario para solicitar su folleto publicitario impreso con las opciones disponibles.</p>
 
 <div id="grid">
-    
+
     <form action="/mandar-solicitud-folleto" method="post">
         <label for="nombre">Nombre y Apellidos:</label>
         <input type="text" id="nombre" name="nombre" class="form-control" maxlength="200" required>
@@ -187,28 +185,25 @@ function getPostValue($field) {
         <br>
 
         <label for="localidad">Localidad:</label>
-        <select id="localidad" name="localidad" class="form-control" required>
-            <?php foreach ($localidades as $localidad): ?>
-                <option value="<?= $localidad ?>"><?= $localidad ?></option>
-            <?php endforeach; ?>
-        </select>
+        <input type="text" id="localidad" name="localidad" class="form-control" required>
+
         <br>
         <span style="color:red;"><?= $errors['localidad'] ?? '' ?></span><br><br>
         <br>
 
         <label for="provincia">Provincia:</label>
-        <select id="provincia" name="provincia" class="form-control" required>
-            <?php foreach ($provincias as $provincia): ?>
-                <option value="<?= $provincia ?>"><?= $provincia ?></option>
-            <?php endforeach; ?>
-        </select>
+        <input type="text" id="provincia" name="provincia" class="form-control" required>
+
         <br>
         <span style="color:red;"><?= $errors['provincia'] ?? '' ?></span><br><br>
         <br>
 
         <label for="pais">País:</label>
-        <select id="pais" name="pais" class="form-control" required>
-            <option value="España">España</option>
+        <select name="pais" id="pais">
+            <option value="" disabled <?= empty($_POST['pais']) ? 'selected' : '' ?>>Seleccione su país</option>
+            <?php foreach ($paises as $pais): ?>
+                <option value="<?php $pais['nombre'] ?>" <?php isset($_POST['pais']) && $_POST['pais'] === $pais['nombre'] ? 'selected' : '' ?>><?php $pais['nombre'] ?></option>
+            <?php endforeach; ?>
         </select>
         <br>
         <span style="color:red;"><?= $errors['pais'] ?? '' ?></span><br><br>
@@ -216,12 +211,12 @@ function getPostValue($field) {
 
         <label for="telefono">Teléfono (Opcional):</label>
         <input type="number" id="telefono" name="telefono" class="form-control">
-        
+
         <br>
 
         <label for="color-portada">Color de la Portada:</label>
         <input type="color" id="color-portada" name="color-portada" class="form-control" value="#000000">
-        
+
         <br>
 
         <label for="num-copias">Número de Copias:</label>
@@ -279,24 +274,48 @@ function getPostValue($field) {
                 </tr>
             </thead>
             <tbody>
-                <tr><td>Coste procesamiento y envío</td><td>10 &euro;</td></tr>
-                <tr><td>&lt; 5 p&aacute;ginas</td><td>2 &euro; por p&aacute;g.</td></tr>
-                <tr><td>entre 5 y 10 p&aacute;ginas</td><td>1.8 &euro; por p&aacute;g.</td></tr>
-                <tr><td>&gt; 10 p&aacute;ginas</td><td>1.6 &euro; por p&aacute;g.</td></tr>
-                <tr><td>Blanco y negro</td><td>0 &euro;</td></tr>
-                <tr><td>Color</td><td>0.5 &euro; por foto</td></tr>
-                <tr><td>Resoluci&oacute;n &le; 300 dpi</td><td>0 &euro; por foto</td></tr>
-                <tr><td>Resoluci&oacute;n &gt; 300 dpi</td><td>0.2 &euro; por foto</td></tr>
+                <tr>
+                    <td>Coste procesamiento y envío</td>
+                    <td>10 &euro;</td>
+                </tr>
+                <tr>
+                    <td>&lt; 5 p&aacute;ginas</td>
+                    <td>2 &euro; por p&aacute;g.</td>
+                </tr>
+                <tr>
+                    <td>entre 5 y 10 p&aacute;ginas</td>
+                    <td>1.8 &euro; por p&aacute;g.</td>
+                </tr>
+                <tr>
+                    <td>&gt; 10 p&aacute;ginas</td>
+                    <td>1.6 &euro; por p&aacute;g.</td>
+                </tr>
+                <tr>
+                    <td>Blanco y negro</td>
+                    <td>0 &euro;</td>
+                </tr>
+                <tr>
+                    <td>Color</td>
+                    <td>0.5 &euro; por foto</td>
+                </tr>
+                <tr>
+                    <td>Resoluci&oacute;n &le; 300 dpi</td>
+                    <td>0 &euro; por foto</td>
+                </tr>
+                <tr>
+                    <td>Resoluci&oacute;n &gt; 300 dpi</td>
+                    <td>0.2 &euro; por foto</td>
+                </tr>
             </tbody>
         </table>
 
-    <?php if ($mostrarTabla == true): ?>
-        <button onclick="location.href='?mostrarTabla=false'">Ocultar Tabla</button>
-        <div id="albumTableContainer">
-            <?php echo generarTablaCostos(); ?>
-        </div>
-    <?php else: ?>
-        <button onclick="location.href='?mostrarTabla=true'">Mostrar Tabla</button>
-    <?php endif; ?>
+        <?php if ($mostrarTabla == true): ?>
+            <button onclick="location.href='?mostrarTabla=false'">Ocultar Tabla</button>
+            <div id="albumTableContainer">
+                <?php echo generarTablaCostos(); ?>
+            </div>
+        <?php else: ?>
+            <button onclick="location.href='?mostrarTabla=true'">Mostrar Tabla</button>
+        <?php endif; ?>
     </div>
 </div>

@@ -1,17 +1,3 @@
-<?php
-// TODO: Coger de la DB
-$ciudades = ["Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza", "Málaga", "Murcia", "Palma", "Las Palmas", "Bilbao"];
-$paises = ["España"];
-$tipos = ["alquiler" => "Alquiler", "venta" => "Venta"];
-$tipos_vivienda = [
-    "vivienda" => "Vivienda",
-    "obra_nueva" => "Obra Nueva",
-    "oficina" => "Oficina",
-    "local" => "Local",
-    "garaje" => "Garaje"
-];
-?>
-
 <h1>Nuevo Anuncio</h1>
 <form action="/mandar-nuevo-anuncio" method="post" enctype="multipart/form-data">
     <label for="titulo">Título:</label>
@@ -21,7 +7,7 @@ $tipos_vivienda = [
     <label for="tipo_anuncio">Tipo de Anuncio:</label>
     <select id="tipo_anuncio" name="tipo_anuncio" required>
         <option value="">Seleccione un tipo</option>
-        <?php foreach ($tipos as $valor => $nombre): ?>
+        <?php foreach ($tipos_anuncio as $valor => $nombre): ?>
             <option value="<?php echo $valor; ?>"><?php echo $nombre; ?></option>
         <?php endforeach; ?>
     </select>
@@ -53,12 +39,7 @@ $tipos_vivienda = [
     <br>
 
     <label for="ciudad">Ciudad:</label>
-    <select id="ciudad" name="ciudad" required>
-        <option value="">Seleccione una ciudad</option>
-        <?php foreach ($ciudades as $ciudad): ?>
-            <option value="<?php echo $ciudad; ?>"><?php echo $ciudad; ?></option>
-        <?php endforeach; ?>
-    </select>
+    <input type="text" id="ciudad" name="ciudad" required>
     <br>
 
     <label for="pais">País:</label>

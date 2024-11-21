@@ -3,6 +3,8 @@
 require_once('./src/models/anuncioModel.php'); 
 require_once('./src/models/usuarioModel.php');
 require_once('./src/models/fotoModel.php'); 
+require_once('./src/models/tiposModel.php');
+require_once('./src/models/paisModel.php');
 
 class AnuncioController {
     public function inicio() {
@@ -32,6 +34,9 @@ class AnuncioController {
             echo "<button onclick=\"window.location.href='/busqueda'\">Volver a la busqueda</button>";
         }
         else {
+            $paises = Paises::getPaises();
+            $tipos_vivienda = Tipos::getTipoVivienda();
+            $tipos_anuncio = Tipos::getTipoAnuncio();
             $anuncios = Anuncio::getResultados($queryParams);
             include_once './src/views/busqueda.php';
         }
@@ -41,6 +46,7 @@ class AnuncioController {
         $anuncio = Anuncio::getAnuncio($id);
         $publicador = Usuario::getUsuario($anuncio['usuario']);
         $fotos = Foto::getFotosPorAnuncio($id);
+        $tipos_mensaje = Tipos::getTipoMensaje();
 
         $ultimosVistos = isset($_COOKIE['ultimosVistos']) ? explode(',', $_COOKIE['ultimosVistos']) : [];
 
@@ -60,6 +66,9 @@ class AnuncioController {
     }
 
     public function nuevoAnuncio() {
+        $paises = Paises::getPaises();
+        $tipos_anuncio = Tipos::getTipoAnuncio();
+        $tipos_vivienda = Tipos::getTipoVivienda();
         include_once './src/views/crearAnuncio.php';
     }
 

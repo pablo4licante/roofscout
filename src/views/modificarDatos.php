@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($errors)) {
-        header('Location: /auth-registro', true, 307);
+        header('Location: /auth-modificar', true, 307);
         exit;
     }
 }
@@ -52,64 +52,64 @@ function getPostValue($field) {
 ?>
 
 
-<h2>Registro</h2>
-<form action="" method="post">
+<h2>Mis datos</h2>
+<form action="" method="post" enctype="multipart/form-data">
     <label for="email">Email:</label>
-    <input type="text" id="email" name="email" placeholder="Email" value="<?= getPostValue('email') ?>">
+    <input type="text" id="email" name="email" placeholder="Email" value="<?= getPostValue('email') ?? htmlspecialchars($usuario['email'] ?? '') ?>">
     <br>
     <span style="color:red;"><?= $errors['email'] ?? '' ?></span><br><br>
 
     <label for="nombre">Nombre de usuario:</label>
-    <input type="text" id="nombre" name="nombre" placeholder="Nombre de usuario" value="<?= getPostValue('nombre') ?>">
+    <input type="text" id="nombre" name="nombre" placeholder="Nombre de usuario" value="<?= getPostValue('nombre') ?? htmlspecialchars($usuario['nombre'] ?? '') ?>">
     <br>
     <span style="color:red;"><?= $errors['nombre'] ?? '' ?></span><br><br>
 
     <label for="password">Contraseña:</label>
-    <input type="password" id="password" name="password" placeholder="Contraseña" value="<?= getPostValue('password') ?>">
+    <input type="password" id="password" name="password" placeholder="Contraseña">
     <br>
     <span style="color:red;"><?= $errors['password'] ?? '' ?></span><br><br>
 
     <label for="confirm_password">Repetir contraseña:</label>
-    <input type="password" id="confirm_password" name="confirm_password" placeholder="Repetir contraseña" value="<?= getPostValue('confirm_password') ?>">
+    <input type="password" id="confirm_password" name="confirm_password" placeholder="Repetir contraseña">
     <br>
     <span style="color:red;"><?= $errors['confirm_password'] ?? '' ?></span><br><br>
 
     <label for="sexo">Sexo:</label>
     <select id="sexo" name="sexo">
-        <option value="" disabled <?= empty($_POST['sexo']) ? 'selected' : '' ?>>Seleccione su sexo</option>
-        <option value="hombre" <?= isset($_POST['sexo']) && $_POST['sexo'] === 'hombre' ? 'selected' : '' ?>>Hombre</option>
-        <option value="mujer" <?= isset($_POST['sexo']) && $_POST['sexo'] === 'mujer' ? 'selected' : '' ?>>Mujer</option>
-        <option value="otros" <?= isset($_POST['sexo']) && $_POST['sexo'] === 'otros' ? 'selected' : '' ?>>Otros</option>
+        <option value="" disabled <?= empty(getPostValue('sexo')) && empty($usuario['sexo']) ? 'selected' : '' ?>>Seleccione su sexo</option>
+        <option value="hombre" <?= getPostValue('sexo') === 'hombre' || ($usuario['sexo'] ?? '') === 'hombre' ? 'selected' : '' ?>>Hombre</option>
+        <option value="mujer" <?= getPostValue('sexo') === 'mujer' || ($usuario['sexo'] ?? '') === 'mujer' ? 'selected' : '' ?>>Mujer</option>
+        <option value="otros" <?= getPostValue('sexo') === 'otros' || ($usuario['sexo'] ?? '') === 'otros' ? 'selected' : '' ?>>Otros</option>
     </select>
     <br>
     <span style="color:red;"><?= $errors['sexo'] ?? '' ?></span><br><br>
 
     <label for="fecha_nacimiento">Fecha de nacimiento:</label>
-    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="<?= $_POST['fecha_nacimiento'] ?? '' ?>">
+    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="<?= getPostValue('fecha_nacimiento') ?? htmlspecialchars($usuario['fecha_nacimiento'] ?? '') ?>">
     <br>
     <span style="color:red;"><?= $errors['fecha_nacimiento'] ?? '' ?></span><br><br>
-    
+
     <label for="pais">País:</label>
     <select name="pais" id="pais">
-        <option value="" disabled <?= empty($_POST['pais']) ? 'selected' : '' ?>>Seleccione su país</option>
-        <?php foreach($paises as $pais):?>
-            <option value="<?php $pais['nombre']?>" <?php isset($_POST['pais']) && $_POST['pais'] === $pais['nombre'] ? 'selected' : '' ?>><?php $pais['nombre']?></option>
-        <?php endforeach;?>
+        <option value="" disabled <?= empty(getPostValue('pais')) && empty($usuario['pais']) ? 'selected' : '' ?>>Seleccione su país</option>
+        <?php foreach ($paises as $pais): ?>
+            <option value="<?= htmlspecialchars($pais['nombre']) ?>" <?= getPostValue('pais') === $pais['nombre'] || ($usuario['pais'] ?? '') === $pais['nombre'] ? 'selected' : '' ?>>
+                <?= htmlspecialchars($pais['nombre']) ?>
+            </option>
+        <?php endforeach; ?>
     </select>
     <br>
+    <span style="color:red;"><?= $errors['pais'] ?? '' ?></span><br><br>
 
     <label for="ciudad">Ciudad:</label>
-    <input type="text" name="ciudad" id="ciudad">
-    
+    <input type="text" name="ciudad" id="ciudad" value="<?= getPostValue('ciudad') ?? htmlspecialchars($usuario['ciudad'] ?? '') ?>">
     <br>
     <span style="color:red;"><?= $errors['ciudad'] ?? '' ?></span><br><br>
 
-    <span style="color:red;"><?= $errors['pais'] ?? '' ?></span><br><br>
-    
     <label for="foto_perfil">Foto de perfil:</label>
     <input type="file" id="foto_perfil" name="foto_perfil" accept="image/*">
     <br>
     <span style="color:red;"><?= $errors['foto_perfil'] ?? '' ?></span><br><br>
-    
-    <button type="submit">Crear cuenta</button>
+
+    <button type="submit">Actualizar datos</button>
 </form>

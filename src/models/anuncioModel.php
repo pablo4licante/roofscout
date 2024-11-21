@@ -34,7 +34,7 @@ class Anuncio {
             'query' => 'titulo LIKE :query', // Aqui query es el titulo
             'tipo_anuncio' => 'tipo_anuncio = :tipo_anuncio',
             'tipo_vivienda' => 'tipo_vivienda = :tipo_vivienda',
-            'ciudad' => 'ciudad = :ciudad',
+            'ciudad' => 'ciudad LIKE :ciudad',
             'pais' => 'pais = :pais'
         ];
 
@@ -130,7 +130,7 @@ class Anuncio {
         $stmt->bindValue(':aseos', $data['aseos'], PDO::PARAM_INT);
         $stmt->bindValue(':planta', $data['planta'], PDO::PARAM_INT);
         $stmt->bindValue(':anyo_construccion', $data['anyo_construccion'], PDO::PARAM_INT);
-        $stmt->bindValue(':usuario', 'pablo@example.com', PDO::PARAM_STR);
+        $stmt->bindValue(':usuario', $_SESSION['user'], PDO::PARAM_STR);
         if ($stmt->execute()) {
             return $db->lastInsertId();
         } else {

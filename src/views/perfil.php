@@ -1,5 +1,7 @@
 <?php
-if (isset($_GET['logged']) && $_GET['logged'] === 'true' && isset($_SESSION['ultimaConexion'])) {
+date_default_timezone_set('Europe/Madrid');
+
+if (isset($_SESSION['ultimaConexion'])) {
     $ultimaConexion = date('d M Y, H:i:s', strtotime($_SESSION['ultimaConexion']));
     echo '<div style="display:block;">
                     <div class="modal-content">
@@ -10,8 +12,6 @@ if (isset($_GET['logged']) && $_GET['logged'] === 'true' && isset($_SESSION['ult
                 </div>';
 }
 
-
-date_default_timezone_set('Europe/Madrid'); // TODO zona horaria personalizada?
 $currentHour = date('H');
 
 if ($currentHour >= 6 && $currentHour < 12) {
@@ -26,30 +26,50 @@ if ($currentHour >= 6 && $currentHour < 12) {
 
 ?>
 
+<?php
+if (isset($_SESSION['flashdata'])) {
+  echo '<div class="mensaje-ok">' . htmlspecialchars($_SESSION['flashdata']) . '</div>';
+  unset($_SESSION['flashdata']);
+}
+?>
+
 
 <div class="mensaje-ok">
+    
+    <?php if($email === $_SESSION['user']):?>
     <h2><?php echo $saludo; ?> <?php echo $usuario['nombre']; ?>!</h2>
-    <img src="https://picsum.photos/200" class="publisher_img">
+    <?php endif;?>
+
+    <img src="<?php echo $usuario['foto']?>" class="publisher_img">
     <h3>Mis datos</h3>
+    
+    <h3><strong></strong> <?php echo $usuario['nombre']; ?></h3>
     <p><strong></strong> <?php echo $usuario['email']; ?></p>
-    <p><strong>Sexo:</strong> <?php echo $usuario['sexo']; ?></p>
-    <p><strong>Fecha de Nacimiento:</strong> <?php echo date('d M Y', strtotime($usuario['fecha_nacimiento'])); ?></p>
-    <p><strong><?php echo $usuario['ciudad']; ?></strong>, <?php echo $usuario['pais']; ?></p>
+    <p><strong>Usuario desde </strong> <?php echo date('d M Y', strtotime($usuario['fecha_incorporacion'])); ?></p>
 </div>
 
-<div class="botones-perfil">
-    <button onclick="location.href='/cerrar-sesion'">Cerrar Sesión</button>
-    <button onclick="location.href='/perfil'">Editar Perfil</button>
-    <button onclick="location.href='/'">Darse de Baja</button>
-    <button onclick="location.href='/seleccion-tema'">Seleccionar Tema</button>
-</div>
+<?php if($email === $_SESSION['user']):?>
+    <div class="botones-perfil">
+        <button onclick="location.href='/mis-datos'">Mis Datos</button>
+        <button onclick="location.href='/mensajes'">Mis Mensajes</button>
+        <button onclick="location.href='/cerrar-sesion'">Cerrar Sesión</button>
+        <button onclick="location.href='/perfil'">Editar Perfil</button>
+        <button onclick="location.href='/'">Darse de Baja</button>
+        <button onclick="location.href='/seleccion-tema'">Seleccionar Tema</button>
+    </div>
+<?php endif;?>
 
 <h2 class="titulo-anuncios-perfil">Mis anuncios</h2>
-<div class="botones-perfil">
-    <button onclick="location.href='/nuevo-anuncio'">Crear anuncio</button>
-    <button onclick="location.href='/solicitar-folleto'">Solicitar folleto</button>
-</div>
 
+
+<?php if($email === $_SESSION['user']):?>
+    <div class="botones-perfil">
+        <button onclick="location.href='/nuevo-anuncio'">Crear anuncio</button>
+        <button onclick="location.href='/solicitar-folleto'">Solicitar folleto</button>
+    </div>
+<?php endif;?>
+
+<h3>Mostrando <?php echo sizeof($anuncios) ?> anuncios</h3>
 <div id="galeria">
     <?php foreach ($anuncios as $anuncio): ?>
         <?php include('./src/views/templates/card.inc.php'); ?>

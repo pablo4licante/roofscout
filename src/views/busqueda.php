@@ -4,11 +4,6 @@
 
 use function PHPSTORM_META\type;
 
-$tipos_anuncio = ["Alquiler", "Venta"];
-$tipos_vivienda = ["Vivienda", "Obra Nueva", "Oficina", "Local", "Garaje"];
-$ciudades = ["Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza", "Málaga", "Murcia", "Palma", "Bilbao", "Alicante"];
-$paises = ["España", "Francia", "Alemania", "Italia", "Portugal", "Reino Unido", "Estados Unidos", "Canadá", "México", "Argentina"];
-
 function getPostValue($field) {
     return isset($_GET[$field]) ? htmlspecialchars($_GET[$field]) : '';
 }
@@ -38,11 +33,8 @@ function getPostValue($field) {
     <div>
         <p>Localización</p>
         <label for="ciudad">Ciudad:</label>
-        <select name="ciudad" id="ciudad">
-            <?php foreach ($ciudades as $value => $label): ?>
-                <option value="<?php echo $label; ?>" <?php if (getPostValue("ciudad") == $label) echo 'selected'; ?>><?php echo $label; ?></option>
-            <?php endforeach; ?>
-        </select><br><br>
+        <input type="text" name="ciudad" id="ciudad"> <!-- TODO AQUI -->
+        <br><br>
 
         <label for="pais">País:</label>
         <select name="pais" id="pais">
