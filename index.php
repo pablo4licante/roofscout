@@ -82,9 +82,9 @@
             $controller = new AnuncioController();
             $controller->agregarFoto($id);
         },
-        '/perfil' => function() {
+        '/perfil/([^/]+)' => function($email) {
             $controller = new UsuarioController();
-            $controller->perfil();
+            $controller->perfil(urldecode($email));
         },
         '/mensajes' => function() {
             $controller = new MensajeController();
@@ -108,18 +108,26 @@
         '/aplicar-seleccion-tema' => function() {
             $controller = new UsuarioController();
             $controller->seleccionarTema($_POST['temaId']);
+        },
+        '/mis-datos' => function() {
+            $controller = new AuthController();
+            $controller->modificar();
+        },
+        '/auth-modificar' => function() {
+            $controller = new AuthController();
+            $controller->controlModificar();
         }
     ];
 
     session_start();
     if (isset($_COOKIE['user'])) {
-        $_SESSION['user'] = $_COOKIE['user'];
+        $controller = new AuthController();
+        if($controller->controlDeCookies()){
+            $_SESSION['user'] = $_COOKIE['user'];
+            $_SESSION['tema'] = Usuario::getTema();
+        }
     }
-
-    if (isset($_SESSION['user'])) {
-        $_SESSION['tema'] = Usuario::getTema();
-    }
-
+    
     $protectedRoutes = [
         '/nuevo-anuncio',
         '/mandar-nuevo-anuncio',
@@ -132,7 +140,9 @@
         '/respuesta-solicitar-folleto',
         '/foto/(\d+)',
         '/mensajes',
-        '/agregar-foto/(\d+)'
+        '/agregar-foto/(\d+)',
+        '/mis-datos',
+        '/auth-modificar'
     ];
 
     $isProtected = false;
@@ -150,7 +160,10 @@
             exit();
         }
     } else {
-        Usuario::updateUltimaConexion();
+        $controller = new AuthController();
+        if($controller->controlDeCookies()){
+            Usuario::updateUltimaConexion();
+        }
     }
 
     include_once('./src/views/templates/cabecera.inc.php');

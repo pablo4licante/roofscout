@@ -1,8 +1,12 @@
 <?php
 require_once('./src/models/folletoModel.php');
+require_once('./src/models/anuncioModel.php');
+require_once('./src/models/paisModel.php');
 
 class FolletoController {
     public function solicitarFolleto() {
+        $anuncios = Anuncio::getAnunciosPorUsuario($_SESSION['user']);
+        $paises = Paises::getPaises();
         include_once('./src/views/solicitarFolleto.php');
     }
 
@@ -26,6 +30,8 @@ class FolletoController {
         $impresionPrecio = $_POST['impresion-precio'];
         $textoAdicional = $_POST['texto-adicional'];
         $precio = $_POST['precio'];
+
+        Folleto::nuevaSolicitud($nombre, $email, $calle, $numero, $piso, $codigoPostal, $localidad, $provincia, $pais, $telefono, $colorPortada, $numCopias, $resolucion, $anuncio, $fechaRecepcion, $impresionColor, $impresionPrecio, $textoAdicional, $precio);
 
         // Redirect to the response page
         header('Location: /respuesta-solicitar-folleto?' .
