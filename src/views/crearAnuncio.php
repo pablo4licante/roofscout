@@ -5,25 +5,23 @@
     <br>
 
     <label for="tipo_anuncio">Tipo de Anuncio:</label>
-    <select id="tipo_anuncio" name="tipo_anuncio" required>
-        <option value="">Seleccione un tipo</option>
-        <?php foreach ($tipos_anuncio as $valor => $nombre): ?>
-            <option value="<?php echo $valor; ?>"><?php echo $nombre; ?></option>
+    <select id="tipo_anuncio" name="tipo_anuncio"  required disabled>
+        <?php foreach ($tipos_anuncio as $tipo_anuncio): ?>
+            <option value="<?php echo $tipo_anuncio['id']; ?>" <?php echo ($anuncio['tipo_anuncio'] == $tipos_anuncio['id']) ? 'selected' : ''; ?>><?php echo $tipos_anuncio['anuncio']; ?></option>
         <?php endforeach; ?>
     </select>
     <br>
 
     <label for="tipo_vivienda">Tipo de Vivienda:</label>
-    <select id="tipo_vivienda" name="tipo_vivienda" required>
-        <option value="">Seleccione un tipo de vivienda</option>
-        <?php foreach ($tipos_vivienda as $valor => $nombre): ?>
-            <option value="<?php echo $valor; ?>"><?php echo $nombre; ?></option>
+    <select id="tipo_vivienda" name="tipo_vivienda"   required disabled>
+        <option value="<?php echo $anuncio['tipo_vivienda']?>">Seleccione un tipo de vivienda</option>
+        <?php foreach ($tipos_vivienda as $tipo_vivienda): ?>
+            <option value="<?php echo $tipo_vivienda['id']; ?>" <?php echo ($anuncio['tipo_vivienda'] == $tipo_vivienda['id']) ? 'selected' : ''; ?>><?php echo $tipo_vivienda['nombre']; ?></option>
         <?php endforeach; ?>
-    </select>
     <br>
-
+    
     <label for="descripcion">Descripción:</label>
-    <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+    <textarea id="descripcion" name="descripcion" rows="4" minlength="10" maxlength="255" required></textarea>
     <br>
 
     <label for="foto-principal">Foto Principal:</label>

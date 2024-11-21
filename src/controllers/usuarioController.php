@@ -23,7 +23,7 @@ class UsuarioController {
     }
     
     public function seleccionarTema($numeroTema) {
-        Usuario::setTema($numeroTema);
+        Temas::setTema($numeroTema);
         header('Location: /perfil/' . $_SESSION['user']);
     }
 

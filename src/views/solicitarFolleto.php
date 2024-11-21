@@ -247,16 +247,16 @@ function getPostValue($field)
 
         <label for="impresion-color">Impresión a Color:</label>
         <select id="impresion-color" name="impresion-color" class="form-control" required>
-            <option value="blanco-negro">Blanco y Negro</option>
-            <option value="color">A Todo Color</option>
+            <option value="0">Blanco y Negro</option>
+            <option value="1">A Todo Color</option>
         </select>
 
         <br>
 
         <label for="impresion-precio">¿Imprimir Precio del Anuncio?:</label>
         <select id="impresion-precio" name="impresion-precio" class="form-control" required>
-            <option value="con-precio">Con Precio</option>
-            <option value="sin-precio">Sin Precio</option>
+            <option value="1">Con Precio</option>
+            <option value="0">Sin Precio</option>
         </select>
 
         <input type="hidden" id="precio" name="precio" value="<?= calcularCostos($_POST['num-copias'] ?? 1, $_POST['resolucion'] ?? 150, $_POST['impresion-color'] ?? 'blanco-negro', $_POST['impresion-precio'] ?? 'sin-precio') ?>">

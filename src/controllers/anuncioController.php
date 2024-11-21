@@ -47,6 +47,8 @@ class AnuncioController {
         $publicador = Usuario::getUsuario($anuncio['usuario']);
         $fotos = Foto::getFotosPorAnuncio($id);
         $tipos_mensaje = Tipos::getTipoMensaje();
+        $tipos_anuncio = Tipos::getTipoAnuncio();
+        $tipos_vivienda = Tipos::getTipoVivienda();
 
         $ultimosVistos = isset($_COOKIE['ultimosVistos']) ? explode(',', $_COOKIE['ultimosVistos']) : [];
 
@@ -86,6 +88,9 @@ class AnuncioController {
 
     public function agregarFoto($id) {
         $anuncio = Anuncio::getAnuncio($id);
+        $paises = Paises::getPaises();
+        $tipos_anuncio = Tipos::getTipoAnuncio();
+        $tipos_vivienda = Tipos::getTipoVivienda();
         include_once './src/views/agregarFotoAnuncio.php';
     }
 

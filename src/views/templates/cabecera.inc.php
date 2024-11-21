@@ -11,37 +11,7 @@
 
     <?php if (isset($_SESSION["tema"])): ?>
 
-        <?php
-        switch ($_SESSION["tema"]) {
-            case 0:
-                echo '<link rel="stylesheet" href="/src/styles/global.css" media="screen">';
-                break;
-            case 1:
-                echo '<link rel="stylesheet" href="/src/styles/darktheme.css" media="screen">';
-                break;
-            case 2:
-                echo '<link rel="stylesheet" href="/src/styles/bigtext.css" media="screen">';
-                break;
-            case 3:
-                echo '<link rel="stylesheet" href="/src/styles/darkbigtext.css" media="screen">';
-                break;
-            case 4:
-                echo '<link rel="stylesheet" href="/src/styles/highcontrast.css" media="screen">';
-                break;
-            case 5:
-                echo '<link rel="stylesheet" href="/src/styles/darkhighcontrast.css" media="screen">';
-                break;
-            case 6:
-                echo '<link rel="stylesheet" href="/src/styles/bigtexthighcontrast.css" media="screen">';
-                break;
-            case 7:
-                echo '<link rel="stylesheet" href="/src/styles/darkbigtexthighcontrast.css" media="screen">';
-                break;
-            default:
-                echo '<link rel="stylesheet" href="/src/styles/global.css" media="screen">';
-                break;
-        }
-        ?>
+        <?php echo '<link rel="stylesheet" href="/src/styles/'. $_SESSION["tema"] . '" media="screen">';?>
 
     <?php endif; ?>
 

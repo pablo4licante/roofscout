@@ -128,7 +128,7 @@
         $controller = new AuthController();
         if($controller->controlDeCookies()){
             $_SESSION['user'] = $_COOKIE['user'];
-            $_SESSION['tema'] = Usuario::getTema();
+            $_SESSION['tema'] = Temas::getTema()["nombre"];
         }
     }
     

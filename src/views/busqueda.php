@@ -15,19 +15,21 @@ function getPostValue($field) {
 
     <p>¿Qué buscas?</p>
     <div>
-        <label for="tipo_anuncio">Tipo de Anuncio</label>
-        <select name="tipo_anuncio" id="tipo_anuncio">
-            <?php foreach ($tipos_anuncio as $value => $label): ?>
-                <option value="<?php echo $label; ?>" <?php if (getPostValue("tipo_anuncio") == $label) echo 'selected'; ?>><?php echo $label; ?></option>
-            <?php endforeach; ?>
-        </select><br><br>
+    <label for="tipo_anuncio">Tipo de Anuncio:</label>
+    <select id="tipo_anuncio" name="tipo_anuncio"  required>
+        <?php foreach ($tipos_anuncio as $tipo_anuncio): ?>
+            <option value="<?php echo $tipo_anuncio['id']; ?>" <?php echo ($anuncio['tipo_anuncio'] == $tipos_anuncio['id']) ? 'selected' : ''; ?>><?php echo $tipos_anuncio['anuncio']; ?></option>
+        <?php endforeach; ?>
+    </select>
+    <br><br>
 
-        <label for="tipo_vivienda">Tipo de Vivienda:</label>
-        <select name="tipo_vivienda" id="tipo_vivienda">
-            <?php foreach ($tipos_vivienda as $value => $label): ?>
-                <option value="<?php echo $label; ?>" <?php if (getPostValue("tipo_vivienda") == $label) echo 'selected'; ?>><?php echo $label; ?></option>
-            <?php endforeach; ?>
-        </select><br><br>
+    <label for="tipo_vivienda">Tipo de Vivienda:</label>
+    <select id="tipo_vivienda" name="tipo_vivienda"   required>
+        <option value="<?php echo $anuncio['tipo_vivienda']?>">Seleccione un tipo de vivienda</option>
+        <?php foreach ($tipos_vivienda as $tipo_vivienda): ?>
+            <option value="<?php echo $tipo_vivienda['id']; ?>" <?php echo ($anuncio['tipo_vivienda'] == $tipo_vivienda['id']) ? 'selected' : ''; ?>><?php echo $tipo_vivienda['nombre']; ?></option>
+        <?php endforeach; ?>
+        <br><br>
     </div>
 
     <div>
@@ -38,8 +40,8 @@ function getPostValue($field) {
 
         <label for="pais">País:</label>
         <select name="pais" id="pais">
-            <?php foreach ($paises as $value => $label): ?>
-                <option value="<?php echo $label; ?>" <?php if (getPostValue("pais") == $label) echo 'selected'; ?>><?php echo $label; ?></option>
+            <?php foreach ($paises as $pais): ?>
+                <option value="<?php echo $pais; ?>" <?php if (getPostValue("pais") == $pais) echo 'selected'; ?>><?php echo $pais; ?></option>
             <?php endforeach; ?>
         </select><br><br>
     </div>
