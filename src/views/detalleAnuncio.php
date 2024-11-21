@@ -11,7 +11,13 @@ if (isset($_SESSION['flashdata'])) {
 
 <div id="photo_banner">
     <h2><?php echo $anuncio['titulo'] ?></h2>
-    <p><?php echo $anuncio['tipo_vivienda'] ?></p>
+    <p><?php  
+    foreach ($tipos_vivienda as $tipo_vivienda) {
+        if ($anuncio['tipo_vivienda'] == $tipo_vivienda['id']) {
+            echo htmlspecialchars($tipo_vivienda['nombre']);
+            break;
+        }
+    }?></p>
     <h3><?php echo $anuncio['ciudad'] ?>, <?php echo htmlspecialchars($anuncio['pais']) ?></h3>
     <?php if ($fotos): ?>
         <?php foreach ($fotos as $foto): ?>
@@ -29,13 +35,15 @@ if (isset($_SESSION['flashdata'])) {
     <!-- Formateo de la fecha de YYYY-MM-DD a DD MM YYYY -->
     <p><?php echo date('d M Y', strtotime($anuncio['fecha_publi'])); ?></p>
 
-
-    <?php if ($anuncio['tipo_anuncio'] == 'Alquiler'): ?>
-        <h3><?php echo number_format(htmlspecialchars($anuncio['precio']), 0, '', '.'); ?> &euro;/mes</h3>
-    <?php else: ?>
-        <h3><?php echo number_format(htmlspecialchars($anuncio['precio']), 0, '', '.'); ?> &euro;</h3>
-    <?php endif; ?>
-
+    <?php foreach ($tipos_vivienda as $tipo_vivienda): ?>
+        <?php if ($anuncio['tipo_vivienda'] == $tipo_vivienda['id']): ?>
+            <?php if ($tipo_vivienda['nombre'] == 'Alquiler'): ?>
+                <h3><?php echo number_format(htmlspecialchars($anuncio['precio']), 0, '', '.'); ?> &euro;/mes</h3>
+            <?php else: ?>
+                <h3><?php echo number_format(htmlspecialchars($anuncio['precio']), 0, '', '.'); ?> &euro;</h3>
+            <?php endif; ?>
+        <?php endif; ?>
+    <?php endforeach; ?>
 
     <p><?php echo $anuncio['habitaciones'] ?> Hab. | <?php echo $anuncio['aseos'] ?> Aseos | <?php echo $anuncio['superficie'] ?>m<sup>2</sup></p>
 
@@ -57,8 +65,8 @@ if (isset($_SESSION['flashdata'])) {
                 <form method="post" action="/enviar-mensaje">
                     <label for="tipo_mensaje">Tipo de Mensaje: </label>
                     <select name="tipo_mensaje" id="tipo_mensaje">
-                        <?php foreach ($tipos_mensaje as $label): ?>
-                            <option value="<?php echo $label; ?>"><?php echo $label; ?></option>
+                        <?php foreach ($tipos_mensaje as $tipo_mensaje): ?>
+                            <option value="<?php echo $tipo_mensaje['id']; ?>"><?php echo $tipo_mensaje['nombre']; ?></option>
                         <?php endforeach; ?>
                     </select><br><br>
                     <label for="mensaje">Mensaje:</label>

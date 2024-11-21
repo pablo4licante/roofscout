@@ -24,6 +24,7 @@ class MensajeController {
     }
 
     public function misMensajes() {
+        $tipos_mensaje = Tipos::getTipoMensaje();
         $email = $_SESSION['user']; 
         $mensajes_recibidos = Mensaje::getMensajesByReceptor($email);
         $mensajes_enviados = Mensaje::getMensajesByEmisor($email);
@@ -32,6 +33,7 @@ class MensajeController {
 
     public function mensajesPorAnuncio($idAnuncio) {
         
+        $tipos_mensaje = Tipos::getTipoMensaje();
         $anuncio = Anuncio::getAnuncio($idAnuncio);
         if($_SESSION['user'] == $anuncio['usuario']) {
             $mensajes = Mensaje::getMensajesByAnuncio($idAnuncio);

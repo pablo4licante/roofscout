@@ -45,7 +45,7 @@ if (isset($_SESSION['flashdata'])) {
     
     <h3><strong></strong> <?php echo $usuario['nombre']; ?></h3>
     <p><strong></strong> <?php echo $usuario['email']; ?></p>
-    <p><strong>Usuario desde </strong> <?php echo date('d M Y', strtotime($usuario['fecha_incorporacion'])); ?></p>
+    <p><strong>Usuario desde </strong> <?php echo date('d M Y', strtotime($usuario['fecha_registro'])); ?></p>
 </div>
 
 <?php if($email === $_SESSION['user']):?>

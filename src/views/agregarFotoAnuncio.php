@@ -1,16 +1,4 @@
-<?php
-// TODO: Coger de la DB
-$ciudades = ["Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza", "Málaga", "Murcia", "Palma", "Las Palmas", "Bilbao"];
-$paises = ["España"];
-$tipos = ["alquiler" => "Alquiler", "venta" => "Venta"];
-$tipos_vivienda = [
-    "vivienda" => "Vivienda",
-    "obra_nueva" => "Obra Nueva",
-    "oficina" => "Oficina",
-    "local" => "Local",
-    "garaje" => "Garaje"
-];
-?>
+
 
 <h1>Agregar Fotos</h1>
 <form action="/anuncio/<?php echo $anuncio['id']?>" method="post" enctype="multipart/form-data">
@@ -20,8 +8,8 @@ $tipos_vivienda = [
 
     <label for="tipo_anuncio">Tipo de Anuncio:</label>
     <select id="tipo_anuncio" name="tipo_anuncio"  required disabled>
-        <?php foreach ($tipos as $valor => $nombre): ?>
-            <option value="<?php echo $valor; ?>" <?php echo ($anuncio['tipo_anuncio'] == $valor) ? 'selected' : ''; ?>><?php echo $nombre; ?></option>
+        <?php foreach ($tipos_anuncio as $tipo_anuncio): ?>
+            <option value="<?php echo $tipo_anuncio['id']; ?>" <?php echo ($anuncio['tipo_anuncio'] == $tipos_anuncio['id']) ? 'selected' : ''; ?>><?php echo $tipos_anuncio['anuncio']; ?></option>
         <?php endforeach; ?>
     </select>
     <br>
@@ -29,8 +17,8 @@ $tipos_vivienda = [
     <label for="tipo_vivienda">Tipo de Vivienda:</label>
     <select id="tipo_vivienda" name="tipo_vivienda"   required disabled>
         <option value="<?php echo $anuncio['tipo_vivienda']?>">Seleccione un tipo de vivienda</option>
-        <?php foreach ($tipos_vivienda as $valor => $nombre): ?>
-            <option value="<?php echo $valor; ?>" <?php echo ($anuncio['tipo_vivienda'] == $valor) ? 'selected' : ''; ?>><?php echo $nombre; ?></option>
+        <?php foreach ($tipos_vivienda as $tipo_vivienda): ?>
+            <option value="<?php echo $tipo_vivienda['id']; ?>" <?php echo ($anuncio['tipo_vivienda'] == $tipo_vivienda['id']) ? 'selected' : ''; ?>><?php echo $tipo_vivienda['nombre']; ?></option>
         <?php endforeach; ?>
     <br>
 
@@ -51,12 +39,7 @@ $tipos_vivienda = [
     <br>
 
     <label for="ciudad">Ciudad:</label>
-    <select id="ciudad" name="ciudad"  required disabled>
-        <option value="<?php echo $anuncio['ciudad']?>">Seleccione una ciudad</option>
-        <?php foreach ($ciudades as $ciudad): ?>
-            <option value="<?php echo $ciudad; ?>" <?php echo ($anuncio['ciudad'] == $ciudad) ? 'selected' : ''; ?>><?php echo $ciudad; ?></option>
-        <?php endforeach; ?>
-    </select>
+    <input type="text" id="ciudad" name="ciudad"  required disabled>  
     <br>
 
     <label for="pais">País:</label>
