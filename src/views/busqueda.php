@@ -13,41 +13,45 @@ function getPostValue($field) {
     <label for="query">Titulo del Anuncio</label>
     <input  value="<?= getPostValue("query")?>" type="text" name="query" placeholder="Titulo de Anuncio"><br><br>
 
-    <p>¿Qué buscas?</p>
+    <h3>¿Qué buscas?</h3>
+
     <div>
     <label for="tipo_anuncio">Tipo de Anuncio:</label>
-    <select id="tipo_anuncio" name="tipo_anuncio"  required>
+    <select id="tipo_anuncio" name="tipo_anuncio">
+        <option value="">Seleccione un tipo de anuncio</option>
         <?php foreach ($tipos_anuncio as $tipo_anuncio): ?>
-            <option value="<?php echo $tipo_anuncio['id']; ?>" <?php echo ($anuncio['tipo_anuncio'] == $tipos_anuncio['id']) ? 'selected' : ''; ?>><?php echo $tipos_anuncio['anuncio']; ?></option>
+            <option value="<?php echo $tipo_anuncio['id']; ?>" <?php if (getPostValue("tipo_anuncio") == $tipo_anuncio['id']) echo 'selected'; ?>><?php echo $tipo_anuncio['nombre']; ?></option>
         <?php endforeach; ?>
     </select>
     <br><br>
 
     <label for="tipo_vivienda">Tipo de Vivienda:</label>
-    <select id="tipo_vivienda" name="tipo_vivienda"   required>
-        <option value="<?php echo $anuncio['tipo_vivienda']?>">Seleccione un tipo de vivienda</option>
+    <select id="tipo_vivienda" name="tipo_vivienda">
+        <option value="">Seleccione un tipo de vivienda</option>
         <?php foreach ($tipos_vivienda as $tipo_vivienda): ?>
-            <option value="<?php echo $tipo_vivienda['id']; ?>" <?php echo ($anuncio['tipo_vivienda'] == $tipo_vivienda['id']) ? 'selected' : ''; ?>><?php echo $tipo_vivienda['nombre']; ?></option>
+            <option value="<?php echo $tipo_vivienda['id']; ?>" <?php if (getPostValue("tipo_vivienda") == $tipo_vivienda['id']) echo 'selected'; ?>><?php echo $tipo_vivienda['nombre']; ?></option>
         <?php endforeach; ?>
+    </select>
         <br><br>
     </div>
 
     <div>
-        <p>Localización</p>
+        <h3>Localización</h3>
         <label for="ciudad">Ciudad:</label>
-        <input type="text" name="ciudad" id="ciudad"> <!-- TODO AQUI -->
+        <input type="text" name="ciudad" id="ciudad" value="<?= getPostValue("ciudad") ?>">
         <br><br>
 
         <label for="pais">País:</label>
         <select name="pais" id="pais">
+            <option value="">Seleccione un Pais</option>
             <?php foreach ($paises as $pais): ?>
-                <option value="<?php echo $pais; ?>" <?php if (getPostValue("pais") == $pais) echo 'selected'; ?>><?php echo $pais; ?></option>
+                <option value="<?php echo $pais['pais']; ?>" <?php if (getPostValue("pais") == $pais['pais']) echo 'selected'; ?>><?php echo $pais['pais']; ?></option>
             <?php endforeach; ?>
         </select><br><br>
     </div>
 
     <div>
-        <p>Precio entre</p>
+        <h3>Precio entre</h3>
         <label for="precio_min">Mínimo:</label>
         <input value="<?= getPostValue("precio_min")?>" type="number" name="precio_min" id="precio_min" placeholder="Precio Mínimo"><br><br>
 
@@ -56,7 +60,7 @@ function getPostValue($field) {
     </div>
 
     <div>
-        <p>Fecha de publicacion</p>
+        <h3>Fecha de publicacion</h3>
         <label for="fecha_inicio">Fecha Inicio:</label>
         <input value="<?= getPostValue("fecha_inicio")?>" type="date" name="fecha_inicio" id="fecha_inicio"><br><br>
 

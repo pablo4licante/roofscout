@@ -1,8 +1,8 @@
 <?php
 date_default_timezone_set('Europe/Madrid');
 
-if (isset($_SESSION['ultimaConexion'])) {
-    $ultimaConexion = date('d M Y, H:i:s', strtotime($_SESSION['ultimaConexion']));
+if ($_SESSION['user'] == $usuario['email']) {
+    $ultimaConexion = date('d M Y, H:i:s', strtotime($usuario['ultimaConexion']));
     echo '<div style="display:block;">
                     <div class="modal-content">
                         <form method="post">
@@ -32,15 +32,13 @@ if (isset($_SESSION['flashdata'])) {
   unset($_SESSION['flashdata']);
 }
 ?>
-
-
 <div class="mensaje-ok">
     
     <?php if($email === $_SESSION['user']):?>
     <h2><?php echo $saludo; ?> <?php echo $usuario['nombre']; ?>!</h2>
     <?php endif;?>
 
-    <img src="<?php echo $usuario['foto']?>" class="publisher_img">
+    <img src="<?php echo $usuario['foto_perfil']?>" class="publisher_img">
     <h3>Mis datos</h3>
     
     <h3><strong></strong> <?php echo $usuario['nombre']; ?></h3>
@@ -48,18 +46,18 @@ if (isset($_SESSION['flashdata'])) {
     <p><strong>Usuario desde </strong> <?php echo date('d M Y', strtotime($usuario['fecha_registro'])); ?></p>
 </div>
 
+
 <?php if($email === $_SESSION['user']):?>
     <div class="botones-perfil">
         <button onclick="location.href='/mis-datos'">Mis Datos</button>
         <button onclick="location.href='/mensajes'">Mis Mensajes</button>
         <button onclick="location.href='/cerrar-sesion'">Cerrar Sesión</button>
-        <button onclick="location.href='/perfil'">Editar Perfil</button>
         <button onclick="location.href='/'">Darse de Baja</button>
         <button onclick="location.href='/seleccion-tema'">Seleccionar Tema</button>
     </div>
 <?php endif;?>
 
-<h2 class="titulo-anuncios-perfil">Mis anuncios</h2>
+<h2 class="titulo-anuncios-perfil">Mis anuncios (<?php echo sizeof($anuncios)?>)</h2>
 
 
 <?php if($email === $_SESSION['user']):?>
@@ -69,9 +67,12 @@ if (isset($_SESSION['flashdata'])) {
     </div>
 <?php endif;?>
 
-<h3>Mostrando <?php echo sizeof($anuncios) ?> anuncios</h3>
 <div id="galeria">
     <?php foreach ($anuncios as $anuncio): ?>
         <?php include('./src/views/templates/card.inc.php'); ?>
     <?php endforeach; ?>
+    
+<?php if (sizeof($anuncios) == 0): ?>
+    <div class="mensaje-ok">No hay anuncios</div>
+<?php endif; ?>
 </div>

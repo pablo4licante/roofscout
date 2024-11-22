@@ -53,6 +53,8 @@ function getPostValue($field) {
 
 
 <h2>Registro</h2>
+
+<div class="login-container">
 <form action="" method="post">
     <label for="email">Email:</label>
     <input type="text" id="email" name="email" placeholder="Email" value="<?= getPostValue('email') ?>">
@@ -91,9 +93,9 @@ function getPostValue($field) {
     
     <label for="pais">País:</label>
     <select name="pais" id="pais">
-        <option value="" disabled <?= empty($_POST['pais']) ? 'selected' : '' ?>>Seleccione su país</option>
+        <option value="" disabled <?php echo empty($_POST['pais']) ? 'selected' : '' ?>>Seleccione su país</option>
         <?php foreach($paises as $pais):?>
-            <option value="<?php $pais['nombre']?>" <?php isset($_POST['pais']) && $_POST['pais'] === $pais['nombre'] ? 'selected' : '' ?>><?php $pais['nombre']?></option>
+            <option value="<?php echo $pais['pais']?>" <?php isset($_POST['pais']) && $_POST['pais'] === $pais ? 'selected' : '' ?>><?php echo $pais['pais']?></option>
         <?php endforeach;?>
     </select>
     <br>
@@ -113,3 +115,4 @@ function getPostValue($field) {
     
     <button type="submit">Crear cuenta</button>
 </form>
+</div>

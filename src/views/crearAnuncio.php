@@ -1,23 +1,25 @@
-<h1>Nuevo Anuncio</h1>
+<h2>Nuevo Anuncio</h2>
+<div class="login-container">
 <form action="/mandar-nuevo-anuncio" method="post" enctype="multipart/form-data">
     <label for="titulo">Título:</label>
     <input type="text" id="titulo" name="titulo" required>
     <br>
 
     <label for="tipo_anuncio">Tipo de Anuncio:</label>
-    <select id="tipo_anuncio" name="tipo_anuncio"  required disabled>
+    <select id="tipo_anuncio" name="tipo_anuncio"  required>
         <?php foreach ($tipos_anuncio as $tipo_anuncio): ?>
-            <option value="<?php echo $tipo_anuncio['id']; ?>" <?php echo ($anuncio['tipo_anuncio'] == $tipos_anuncio['id']) ? 'selected' : ''; ?>><?php echo $tipos_anuncio['anuncio']; ?></option>
+            <option value="<?php echo $tipo_anuncio['id']; ?>"><?php echo $tipo_anuncio['nombre']; ?></option>
         <?php endforeach; ?>
     </select>
     <br>
 
     <label for="tipo_vivienda">Tipo de Vivienda:</label>
-    <select id="tipo_vivienda" name="tipo_vivienda"   required disabled>
+    <select id="tipo_vivienda" name="tipo_vivienda"   required>
         <option value="<?php echo $anuncio['tipo_vivienda']?>">Seleccione un tipo de vivienda</option>
         <?php foreach ($tipos_vivienda as $tipo_vivienda): ?>
-            <option value="<?php echo $tipo_vivienda['id']; ?>" <?php echo ($anuncio['tipo_vivienda'] == $tipo_vivienda['id']) ? 'selected' : ''; ?>><?php echo $tipo_vivienda['nombre']; ?></option>
+            <option value="<?php echo $tipo_vivienda['id']; ?>"><?php echo $tipo_vivienda['nombre']; ?></option>
         <?php endforeach; ?>
+    </select>
     <br>
     
     <label for="descripcion">Descripción:</label>
@@ -44,7 +46,7 @@
     <select id="pais" name="pais" required>
         <option value="">Seleccione un país</option>
         <?php foreach ($paises as $pais): ?>
-            <option value="<?php echo $pais; ?>"><?php echo $pais; ?></option>
+            <option value="<?php echo $pais['pais']; ?>"><?php echo $pais['pais']; ?></option>
         <?php endforeach; ?>
     </select>
     <br>
@@ -71,3 +73,4 @@
 
     <button type="submit">Enviar</button>
 </form>
+</div>

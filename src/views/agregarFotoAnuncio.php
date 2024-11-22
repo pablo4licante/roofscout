@@ -1,6 +1,7 @@
 
 
-<h1>Agregar Fotos</h1>
+<h3>Agregar Fotos</h3>
+<div class="login-container">
 <form action="/anuncio/<?php echo $anuncio['id']?>" method="post" enctype="multipart/form-data">
     <label for="titulo">Título:</label>
     <input type="text" id="titulo" name="titulo" value="<?php echo $anuncio['titulo']?>"  disabled>
@@ -9,7 +10,7 @@
     <label for="tipo_anuncio">Tipo de Anuncio:</label>
     <select id="tipo_anuncio" name="tipo_anuncio"  required disabled>
         <?php foreach ($tipos_anuncio as $tipo_anuncio): ?>
-            <option value="<?php echo $tipo_anuncio['id']; ?>" <?php echo ($anuncio['tipo_anuncio'] == $tipos_anuncio['id']) ? 'selected' : ''; ?>><?php echo $tipos_anuncio['anuncio']; ?></option>
+            <option value="<?php echo $tipo_anuncio['id']; ?>" <?php echo ($anuncio['tipo_anuncio'] == $tipo_anuncio['id']) ? 'selected' : ''; ?>><?php echo $tipo_anuncio['nombre']; ?></option>
         <?php endforeach; ?>
     </select>
     <br>
@@ -20,6 +21,7 @@
         <?php foreach ($tipos_vivienda as $tipo_vivienda): ?>
             <option value="<?php echo $tipo_vivienda['id']; ?>" <?php echo ($anuncio['tipo_vivienda'] == $tipo_vivienda['id']) ? 'selected' : ''; ?>><?php echo $tipo_vivienda['nombre']; ?></option>
         <?php endforeach; ?>
+    </select>
     <br>
 
     <label for="descripcion">Descripción:</label>
@@ -39,14 +41,14 @@
     <br>
 
     <label for="ciudad">Ciudad:</label>
-    <input type="text" id="ciudad" name="ciudad"  required disabled>  
+    <input type="text" id="ciudad" name="ciudad"  value="<?php echo $anuncio['ciudad']?>"required disabled>  
     <br>
 
     <label for="pais">País:</label>
     <select id="pais" name="pais"  required disabled>
-        <option value="<?php echo $anuncio['pais']?>">Seleccione un país</option>
+        <option value="">Seleccione un país</option>
         <?php foreach ($paises as $pais): ?>
-            <option value="<?php echo $pais; ?>"><?php echo $pais; ?></option>
+            <option value="<?php echo $pais['pais']; ?>" <?php echo ($anuncio['pais'] == $pais['pais']) ? 'selected' : ''; ?>><?php echo $pais['pais']; ?></option>
         <?php endforeach; ?>
     </select>
     <br>
@@ -73,3 +75,4 @@
 
     <button type="submit">Enviar</button>
 </form>
+</div>
