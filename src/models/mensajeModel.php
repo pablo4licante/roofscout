@@ -20,10 +20,15 @@ class Mensaje {
     }
 
     public static function getMensajesByAnuncio($anuncio) {
-        $sql = "SELECT * FROM mensajes WHERE anuncio = :anuncio ORDER BY fecha_hora DESC";
+        $sql = "SELECT m.*, u.foto_perfil FROM mensajes m 
+                JOIN usuarios u ON u.email = m.emisor 
+                WHERE m.receptor = :usuario AND anuncio = :anuncio
+                ORDER BY m.fecha_hora DESC";
+        
         $db = DB::getConnection();
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':anuncio', $anuncio, PDO::PARAM_INT);
+        $stmt->bindValue(':usuario', $_SESSION['user'], PDO::PARAM_INT);
         
         if ($stmt->execute()) {
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -33,7 +38,10 @@ class Mensaje {
     }
 
     public static function getMensajesByReceptor($receptor) {
-        $sql = "SELECT * FROM mensajes WHERE receptor = :receptor ORDER BY fecha_hora DESC";
+        $sql = "SELECT m.*, u.foto_perfil FROM mensajes m 
+                JOIN usuarios u ON u.email = m.emisor 
+                WHERE m.receptor = :receptor 
+                ORDER BY m.fecha_hora DESC";
         $db = DB::getConnection();
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':receptor', $receptor, PDO::PARAM_STR);
@@ -46,7 +54,10 @@ class Mensaje {
     }
 
     public static function getMensajesByEmisor($emisor) { 
-        $sql = "SELECT * FROM mensajes WHERE emisor = :emisor ORDER BY fecha_hora DESC";
+        $sql = "SELECT m.*, u.foto_perfil FROM mensajes m 
+        JOIN usuarios u ON u.email = m.receptor 
+        WHERE m.emisor = :emisor 
+        ORDER BY m.fecha_hora DESC";
         $db = DB::getConnection();
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':emisor', $emisor, PDO::PARAM_STR);

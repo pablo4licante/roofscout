@@ -35,28 +35,28 @@ if (isset($_SESSION['flashdata'])) {
     <!-- Formateo de la fecha de YYYY-MM-DD a DD MM YYYY -->
     <p><?php echo date('d M Y', strtotime($anuncio['fecha_publi'])); ?></p>
 
-    <?php foreach ($tipos_vivienda as $tipo_vivienda): ?>
-        <?php if ($anuncio['tipo_vivienda'] == $tipo_vivienda['id']): ?>
-            <?php if ($tipo_vivienda['nombre'] == 'Alquiler'): ?>
-                <h3><?php echo number_format(htmlspecialchars($anuncio['precio']), 0, '', '.'); ?> &euro;/mes</h3>
-            <?php else: ?>
-                <h3><?php echo number_format(htmlspecialchars($anuncio['precio']), 0, '', '.'); ?> &euro;</h3>
-            <?php endif; ?>
-        <?php endif; ?>
-    <?php endforeach; ?>
+    <?php foreach ($tipos_anuncio as $tipo_anuncio): ?>
+                <?php if ($anuncio['tipo_anuncio'] == $tipo_anuncio['id']): ?>
+                    <?php if ($tipo_anuncio['nombre'] == 'Alquiler'): ?>
+                        <h3><?php echo number_format(htmlspecialchars($anuncio['precio']), 0, '', '.'); ?> &euro;/mes</h3>
+                    <?php else: ?>
+                        <h3><?php echo number_format(htmlspecialchars($anuncio['precio']), 0, '', '.'); ?> &euro;</h3>
+                    <?php endif; ?>
+                <?php endif; ?>
+            <?php endforeach; ?>
 
     <p><?php echo $anuncio['habitaciones'] ?> Hab. | <?php echo $anuncio['aseos'] ?> Aseos | <?php echo $anuncio['superficie'] ?>m<sup>2</sup></p>
 
 </div>
 
 <div id="publisher_info">
-    <img src="<?php echo $publicador['foto'] ?>" onclick="location.href='/perfil/<?php echo $publicador['email'] ?>'" alt="Foto del Publicador"
+    <img src="<?php echo $publicador['foto_perfil'] ?>" onclick="location.href='/perfil/<?php echo $publicador['email'] ?>'"
         class="publisher_img">
     <p><?php echo $publicador['nombre'] ?></p>
 
     <?php if ($publicador['email'] == $_SESSION['user']): ?>
         <button onclick="window.location.href='/agregar-foto/<?php echo $anuncio['id'] ?>'">Agregar Fotos</button>
-        <button onclick="window.location.href='/mensajes-anuncio/<?php echo $anuncio['id'] ?>'">Agregar Fotos</button>
+        <button onclick="window.location.href='/mensajes-anuncio/<?php echo $anuncio['id'] ?>'">Ver mensajes de este anuncio</button>
     <?php else: ?>
         <div id="enviar-mensaje">
             <?php if ($enviarMensaje == false): ?>
@@ -83,8 +83,7 @@ if (isset($_SESSION['flashdata'])) {
 
 <?php if ($fotos && count($fotos) > 0): ?>
     <div id="galeria_fotos">
-        <h2>Galería de Fotos</h2>
-        <h3>Mostrando <?php echo sizeof($fotos)?> fotos</h3>
+        <h2>Galería de Fotos (<?php echo sizeof($fotos)?>)</h2>
         <div class="thumbnails">
             <?php foreach ($fotos as $foto): ?>
                 <a href="/foto/<?php echo $foto['id']; ?>">

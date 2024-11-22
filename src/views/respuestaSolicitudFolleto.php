@@ -22,5 +22,5 @@
     <p>Texto Adicional: <?php echo htmlspecialchars($_GET['texto-adicional']); ?></p>
     <b>Precio: <?php echo htmlspecialchars($_GET['precio']); ?></b>
     <br><br>
-    <button onclick="window.location.href='/'">Volver</button>
+    <button onclick="window.location.href='/perfil/<?php echo $_SESSION['user']; ?>'">Volver</button>
 </div>

@@ -1,7 +1,6 @@
 <?php
 
 require_once("./src/models/dbModel.php");
-
 class Usuario
 {
     public static function getUsuario($email)
@@ -33,9 +32,16 @@ class Usuario
 
     public static function nuevoUsuario($email, $password, $nombre, $sexo, $fecha_nacimiento, $ciudad, $pais, $foto_perfil)
     {
+        if ($foto_perfil != null)  {
 
-        $sql = "INSERT INTO usuarios (email, password, nombre, sexo, fecha_nacimiento, ciudad, pais, foto_perfil, fecha_registro) 
-        VALUES (:email, :password, :nombre, :sexo, :fecha_nacimiento, :ciudad, :pais, :foto_perfil, NOW())";
+            $sql = "INSERT INTO usuarios (email, password, nombre, sexo, fecha_nacimiento, ciudad, pais, foto_perfil, fecha_registro) 
+            VALUES (:email, :password, :nombre, :sexo, :fecha_nacimiento, :ciudad, :pais, :foto_perfil, NOW())";
+        }
+        else {
+            $sql = "INSERT INTO usuarios (email, password, nombre, sexo, fecha_nacimiento, ciudad, pais, fecha_registro) 
+            VALUES (:email, :password, :nombre, :sexo, :fecha_nacimiento, :ciudad, :pais, NOW())";
+        }
+
         $db = DB::getConnection();
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':email', $email, PDO::PARAM_STR);
@@ -45,7 +51,9 @@ class Usuario
         $stmt->bindValue(':fecha_nacimiento', $fecha_nacimiento, PDO::PARAM_STR);
         $stmt->bindValue(':ciudad', $ciudad, PDO::PARAM_STR);
         $stmt->bindValue(':pais', $pais, PDO::PARAM_STR);
-        $stmt->bindValue(':foto_perfil', $foto_perfil, PDO::PARAM_STR);
+        if( $foto_perfil != null ) {
+            $stmt->bindValue(':foto_perfil', $foto_perfil, PDO::PARAM_STR);
+        }
         if ($stmt->execute()) {
             return true;
         } else {
@@ -55,18 +63,32 @@ class Usuario
 
     public static function modificarUsuario($email, $password, $nombre, $sexo, $fecha_nacimiento, $ciudad, $pais, $foto_perfil)
     {
-        $sql_check = "SELECT COUNT(*) FROM usuarios WHERE email = :nuevo_email";
-        $db = DB::getConnection();
-        $stmt_check = $db->prepare($sql_check);
-        $stmt_check->bindValue(':nuevo_email', $email, PDO::PARAM_STR);
-        $stmt_check->execute();
-        
-        if ($stmt_check->fetchColumn() > 0) {
-            return false;
+        if ($email != $_SESSION['user']) {
+
+            $sql_check = "SELECT COUNT(*) FROM usuarios WHERE email = :nuevo_email";
+            $db = DB::getConnection();
+            $stmt_check = $db->prepare($sql_check);
+            $stmt_check->bindValue(':nuevo_email', $email, PDO::PARAM_STR);
+            $stmt_check->execute();
+
+            if ($stmt_check->fetchColumn() > 0) {
+                return false;
+            }
         }
-        
-        $sql = "UPDATE usuarios 
-                SET email = :nuevo_email, 
+
+        if ($foto_perfil == null) {
+            $sql = "UPDATE usuarios 
+                    SET email = :nuevo_email, 
+                    password = :password, 
+                    nombre = :nombre, 
+                    sexo = :sexo, 
+                    fecha_nacimiento = :fecha_nacimiento, 
+                    ciudad = :ciudad, 
+                    pais = :pais 
+                    WHERE email = :email";
+        } else {
+            $sql = "UPDATE usuarios 
+                    SET email = :nuevo_email, 
                     password = :password, 
                     nombre = :nombre, 
                     sexo = :sexo, 
@@ -74,10 +96,11 @@ class Usuario
                     ciudad = :ciudad, 
                     pais = :pais, 
                     foto_perfil = :foto_perfil 
-                WHERE email = :email";
-        
+                    WHERE email = :email";
+        }
+        $db = DB::getConnection();
         $stmt = $db->prepare($sql);
-    
+
         $stmt->bindValue(':email', $_SESSION['user'], PDO::PARAM_STR);
         $stmt->bindValue(':nuevo_email', $email, PDO::PARAM_STR);
         $stmt->bindValue(':password', $password, PDO::PARAM_STR);
@@ -86,12 +109,13 @@ class Usuario
         $stmt->bindValue(':fecha_nacimiento', $fecha_nacimiento, PDO::PARAM_STR);
         $stmt->bindValue(':ciudad', $ciudad, PDO::PARAM_STR);
         $stmt->bindValue(':pais', $pais, PDO::PARAM_STR);
-        $stmt->bindValue(':foto_perfil', $foto_perfil, PDO::PARAM_STR);
-
+        if($foto_perfil != null) {
+            $stmt->bindValue(':foto_perfil', $foto_perfil, PDO::PARAM_STR);
+        }
         if ($stmt->execute()) {
-            return true; 
+            return true;
         } else {
-            return false; 
+            return false;
         }
     }
 
@@ -129,5 +153,5 @@ class Usuario
         }
     }
 
-    
+
 }

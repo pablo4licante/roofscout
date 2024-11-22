@@ -1,6 +1,6 @@
 <?php
 
-require_once("./src/models/dbModel.php");
+require_once "./src/models/dbModel.php";
 class Anuncio {
     public static function getUltimos($limit = 5) {
 

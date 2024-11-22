@@ -6,16 +6,12 @@ class Temas
 {
     public static function getTema()
     {
-        $email = isset($_COOKIE['user']) ? $_COOKIE['user'] : (isset($_SESSION['user']) ? $_SESSION['user'] : null);
-        if ($email === null) {
-            return false;
-        }
-        $sql = "SELECT t.* FROM usuarios u JOIN temas t WHERE email = :email AND t.id = u.tema";
+        $sql = "SELECT * FROM temas t JOIN usuarios u on u.tema = t.id WHERE email = :email ";
         $db = DB::getConnection();
         $stmt = $db->prepare($sql);
-        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+        $stmt->bindValue(':email', $_SESSION['user'], PDO::PARAM_STR);
         if ($stmt->execute()) {
-            return $stmt->fetchColumn();
+            return $stmt->fetch();
         } else {
             return null;
         }
@@ -23,15 +19,11 @@ class Temas
 
     public static function setTema($tema)
     {
-        $email = isset($_COOKIE['user']) ? $_COOKIE['user'] : (isset($_SESSION['user']) ? $_SESSION['user'] : null);
-        if ($email === null) {
-            return false;
-        }
-        $sql = "UPDATE usuarios u SET u.tema = t.id WHERE email = :email AND t.id = :tema";
+        $sql = "UPDATE usuarios u SET u.tema = :tema WHERE email = :email";
         $db = DB::getConnection();
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':tema', $tema, PDO::PARAM_STR);
-        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+        $stmt->bindValue(':email', $_SESSION['user'], PDO::PARAM_STR);
         return $stmt->execute();
     }
 
@@ -40,7 +32,7 @@ class Temas
         $db = DB::getConnection();
         $stmt = $db->prepare($sql);
         if ($stmt->execute()) {
-            return $stmt->fetchColumn();
+            return $stmt->fetchAll();
         } else {
             return null;
         }

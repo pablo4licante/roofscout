@@ -202,7 +202,7 @@ function getPostValue($field)
         <select name="pais" id="pais">
             <option value="" disabled <?= empty($_POST['pais']) ? 'selected' : '' ?>>Seleccione su país</option>
             <?php foreach ($paises as $pais): ?>
-                <option value="<?php $pais['nombre'] ?>" <?php isset($_POST['pais']) && $_POST['pais'] === $pais['nombre'] ? 'selected' : '' ?>><?php $pais['nombre'] ?></option>
+                <option value="<?php echo $pais['pais'] ?>" <?php isset($_POST['pais']) && $_POST['pais'] === $pais ? 'selected' : '' ?>><?php echo $pais['pais'] ?></option>
             <?php endforeach; ?>
         </select>
         <br>
@@ -232,8 +232,8 @@ function getPostValue($field)
 
         <label for="anuncio">Anuncio del Usuario (Obligatorio):</label>
         <select id="anuncio" name="anuncio" class="form-control" required>
-            <?php foreach ($anuncios as $key => $value): ?>
-                <option value="<?= $key ?>"><?= $value ?></option>
+            <?php foreach ($anuncios as $anuncio): ?>
+                <option value="<?php echo $anuncio['id'] ?>"><?php echo $anuncio['titulo'] ?></option>
             <?php endforeach; ?>
         </select>
         <br>

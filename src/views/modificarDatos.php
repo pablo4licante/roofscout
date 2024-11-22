@@ -45,22 +45,18 @@ function validateFechaNacimiento($fecha_nacimiento) {
     $edad = $hoy->diff($fecha_nacimientoDate)->y;
     return $edad >= 18;
 }
-
-function getPostValue($field) {
-    return isset($_POST[$field]) ? htmlspecialchars($_POST[$field]) : '';
-}
 ?>
 
-
 <h2>Mis datos</h2>
+<div class="login-container">
 <form action="" method="post" enctype="multipart/form-data">
     <label for="email">Email:</label>
-    <input type="text" id="email" name="email" placeholder="Email" value="<?= getPostValue('email') ?? htmlspecialchars($usuario['email'] ?? '') ?>">
+    <input type="text" id="email" name="email" placeholder="Email" value="<?= htmlspecialchars($usuario['email'] ?? '') ?>" disabled>
     <br>
     <span style="color:red;"><?= $errors['email'] ?? '' ?></span><br><br>
 
     <label for="nombre">Nombre de usuario:</label>
-    <input type="text" id="nombre" name="nombre" placeholder="Nombre de usuario" value="<?= getPostValue('nombre') ?? htmlspecialchars($usuario['nombre'] ?? '') ?>">
+    <input type="text" id="nombre" name="nombre" placeholder="Nombre de usuario" value="<?= htmlspecialchars($usuario['nombre'] ?? '') ?>">
     <br>
     <span style="color:red;"><?= $errors['nombre'] ?? '' ?></span><br><br>
 
@@ -76,25 +72,25 @@ function getPostValue($field) {
 
     <label for="sexo">Sexo:</label>
     <select id="sexo" name="sexo">
-        <option value="" disabled <?= empty(getPostValue('sexo')) && empty($usuario['sexo']) ? 'selected' : '' ?>>Seleccione su sexo</option>
-        <option value="hombre" <?= getPostValue('sexo') === 'hombre' || ($usuario['sexo'] ?? '') === 'hombre' ? 'selected' : '' ?>>Hombre</option>
-        <option value="mujer" <?= getPostValue('sexo') === 'mujer' || ($usuario['sexo'] ?? '') === 'mujer' ? 'selected' : '' ?>>Mujer</option>
-        <option value="otros" <?= getPostValue('sexo') === 'otros' || ($usuario['sexo'] ?? '') === 'otros' ? 'selected' : '' ?>>Otros</option>
+        <option value="" disabled <?= empty($usuario['sexo']) ? 'selected' : '' ?>>Seleccione su sexo</option>
+        <option value="hombre" <?= ($usuario['sexo'] ?? '') === 'hombre' ? 'selected' : '' ?>>Hombre</option>
+        <option value="mujer" <?= ($usuario['sexo'] ?? '') === 'mujer' ? 'selected' : '' ?>>Mujer</option>
+        <option value="otros" <?= ($usuario['sexo'] ?? '') === 'otros' ? 'selected' : '' ?>>Otros</option>
     </select>
     <br>
     <span style="color:red;"><?= $errors['sexo'] ?? '' ?></span><br><br>
 
     <label for="fecha_nacimiento">Fecha de nacimiento:</label>
-    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="<?= getPostValue('fecha_nacimiento') ?? htmlspecialchars($usuario['fecha_nacimiento'] ?? '') ?>">
+    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="<?= htmlspecialchars($usuario['fecha_nacimiento'] ?? '') ?>">
     <br>
     <span style="color:red;"><?= $errors['fecha_nacimiento'] ?? '' ?></span><br><br>
 
     <label for="pais">País:</label>
     <select name="pais" id="pais">
-        <option value="" disabled <?= empty(getPostValue('pais')) && empty($usuario['pais']) ? 'selected' : '' ?>>Seleccione su país</option>
+        <option value="" disabled <?= empty($usuario['pais']) ? 'selected' : '' ?>>Seleccione su país</option>
         <?php foreach ($paises as $pais): ?>
-            <option value="<?= htmlspecialchars($pais['nombre']) ?>" <?= getPostValue('pais') === $pais['nombre'] || ($usuario['pais'] ?? '') === $pais['nombre'] ? 'selected' : '' ?>>
-                <?= htmlspecialchars($pais['nombre']) ?>
+            <option value="<?php echo $pais['pais'] ?>" <?= ($usuario['pais'] ?? '') === $pais['pais'] ? 'selected' : '' ?>>
+                <?php echo $pais['pais'] ?>
             </option>
         <?php endforeach; ?>
     </select>
@@ -102,7 +98,7 @@ function getPostValue($field) {
     <span style="color:red;"><?= $errors['pais'] ?? '' ?></span><br><br>
 
     <label for="ciudad">Ciudad:</label>
-    <input type="text" name="ciudad" id="ciudad" value="<?= getPostValue('ciudad') ?? htmlspecialchars($usuario['ciudad'] ?? '') ?>">
+    <input type="text" name="ciudad" id="ciudad" value="<?= htmlspecialchars($usuario['ciudad'] ?? '') ?>">
     <br>
     <span style="color:red;"><?= $errors['ciudad'] ?? '' ?></span><br><br>
 
@@ -113,3 +109,5 @@ function getPostValue($field) {
 
     <button type="submit">Actualizar datos</button>
 </form>
+
+</div>

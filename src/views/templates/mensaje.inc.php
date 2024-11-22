@@ -4,10 +4,20 @@
 ?>
 
 <div class="mensaje">
-    <img src="https://picsum.photos/50" alt="Foto del Usuario" class="user-img">
+    <?php if($mensaje['emisor'] == $_SESSION['user']):?>
+    <img src="<?php echo $mensaje['foto_perfil'] ?>" alt="Foto del Usuario" class="user-img">
+    <?php else:?>
+    <img src="<?php echo $mensaje['foto_perfil'] ?>" alt="Foto del Usuario" class="user-img">
+    <?php endif;?>
     <div class="mensaje-info">
         <p><strong><?= $titulo_anuncio ?></strong></p>
-        <p><strong>Emisor:</strong> <?= htmlspecialchars($mensaje['emisor']) ?></p>
+        
+        <?php if($mensaje['emisor'] == $_SESSION['user']):?>
+            <p><strong>Receptor:</strong> <?= htmlspecialchars($mensaje['receptor']) ?></p>
+            <?php else:?>
+                <p><strong>Emisor:</strong> <?= htmlspecialchars($mensaje['emisor']) ?></p>
+        <?php endif;?>
+        
         <p><strong>Fecha del mensaje:</strong> <?= htmlspecialchars($mensaje['fecha_hora']) ?></p>
         <?php foreach ($tipos_mensaje as $tipo_mensaje): ?>
             <?php if ($tipo_mensaje['id'] == $mensaje['tipo_mensaje']): ?>

@@ -9,6 +9,8 @@ require_once('./src/models/paisModel.php');
 class AnuncioController {
     public function inicio() {
         $anuncios = Anuncio::getUltimos();
+        $tipos_anuncio = Tipos::getTipoAnuncio();
+        $tipos_vivienda = Tipos::getTipoVivienda();
         include_once './src/views/inicio.php';
     }
 
@@ -46,9 +48,7 @@ class AnuncioController {
         $anuncio = Anuncio::getAnuncio($id);
         $publicador = Usuario::getUsuario($anuncio['usuario']);
         $fotos = Foto::getFotosPorAnuncio($id);
-        $tipos_mensaje = Tipos::getTipoMensaje();
-        $tipos_anuncio = Tipos::getTipoAnuncio();
-        $tipos_vivienda = Tipos::getTipoVivienda();
+        
 
         $ultimosVistos = isset($_COOKIE['ultimosVistos']) ? explode(',', $_COOKIE['ultimosVistos']) : [];
 
@@ -63,7 +63,9 @@ class AnuncioController {
         }
 
         setcookie('ultimosVistos', implode(',', $ultimosVistos), time() + (86400 * 7), "/");
-
+        $tipos_mensaje = Tipos::getTipoMensaje();
+        $tipos_anuncio = Tipos::getTipoAnuncio();
+        $tipos_vivienda = Tipos::getTipoVivienda();
         include_once './src/views/detalleAnuncio.php';
     }
 
@@ -103,6 +105,9 @@ class AnuncioController {
                 $anunciosVisitados[] = Anuncio::getAnuncio($id);
             }
         }
+        $tipos_anuncio = Tipos::getTipoAnuncio();
+        $tipos_vivienda = Tipos::getTipoVivienda();
+        $paises = Paises::getPaises();
         include_once './src/views/templates/ultimoAnunciosVisitados.inc.php';
     }
 }

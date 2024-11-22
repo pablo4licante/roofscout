@@ -14,6 +14,9 @@ class UsuarioController {
         }
         $usuario = Usuario::getUsuario($email);
         $anuncios = Anuncio::getAnunciosPorUsuario($email);
+        $tipos_anuncio = Tipos::getTipoAnuncio();
+        $tipos_vivienda = Tipos::getTipoVivienda();
+        $paises = Paises::getPaises();
         include_once("./src/views/perfil.php");
     }
 
@@ -24,10 +27,14 @@ class UsuarioController {
     
     public function seleccionarTema($numeroTema) {
         Temas::setTema($numeroTema);
+        $_SESSION['tema'] = Temas::getTema()['fichero'];
         header('Location: /perfil/' . $_SESSION['user']);
     }
 
     public function paginaMisDatos() {
+        $tipos_anuncio = Tipos::getTipoAnuncio();
+        $tipos_vivienda = Tipos::getTipoVivienda();
+        $paises = Paises::getPaises();
         $usuario = Usuario::getUsuario($_SESSION['user']);
         include_once("./src/views/modificarDatos.php");
     }

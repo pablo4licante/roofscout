@@ -1,6 +1,6 @@
-<?
+<?php
 
-require_once("./src/models/dbModel.php");
+require_once "./src/models/dbModel.php";
 
 class Folleto {
     public static function nuevaSolicitud($nombre, $email, $calle, $numero, $piso, $codigoPostal, $localidad, $provincia, $pais, $telefono, $colorPortada, $numCopias, $resolucion, $anuncio, $fechaRecepcion, $impresionColor, $impresionPrecio, $textoAdicional, $precio) {

@@ -110,8 +110,8 @@
             $controller->seleccionarTema($_POST['temaId']);
         },
         '/mis-datos' => function() {
-            $controller = new AuthController();
-            $controller->modificar();
+            $controller = new UsuarioController();
+            $controller->paginaMisDatos();
         },
         '/auth-modificar' => function() {
             $controller = new AuthController();
@@ -128,7 +128,7 @@
         $controller = new AuthController();
         if($controller->controlDeCookies()){
             $_SESSION['user'] = $_COOKIE['user'];
-            $_SESSION['tema'] = Temas::getTema()["nombre"];
+            $_SESSION['tema'] = Temas::getTema()['fichero'];
         }
     }
     
@@ -165,10 +165,10 @@
             exit();
         }
     } else {
-        $controller = new AuthController();
-        if($controller->controlDeCookies()){
-            Usuario::updateUltimaConexion();
-        }
+            $controller = new AuthController();
+            if($controller->controlDeCookies()){
+                Usuario::updateUltimaConexion();
+            }
     }
 
     include_once('./src/views/templates/cabecera.inc.php');

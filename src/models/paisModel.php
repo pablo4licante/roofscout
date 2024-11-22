@@ -10,7 +10,7 @@ class Paises
         $db = DB::getConnection();
         $stmt = $db->prepare($sql);
         if ($stmt->execute()) {
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } else {
             return null;
         } 
