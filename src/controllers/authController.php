@@ -171,7 +171,7 @@ class AuthController
 
     public function controlModificar()
     {
-        $email = $_POST['email'];
+        $email = $_SESSION['user'];
         $password = $_POST['password'];
         $new_password = $_POST['new_password'];
         $nombre = $_POST['nombre'];

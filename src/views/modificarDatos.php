@@ -1,21 +1,25 @@
 <?php
 $errors = [];
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-        $errors['email'] = "Por favor, introduce un correo electrónico válido.";
-    }
 
     if (empty($_POST['nombre']) || !preg_match('/^[a-zA-Z][a-zA-Z0-9]{2,14}$/', $_POST['nombre'])) {
         $errors['nombre'] = "El nombre de usuario debe tener entre 3 y 15 caracteres, solo contener letras y números, y no puede comenzar con un número.";
     }
 
-    if (empty($_POST['password']) || !preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d_-]{6,15}$/', $_POST['password'])) {
+    if (!empty($_POST['password']) && !preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d_-]{6,15}$/', $_POST['password'])) {
         $errors['password'] = "La contraseña debe tener entre 6 y 15 caracteres, contener al menos una letra mayúscula, una letra minúscula y un número, y solo puede contener letras, números, guiones y guiones bajos.";
     }
 
-    if (empty($_POST['confirm_new_password']) || $_POST['confirm_new_password'] !== $_POST['new_password']) {
+    if (!empty($_POST['new_password']) && !preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d_-]{6,15}$/', $_POST['new_password'])) {
+        $errors['new_password'] = "La nueva contraseña debe tener entre 6 y 15 caracteres, contener al menos una letra mayúscula, una letra minúscula y un número, y solo puede contener letras, números, guiones y guiones bajos.";
+    }
+
+    if (!empty($_POST['confirm_new_password']) && $_POST['confirm_new_password'] !== $_POST['new_password']) {
         $errors['confirm_new_password'] = "Las contraseñas no coinciden.";
+    }
+
+    if (!empty($_POST['new_password']) && $_POST['confirm_new_password'] !== $_POST['new_password']) {
+        $errors['new_password'] = "Las contraseñas no coinciden.";
     }
 
     if (empty($_POST['fecha_nacimiento']) || !validateFechaNacimiento($_POST['fecha_nacimiento'])) {
@@ -33,7 +37,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['pais'] = "El país es obligatorio.";
     }
 
+
+    if (!empty($errors)) {
+        $errorMessages = implode("\\n", $errors);
+        echo "<script>alert('Errores:\\n" . $errorMessages . "');</script>";
+    }
+
     if (empty($errors)) {
+        echo "<script>alert('Email: " . htmlspecialchars($_POST['email']) . "');</script>";
         header('Location: /auth-modificar', true, 307);
         exit;
     }
@@ -64,17 +75,17 @@ function validateFechaNacimiento($fecha_nacimiento) {
     <input type="password" id="password" name="password" placeholder="Contraseña actual">
     <br>
     <span style="color:red;"><?= $errors['password'] ?? '' ?></span><br><br>
-
+    
     
     <label for="password">Nueva Contraseña:</label>
     <input type="password" id="new_password" name="new_password" placeholder="Contraseña nueva">
     <br>
-    <span style="color:red;"><?= $errors['password'] ?? '' ?></span><br><br>
+    <span style="color:red;"><?= $errors['new_password'] ?? '' ?></span><br><br>
 
     <label for="confirm_password">Repetir nueva contraseña:</label>
     <input type="password" id="confirm_new_password" name="confirm_new_password" placeholder="Repetir contraseña nueva">
     <br>
-    <span style="color:red;"><?= $errors['confirm_password'] ?? '' ?></span><br><br>
+    <span style="color:red;"><?= $errors['confirm_new_password'] ?? '' ?></span><br><br>
 
     <label for="sexo">Sexo:</label>
     <select id="sexo" name="sexo">
