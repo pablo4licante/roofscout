@@ -94,8 +94,8 @@ class AnuncioController {
         $tipos_anuncio = Tipos::getTipoAnuncio();
         $tipos_vivienda = Tipos::getTipoVivienda();
 
-        $_SESSION['flashdata'] = 'Agrega una nueva foto para tu anuncio!';
-        
+        $_SESSION['flashdata'] = 'Agrega una nueva foto para tu anuncio';
+
         include_once './src/views/agregarFotoAnuncio.php';
     }
 
@@ -122,13 +122,7 @@ class AnuncioController {
             if(Usuario::checkCredentials($_SESSION['user'], $password)){        Anuncio::eliminarAnuncio($id);
             $_SESSION['flashdata'] = 'Anuncio eliminado con exito!';
             
-            if(isset($_COOKIE['ultimosVistos'])) {
-                $ultimosVistos = explode(',', $_COOKIE['ultimosVistos']);
-                if (($key = array_search($id, $ultimosVistos)) !== false) {
-                    unset($ultimosVistos[$key]);
-                }
-                setcookie('ultimosVistos', implode(',', $ultimosVistos), time() + (86400 * 7), "/");
-            }
+            setcookie('ultimosVistos', '', time() + (86400 * 7), "/");
 
             header('Location: /perfil/'.$_SESSION['user']);
         } else {
