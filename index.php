@@ -136,7 +136,15 @@
         '/confirmar-eliminar-anuncio/(\d+)' => function($id) {
             $controller = new AnuncioController();
             $controller->confirmarEliminarAnuncio($id, $_POST['password']);
-        }
+        },
+        '/modificar-anuncio/(\d+)' => function($id) {
+            $controller = new AnuncioController();
+            $controller->modificarAnuncio($id);
+        },
+        '/mandar-modificar-anuncio/(\d+)' => function($id) {
+            $controller = new AnuncioController();
+            $controller->mandarModificarAnuncio($id);
+        },
     ];
 
     session_start();

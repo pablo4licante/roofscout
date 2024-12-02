@@ -130,4 +130,30 @@ class AnuncioController {
             header('Location: /anuncio/'.$id);
         }
     }
+
+    public function modificarAnuncio($id) {
+        $anuncio = Anuncio::getAnuncio($id);
+        $paises = Paises::getPaises();
+        $tipos_anuncio = Tipos::getTipoAnuncio();
+        $tipos_vivienda = Tipos::getTipoVivienda();
+        include_once './src/views/modificarAnuncio.php';
+    }
+
+    public function mandarModificarAnuncio($id) {
+        if (Usuario::checkCredentials($_SESSION['user'], $_SESSION['password'])) {
+            $anuncioId = Anuncio::modificarAnuncio($id, $_POST);
+
+            if ($anuncioId) {
+                $_SESSION['flashdata'] = 'Anuncio modificado con exito!';
+                header("Location: /anuncio/$id");
+                exit();
+            } else {
+                return false;
+            }
+        } else {
+            $_SESSION['flashdata'] = 'No se ha podido modificar el anuncio. Comprueba que la contraseña es correcta.';
+            header("Location: /modificar-anuncio/$id");
+            exit();
+        }
+    }
 }

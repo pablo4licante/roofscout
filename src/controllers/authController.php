@@ -254,6 +254,11 @@ class AuthController
          }
 
         if (Usuario::checkCredentials($_SESSION['user'], $password)) {
+            
+            if($new_password == '') {
+                $new_password = $password;
+            }
+
             if (Usuario::modificarUsuario($email, $new_password, $nombre, $sexo, $fecha_nacimiento, $ciudad, $pais, $foto_perfil)) {
                 
                 if (isset($_COOKIE['user'])) {

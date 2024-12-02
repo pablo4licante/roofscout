@@ -166,4 +166,33 @@ class Anuncio {
         
         return $stmt->execute();
     }
+
+    public static function modificarAnuncio($id, $data) {
+        $sql = "UPDATE anuncios 
+                SET titulo = :titulo, descripcion = :descripcion, tipo_anuncio = :tipo_anuncio, 
+                    tipo_vivienda = :tipo_vivienda, ciudad = :ciudad, pais = :pais, 
+                    precio = :precio, superficie = :superficie, habitaciones = :habitaciones, 
+                    aseos = :aseos, planta = :planta, anyo_construccion = :anyo_construccion 
+                WHERE id = :id AND usuario = :usuario";
+        
+        $db = DB::getConnection();
+        $stmt = $db->prepare($sql);
+        
+        $stmt->bindValue(':titulo', $data['titulo'], PDO::PARAM_STR);
+        $stmt->bindValue(':descripcion', $data['descripcion'], PDO::PARAM_STR);
+        $stmt->bindValue(':tipo_anuncio', $data['tipo_anuncio'], PDO::PARAM_STR);
+        $stmt->bindValue(':tipo_vivienda', $data['tipo_vivienda'], PDO::PARAM_STR);
+        $stmt->bindValue(':ciudad', $data['ciudad'], PDO::PARAM_STR);
+        $stmt->bindValue(':pais', $data['pais'], PDO::PARAM_STR);
+        $stmt->bindValue(':precio', $data['precio'], PDO::PARAM_INT);
+        $stmt->bindValue(':superficie', $data['superficie'], PDO::PARAM_INT);
+        $stmt->bindValue(':habitaciones', $data['habitaciones'], PDO::PARAM_INT);
+        $stmt->bindValue(':aseos', $data['aseos'], PDO::PARAM_INT);
+        $stmt->bindValue(':planta', $data['planta'], PDO::PARAM_INT);
+        $stmt->bindValue(':anyo_construccion', $data['anyo_construccion'], PDO::PARAM_INT);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->bindValue(':usuario', $_SESSION['user'], PDO::PARAM_STR);
+        
+        return $stmt->execute();
+    }
 }
