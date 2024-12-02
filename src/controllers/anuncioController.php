@@ -81,7 +81,7 @@ class AnuncioController {
 
         if ($anuncioId) {
             $_SESSION['flashdata'] = 'Anuncio creado con exito!';
-            header("Location: /anuncio/$anuncioId");
+            header("Location: /agregar-foto/$anuncioId");
             exit();
         } else {
             return false;
@@ -93,6 +93,9 @@ class AnuncioController {
         $paises = Paises::getPaises();
         $tipos_anuncio = Tipos::getTipoAnuncio();
         $tipos_vivienda = Tipos::getTipoVivienda();
+
+        $_SESSION['flashdata'] = 'Agrega una nueva foto para tu anuncio!';
+        
         include_once './src/views/agregarFotoAnuncio.php';
     }
 
