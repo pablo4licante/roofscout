@@ -26,14 +26,6 @@
     <textarea id="descripcion" name="descripcion" rows="4" minlength="10" maxlength="255" required></textarea>
     <br>
 
-    <label for="foto-principal">Foto Principal:</label>
-    <input type="file" id="foto-principal" name="foto-principal" accept="image/*" required>
-    <br>
-
-    <label for="galeria-fotos">Galería de Fotos:</label>
-    <input type="file" id="galeria-fotos" name="galeria-fotos[]" accept="image/*" multiple>
-    <br>
-
     <label for="precio">Precio:</label>
     <input type="number" id="precio" name="precio" required>
     <br>

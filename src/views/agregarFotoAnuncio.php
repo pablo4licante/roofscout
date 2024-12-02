@@ -1,4 +1,9 @@
-
+<?php
+if (isset($_SESSION['flashdata'])) {
+    echo '<div class="mensaje-ok">' . htmlspecialchars($_SESSION['flashdata']) . '</div>';
+    unset($_SESSION['flashdata']);
+}
+?>
 
 <h3>Agregar Fotos</h3>
 <div class="login-container">
