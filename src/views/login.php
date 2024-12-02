@@ -44,5 +44,5 @@ if (isset($_SESSION['flashdata'])) {
   <button type="submit">Acceder</button>
   </form>
 
-  <p class="enlace-registro enlace-login">&#191;A&#250;n no tienes cuenta? <br> <a href="./registro.html">Reg&#237;strate aqu&#237;</a></p>
+  <p class="enlace-registro enlace-login">&#191;A&#250;n no tienes cuenta? <br> <a href="/registro">Reg&#237;strate aqu&#237;</a></p>
 </div></form>

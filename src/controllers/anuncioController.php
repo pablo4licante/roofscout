@@ -110,4 +110,27 @@ class AnuncioController {
         $paises = Paises::getPaises();
         include_once './src/views/templates/ultimoAnunciosVisitados.inc.php';
     }
+
+    public function eliminarAnuncio($id) {
+        include_once('./src/views/eliminarAnuncio.php');
+    }
+
+    public function confirmarEliminarAnuncio($id,$password) {
+            if(Usuario::checkCredentials($_SESSION['user'], $password)){        Anuncio::eliminarAnuncio($id);
+            $_SESSION['flashdata'] = 'Anuncio eliminado con exito!';
+            
+            if(isset($_COOKIE['ultimosVistos'])) {
+                $ultimosVistos = explode(',', $_COOKIE['ultimosVistos']);
+                if (($key = array_search($id, $ultimosVistos)) !== false) {
+                    unset($ultimosVistos[$key]);
+                }
+                setcookie('ultimosVistos', implode(',', $ultimosVistos), time() + (86400 * 7), "/");
+            }
+
+            header('Location: /perfil/'.$_SESSION['user']);
+        } else {
+            $_SESSION['flashdata'] = 'No se ha podido eliminar el anuncio. Comprueba que la contraseña es correcta.';
+            header('Location: /anuncio/'.$id);
+        }
+    }
 }

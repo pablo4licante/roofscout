@@ -14,8 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['password'] = "La contraseña debe tener entre 6 y 15 caracteres, contener al menos una letra mayúscula, una letra minúscula y un número, y solo puede contener letras, números, guiones y guiones bajos.";
     }
 
-    if (empty($_POST['confirm_password']) || $_POST['confirm_password'] !== $_POST['password']) {
-        $errors['confirm_password'] = "Las contraseñas no coinciden.";
+    if (empty($_POST['confirm_new_password']) || $_POST['confirm_new_password'] !== $_POST['new_password']) {
+        $errors['confirm_new_password'] = "Las contraseñas no coinciden.";
     }
 
     if (empty($_POST['fecha_nacimiento']) || !validateFechaNacimiento($_POST['fecha_nacimiento'])) {
@@ -60,13 +60,19 @@ function validateFechaNacimiento($fecha_nacimiento) {
     <br>
     <span style="color:red;"><?= $errors['nombre'] ?? '' ?></span><br><br>
 
-    <label for="password">Contraseña:</label>
-    <input type="password" id="password" name="password" placeholder="Contraseña">
+    <label for="password">Contraseña actual:</label>
+    <input type="password" id="password" name="password" placeholder="Contraseña actual">
     <br>
     <span style="color:red;"><?= $errors['password'] ?? '' ?></span><br><br>
 
-    <label for="confirm_password">Repetir contraseña:</label>
-    <input type="password" id="confirm_password" name="confirm_password" placeholder="Repetir contraseña">
+    
+    <label for="password">Nueva Contraseña:</label>
+    <input type="password" id="new_password" name="new_password" placeholder="Contraseña nueva">
+    <br>
+    <span style="color:red;"><?= $errors['password'] ?? '' ?></span><br><br>
+
+    <label for="confirm_password">Repetir nueva contraseña:</label>
+    <input type="password" id="confirm_new_password" name="confirm_new_password" placeholder="Repetir contraseña nueva">
     <br>
     <span style="color:red;"><?= $errors['confirm_password'] ?? '' ?></span><br><br>
 

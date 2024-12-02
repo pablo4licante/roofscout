@@ -52,7 +52,7 @@ if (isset($_SESSION['flashdata'])) {
         <button onclick="location.href='/mis-datos'">Mis Datos</button>
         <button onclick="location.href='/mensajes'">Mis Mensajes</button>
         <button onclick="location.href='/cerrar-sesion'">Cerrar Sesión</button>
-        <button onclick="location.href='/'">Darse de Baja</button>
+        <button onclick="location.href='/darse-de-baja'">Darse de Baja</button>
         <button onclick="location.href='/seleccion-tema'">Seleccionar Tema</button>
     </div>
 <?php endif;?>

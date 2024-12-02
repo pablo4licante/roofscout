@@ -106,4 +106,14 @@ class Foto {
             return []; // Devuelve un array vacío en caso de error
         }
     }
+
+    public static function eliminarFoto($id) {
+        $sql = "DELETE FROM fotos WHERE id = :id";
+        
+        $db = DB::getConnection();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        
+        return $stmt->execute();
+    }
 }

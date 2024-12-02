@@ -154,4 +154,19 @@ class Usuario
     }
 
 
+    public static function eliminarUsuario()
+    {
+        $email = $_SESSION['user'];
+        $sql = "DELETE FROM usuarios WHERE email = :email";
+        $db = DB::getConnection();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 }

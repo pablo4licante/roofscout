@@ -120,6 +120,22 @@
         '/mensajes-anuncio/(\d+)' => function($idAnuncio) {
             $controller = new MensajeController();
             $controller->mensajesPorAnuncio($idAnuncio);
+        },
+        '/darse-de-baja' => function() {
+            $controller = new AuthController();
+            $controller->confirmarBaja();
+        },
+        '/confirmar-baja' => function() {
+            $controller = new AuthController();
+            $controller->darseDeBaja();
+        },
+        '/eliminar-anuncio/(\d+)' => function($id) {
+            $controller = new AnuncioController();
+            $controller->eliminarAnuncio($id);
+        },
+        '/confirmar-eliminar-anuncio/(\d+)' => function($id) {
+            $controller = new AnuncioController();
+            $controller->confirmarEliminarAnuncio($id, $_POST['password']);
         }
     ];
 

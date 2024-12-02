@@ -1,3 +1,4 @@
+
 <h1 id="tituloMovil">RoofScout.</h1>
 
 <form action="/busqueda" method="get" class="search-bar">
@@ -5,6 +6,13 @@
       <button type="submit" class="fa fa-search"></button>
 </form>
     
+
+<?php
+if (isset($_SESSION['flashdata'])) {
+  echo '<div class="mensaje-ok">' . htmlspecialchars($_SESSION['flashdata']) . '</div>';
+  unset($_SESSION['flashdata']);
+}
+?>
 
 <div id="galeria">
         <?php foreach ($anuncios as $anuncio): ?>

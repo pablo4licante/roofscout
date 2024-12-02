@@ -155,4 +155,15 @@ class Anuncio {
             return []; // Devuelve un array vacío en caso de error
         }
     }
+
+    public static function eliminarAnuncio($id) {
+        $sql = "DELETE FROM anuncios WHERE id = :id AND usuario = :usuario";
+        
+        $db = DB::getConnection();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->bindValue(':usuario', $_SESSION['user'], PDO::PARAM_STR);
+        
+        return $stmt->execute();
+    }
 }
