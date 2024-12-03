@@ -13,6 +13,9 @@
         <p><?php echo htmlspecialchars($foto['alt']); ?></p>
         <button onclick="window.location.href='/anuncio/<?php echo $foto['anuncio']?>'">Volver al anuncio</button>
     </div>
+    <div>
+        <button style="background-color:red;" onclick="if(confirm('¿Estás seguro de que deseas eliminar esta foto?')) { window.location.href='/eliminar-foto/<?php echo $foto['id']; ?>'; }">Eliminar foto</button>
+    </div>
 </div>
 
 <?php endif; ?>

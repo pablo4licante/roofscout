@@ -145,6 +145,10 @@
             $controller = new AnuncioController();
             $controller->mandarModificarAnuncio($id);
         },
+        '/eliminar-foto/(\d+)' => function($id) {
+            $controller = new AnuncioController();
+            $controller->eliminarFoto($id);
+        },
     ];
 
     session_start();

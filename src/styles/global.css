@@ -512,6 +512,54 @@ form, #tarifas {
     justify-content: center;
 }
 
+.delete-image-card-button {
+    position: relative;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-image-card-button:hover {
+    background-color: darkred;
+}
+
+#agregar-fotos-panels {
+    width: 100%;   
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: start;
+}
+
+
+#add-image-card, #post-image-card {
+    margin: 0.2rem 50%;
+    transform: translateX(-50%);
+}
+
+.image-card {
+    background-color: var(--element-background-color);
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    > div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
 
 #galeria_fotos {
     text-align: center;

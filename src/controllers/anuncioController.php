@@ -99,6 +99,19 @@ class AnuncioController {
         include_once './src/views/agregarFotoAnuncio.php';
     }
 
+    public function eliminarFoto($id) {
+        $foto = Foto::getFoto($id);
+        if(Foto::eliminarFoto($id)) {
+            $_SESSION['flashdata'] = 'Foto eliminada con exito!';
+            header("Location: /anuncio/".$foto['anuncio']);
+            exit();
+        } else {
+            $_SESSION['flashdata'] = 'No se ha podido eliminar la foto.';
+            header("Location: /anuncio/".$foto['anuncio']);
+            exit();
+        }
+    }
+
     public function ultimosVistos() {
         $ids = isset($_COOKIE['ultimosVistos']) ? $_COOKIE['ultimosVistos'] : null;
         $anunciosVisitados = [];
