@@ -76,8 +76,8 @@ class Foto {
     }
 
     public static function nuevaFoto($data) {
-        $sql = "INSERT INTO fotos (url, anuncio, alt) 
-            VALUES (:url, :anuncio, :alt)";
+        $sql = "INSERT INTO fotos (url, anuncio, alt, principal) 
+            VALUES (:url, :anuncio, :alt, 0)";
         
         $db = DB::getConnection();
         $stmt = $db->prepare($sql);

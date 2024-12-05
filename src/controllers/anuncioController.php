@@ -99,6 +99,15 @@ class AnuncioController {
         include_once './src/views/agregarFotoAnuncio.php';
     }
 
+    public function agregarFotoDB($id_anuncio, $titulo, $alt, $url) {
+        $data = [
+            'url' => $url,
+            'anuncio' => $id_anuncio,
+            'alt' => $alt
+        ];
+        Foto::nuevaFoto($data);
+    }
+
     public function eliminarFoto($id) {
         $foto = Foto::getFoto($id);
         if(Foto::eliminarFoto($id)) {

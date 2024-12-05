@@ -55,6 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
                 if (ftp_fput($ftp_conn, $destination, $fileHandle, FTP_BINARY)) {
                     echo "<script>console.log('File " . basename($_FILES['new_images']['name'][$index]) . " uploaded correctly!');</script>";
+
+                    $controller = new AnuncioController();
+                    $controller->agregarFotoDB($anuncio['id'], $title, $alt, "https://roofscout.one/images/" . basename($_FILES['new_images']['name'][$index]));
                 } else {
                     $errors[] = "Error al subir la imagen " . ($index + 1) . " al servidor FTP.";
                 }
