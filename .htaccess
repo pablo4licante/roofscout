@@ -1,4 +1,9 @@
 RewriteEngine On
+
+# Allow direct access to images folder
+RewriteCond %{REQUEST_URI} !^/images/
+
+# Redirect other requests to index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php [QSA,L]

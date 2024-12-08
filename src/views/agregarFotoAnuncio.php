@@ -26,14 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ftp_server = "ftpupload.net";
         $ftp_username = "if0_37316886";
         $ftp_password = "jQFsQZWSRwmZgfj";
-        
+
         // Conectar al servidor FTP
         $ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
         ftp_set_option($ftp_conn, FTP_TIMEOUT_SEC, 300); // Set timeout to 5 minutes
-        
+
         // Iniciar sesión
         $login = ftp_login($ftp_conn, $ftp_username, $ftp_password);
-        
+
         if (!$login) {
             $errors[] = "Error al conectar con el servidor FTP.";
         } else {
@@ -44,35 +44,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $errors[] = "El archivo temporal no existe o no es legible para la imagen " . ($index + 1) . ".";
                     continue;
                 }
-        
-                $destination = '/roofscout.one/htdocs/images/' . basename($_FILES['new_images']['name'][$index]);
+
+                $timestamp = time();
+                $user = $_SESSION['user'];
+                $originalName = pathinfo($_FILES['new_images']['name'][$index], PATHINFO_FILENAME);
+                $extension = pathinfo($_FILES['new_images']['name'][$index], PATHINFO_EXTENSION);
+                $newFileName = "{$originalName}_{$timestamp}_{$user}.{$extension}";
+                $destination = "/roofscout.one/htdocs/images/{$newFileName}";
                 $fileHandle = fopen($tmpName, 'rb');
-        
+
                 if ($fileHandle === false) {
                     $errors[] = "No se pudo abrir el archivo temporal para la imagen " . ($index + 1) . ".";
                     continue;
                 }
-        
+
                 if (ftp_fput($ftp_conn, $destination, $fileHandle, FTP_BINARY)) {
-                    echo "<script>console.log('File " . basename($_FILES['new_images']['name'][$index]) . " uploaded correctly!');</script>";
+                    echo "<script>console.log('File {$newFileName} uploaded correctly!');</script>";
 
                     $controller = new AnuncioController();
-                    $controller->agregarFotoDB($anuncio['id'], $title, $alt, "https://roofscout.one/images/" . basename($_FILES['new_images']['name'][$index]));
+                    $controller->agregarFotoDB($anuncio['id'], $title, $alt, "https://roofscout.one/images/{$newFileName}");
                 } else {
                     $errors[] = "Error al subir la imagen " . ($index + 1) . " al servidor FTP.";
                 }
-        
-                fclose($fileHandle);
+
             }
-            ftp_close($ftp_conn);
         }
-        
-        if (empty($errors)) {
-            $_SESSION['flashdata'] = 'Imágenes subidas correctamente.';
-            header('Location: /anuncio/' . $anuncio['id']);
-            exit;
-        }
+        fclose($fileHandle);
     }
+
+    ftp_close($ftp_conn);
+
+    if (empty($errors)) {
+        $_SESSION['flashdata'] = 'Imágenes subidas correctamente.';
+        header("Location: /anuncio/{$anuncio['id']}");
+        exit;
+    }
+
 
     if (!empty($errors)) {
         foreach ($errors as $error) {
@@ -100,7 +107,8 @@ if (isset($_SESSION['flashdata'])) {
             <select id="tipo_anuncio" name="tipo_anuncio" required disabled>
                 <?php foreach ($tipos_anuncio as $tipo_anuncio): ?>
                     <option value="<?php echo $tipo_anuncio['id']; ?>" <?php echo ($anuncio['tipo_anuncio'] == $tipo_anuncio['id']) ? 'selected' : ''; ?>>
-                        <?php echo $tipo_anuncio['nombre']; ?></option>
+                        <?php echo $tipo_anuncio['nombre']; ?>
+                    </option>
                 <?php endforeach; ?>
             </select>
             <br>
@@ -110,7 +118,8 @@ if (isset($_SESSION['flashdata'])) {
                 <option value="<?php echo $anuncio['tipo_vivienda'] ?>">Seleccione un tipo de vivienda</option>
                 <?php foreach ($tipos_vivienda as $tipo_vivienda): ?>
                     <option value="<?php echo $tipo_vivienda['id']; ?>" <?php echo ($anuncio['tipo_vivienda'] == $tipo_vivienda['id']) ? 'selected' : ''; ?>>
-                        <?php echo $tipo_vivienda['nombre']; ?></option>
+                        <?php echo $tipo_vivienda['nombre']; ?>
+                    </option>
                 <?php endforeach; ?>
             </select>
             <br>

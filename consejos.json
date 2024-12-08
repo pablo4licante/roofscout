@@ -1,0 +1,92 @@
+[
+  {
+    "categoria": "compra",
+    "titulo": "Revisa el barrio y la ubicación",
+    "importancia": "alta",
+    "descripcion": "Si la zona es un caos o un rincón oscuro, tu compra será un auténtico conjuro. Ubicación buena, inversión segura."
+  },
+  {
+    "categoria": "compra",
+    "titulo": "Examina las escrituras y la legalización",
+    "importancia": "alta",
+    "descripcion": "Si el papel no está claro, tendrás líos por un raro. ¡Todo en orden y evitarás desorden!"
+  },
+  {
+    "categoria": "compra",
+    "titulo": "Pregunta sobre los servicios cercanos",
+    "importancia": "media",
+    "descripcion": "Cerciórate de que hay mercado y escuela, o vivirás a dieta y sin novela."
+  },
+  {
+    "categoria": "compra",
+    "titulo": "Negocia el precio con valentía",
+    "importancia": "alta",
+    "descripcion": "Un regateo con estilo puede ahorrarte hasta un kilo. ¡Que no te tiemble el bolsillo!"
+  },
+  {
+    "categoria": "compra",
+    "titulo": "Inspección previa al hogar",
+    "importancia": "alta",
+    "descripcion": "Si el techo tiene goteras y el piso está fatal, más vale esperar que tomar un mal local."
+  },
+  {
+    "categoria": "venta",
+    "titulo": "Limpia la casa antes de enseñar",
+    "importancia": "alta",
+    "descripcion": "Polvo y suciedad espantan la clientela. Deja la casa pulida para que brille como estrella."
+  },
+  {
+    "categoria": "venta",
+    "titulo": "Haz fotos de calidad",
+    "importancia": "media",
+    "descripcion": "Un mal encuadre puede dar miedo; mejor una foto con encanto que cierre el acuerdo."
+  },
+  {
+    "categoria": "venta",
+    "titulo": "Fija un precio competitivo",
+    "importancia": "alta",
+    "descripcion": "Si el precio es de otro mundo, tu venta quedará en segundo. ¡Sé realista y ganarás la pista!"
+  },
+  {
+    "categoria": "venta",
+    "titulo": "Ofrece visitas a tiempo",
+    "importancia": "media",
+    "descripcion": "Si no muestras la casa porque andas perdido, olvídate de cerrar el pedido."
+  },
+  {
+    "categoria": "venta",
+    "titulo": "No escondas los desperfectos",
+    "importancia": "alta",
+    "descripcion": "Un comprador cabreado por un defecto oculto te dirá: 'Lo siento, no lo junto'."
+  },
+  {
+    "categoria": "venta",
+    "titulo": "Sé paciente y flexible",
+    "importancia": "alta",
+    "descripcion": "En la compra y la venta, paciencia es ciencia. No fuerces el trato, encuentra tu esencia."
+  },
+  {
+    "categoria": "venta",
+    "titulo": "Consulta con profesionales",
+    "importancia": "alta",
+    "descripcion": "Un buen agente sabe lo que vende, no como el primo que dice: 'Ahí te atiendes'."
+  },
+  {
+    "categoria": "compra",
+    "titulo": "No te guíes solo por emociones",
+    "importancia": "media",
+    "descripcion": "El corazón es buen amigo, pero la lógica es el abrigo. ¡Compra y vende sin castigo!"
+  },
+  {
+    "categoria": "compra",
+    "titulo": "Considera los impuestos y trámites",
+    "importancia": "alta",
+    "descripcion": "Si olvidas Hacienda, el susto te saldrá caro. ¡Consulta antes y sin reparo!"
+  },
+  {
+    "categoria": "compra",
+    "titulo": "Evita las prisas al cerrar",
+    "importancia": "alta",
+    "descripcion": "Si vas corriendo como un rayo, puede que caigas en un desmayo. ¡Revisa bien y hazlo guay!"
+  }
+]

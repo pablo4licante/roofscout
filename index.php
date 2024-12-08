@@ -161,6 +161,14 @@ $routes = [
             echo "Image not found.";
         }
     },
+    '/eliminar-foto-perfil' => function () {
+        $controller = new UsuarioController();
+        $controller->eliminarFotoPerfil();
+    },
+    '/foto-principal/(\d+)' => function ($id) {
+        $controller = new FotoController();
+        $controller->hacerPrincipal($id);
+    },
 
 ];
 
@@ -188,7 +196,8 @@ $protectedRoutes = [
     '/agregar-foto/(\d+)',
     '/mis-datos',
     '/auth-modificar',
-    '/mensajes-anuncio/(\d+)'
+    '/mensajes-anuncio/(\d+)',
+    '/eliminar-foto-perfil',
 ];
 
 

@@ -116,4 +116,15 @@ class Foto {
         
         return $stmt->execute();
     }
+
+    public static function hacerPrincipal($id) {
+        $sql = "UPDATE fotos SET principal = 0 WHERE anuncio = (SELECT anuncio FROM fotos WHERE id = :id);
+                UPDATE fotos SET principal = 1 WHERE id = :id";
+        
+        $db = DB::getConnection();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        
+        return $stmt->execute();
+    }
 }

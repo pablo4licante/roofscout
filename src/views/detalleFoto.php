@@ -13,9 +13,13 @@
         <p><?php echo htmlspecialchars($foto['alt']); ?></p>
         <button onclick="window.location.href='/anuncio/<?php echo $foto['anuncio']?>'">Volver al anuncio</button>
     </div>
+    <?php if($anuncio['usuario'] == $_SESSION['user']):?>
+        <div>
+            <button  onclick="if(confirm('¿Estás seguro de que quieres hacer esta foto la principal?')) { window.location.href='/foto-principal/<?php echo $foto['id']; ?>'; }">Hacer principal</button>
+        </div>
     <div>
         <button style="background-color:red;" onclick="if(confirm('¿Estás seguro de que deseas eliminar esta foto?')) { window.location.href='/eliminar-foto/<?php echo $foto['id']; ?>'; }">Eliminar foto</button>
     </div>
+    <?php endif; ?>
 </div>
-
 <?php endif; ?>

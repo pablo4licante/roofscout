@@ -1,41 +1,81 @@
 <?php
 
-require_once('./src/models/anuncioModel.php'); 
+require_once('./src/models/anuncioModel.php');
 require_once('./src/models/usuarioModel.php');
-require_once('./src/models/fotoModel.php'); 
+require_once('./src/models/fotoModel.php');
 require_once('./src/models/tiposModel.php');
 require_once('./src/models/paisModel.php');
 
-class AnuncioController {
-    public function inicio() {
+class AnuncioController
+{
+    public function inicio()
+    {
         $anuncios = Anuncio::getUltimos();
+        
+        $filename = "anuncios_favoritos.cdm";
+        $favoritos = [];
+
+        if (file_exists($filename)) {
+            $file = fopen($filename, "r");
+            if ($file) {
+                while (($line = fgets($file)) !== false) {
+                    $parts = explode(" #$ ", $line);
+                    if (isset($parts[0])) {
+                        $favoritos[] = $line;
+                    }
+                }
+                fclose($file);
+            }
+
+        } else {
+            echo "<div class='mensaje-error'>No se ha podido cargar la lista de favoritos.</div>";
+        }
+        $anuncios_favs = Anuncio::getFavoritos($favoritos);
+        $anuncios_favoritos = [];
+        foreach ($anuncios_favs as $anuncio_fav) {
+            foreach ($favoritos as $line) {
+                $parts = explode(" #$ ", $line);
+                if (trim($parts[0]) == $anuncio_fav['id']) {
+                    $anuncios_favoritos[] = [
+                        'id' => $anuncio_fav['id'],
+                        'url' => $anuncio_fav['url'],
+                        'alt' => $anuncio_fav['alt'],
+                        'titulo' => $anuncio_fav['titulo'],
+                        'ciudad' => $anuncio_fav['ciudad'],
+                        'pais' => $anuncio_fav['pais'],
+                        'tipo_anuncio' => $anuncio_fav['tipo_anuncio'],
+                        'precio' => $anuncio_fav['precio'],
+                        'fecha_publi' => $anuncio_fav['fecha_publi'],
+                        'nombre' => $parts[1],
+                        'comentario' => $parts[2]
+                    ];
+                    break;
+                }
+            }
+        }
+
+        $consejos = json_decode(file_get_contents('./consejos.json'), true);
         $tipos_anuncio = Tipos::getTipoAnuncio();
         $tipos_vivienda = Tipos::getTipoVivienda();
         include_once './src/views/inicio.php';
     }
 
-    public function busqueda($queryParams) {
+    public function busqueda($queryParams)
+    {
 
-        if(isset($queryParams["precio_min"]) && $queryParams["precio_min"] != "" && !is_numeric($queryParams["precio_min"])) {
+        if (isset($queryParams["precio_min"]) && $queryParams["precio_min"] != "" && !is_numeric($queryParams["precio_min"])) {
             echo "<div class='mensaje-error'>El precio mínimo debe ser un número entero.</div>";
             echo "<button onclick=\"window.location.href='/busqueda'\">Volver a la busqueda</button>";
-        }
-
-        elseif(isset($queryParams["precio_max"]) && $queryParams["precio_max"] != "" && !is_numeric($queryParams["precio_max"])) {
+        } elseif (isset($queryParams["precio_max"]) && $queryParams["precio_max"] != "" && !is_numeric($queryParams["precio_max"])) {
             echo "<div class='mensaje-error'>El precio máximo debe ser un número entero.</div>";
             echo "<button onclick=\"window.location.href='/busqueda'\">Volver a la busqueda</button>";
-        }
-
-        elseif(isset($queryParams["fecha_inicio"]) && $queryParams["fecha_inicio"] != "" && !preg_match("/^\d{4}-\d{2}-\d{2}$/", $queryParams["fecha_inicio"])) {
+        } elseif (isset($queryParams["fecha_inicio"]) && $queryParams["fecha_inicio"] != "" && !preg_match("/^\d{4}-\d{2}-\d{2}$/", $queryParams["fecha_inicio"])) {
             echo "<div class='mensaje-error'>La fecha de inicio debe tener el formato AAAA-MM-DD.</div>";
             echo "<button onclick=\"window.location.href='/busqueda'\">Volver a la busqueda</button>";
-        }
-
-        elseif(isset($queryParams["fecha_fin"]) && $queryParams["fecha_fin"] != "" && !preg_match("/^\d{4}-\d{2}-\d{2}$/", $queryParams["fecha_fin"])) {
+        } elseif (isset($queryParams["fecha_fin"]) && $queryParams["fecha_fin"] != "" && !preg_match("/^\d{4}-\d{2}-\d{2}$/", $queryParams["fecha_fin"])) {
             echo "<div class='mensaje-error'>La fecha de fin debe tener el formato AAAA-MM-DD.</div>";
             echo "<button onclick=\"window.location.href='/busqueda'\">Volver a la busqueda</button>";
-        }
-        else {
+        } else {
             $paises = Paises::getPaises();
             $tipos_vivienda = Tipos::getTipoVivienda();
             $tipos_anuncio = Tipos::getTipoAnuncio();
@@ -44,11 +84,12 @@ class AnuncioController {
         }
     }
 
-    public function detalleAnuncio($id) {
+    public function detalleAnuncio($id)
+    {
         $anuncio = Anuncio::getAnuncio($id);
         $publicador = Usuario::getUsuario($anuncio['usuario']);
         $fotos = Foto::getFotosPorAnuncio($id);
-        
+
 
         $ultimosVistos = isset($_COOKIE['ultimosVistos']) ? explode(',', $_COOKIE['ultimosVistos']) : [];
 
@@ -69,14 +110,16 @@ class AnuncioController {
         include_once './src/views/detalleAnuncio.php';
     }
 
-    public function nuevoAnuncio() {
+    public function nuevoAnuncio()
+    {
         $paises = Paises::getPaises();
         $tipos_anuncio = Tipos::getTipoAnuncio();
         $tipos_vivienda = Tipos::getTipoVivienda();
         include_once './src/views/crearAnuncio.php';
     }
 
-    public function mandarNuevoAnuncio() {
+    public function mandarNuevoAnuncio()
+    {
         $anuncioId = Anuncio::nuevoAnuncio($_POST);
 
         if ($anuncioId) {
@@ -88,7 +131,8 @@ class AnuncioController {
         }
     }
 
-    public function agregarFoto($id) {
+    public function agregarFoto($id)
+    {
         $anuncio = Anuncio::getAnuncio($id);
         $paises = Paises::getPaises();
         $tipos_anuncio = Tipos::getTipoAnuncio();
@@ -99,7 +143,8 @@ class AnuncioController {
         include_once './src/views/agregarFotoAnuncio.php';
     }
 
-    public function agregarFotoDB($id_anuncio, $titulo, $alt, $url) {
+    public function agregarFotoDB($id_anuncio, $titulo, $alt, $url)
+    {
         $data = [
             'url' => $url,
             'anuncio' => $id_anuncio,
@@ -108,20 +153,22 @@ class AnuncioController {
         Foto::nuevaFoto($data);
     }
 
-    public function eliminarFoto($id) {
+    public function eliminarFoto($id)
+    {
         $foto = Foto::getFoto($id);
-        if(Foto::eliminarFoto($id)) {
+        if (Foto::eliminarFoto($id)) {
             $_SESSION['flashdata'] = 'Foto eliminada con exito!';
-            header("Location: /anuncio/".$foto['anuncio']);
+            header("Location: /anuncio/" . $foto['anuncio']);
             exit();
         } else {
             $_SESSION['flashdata'] = 'No se ha podido eliminar la foto.';
-            header("Location: /anuncio/".$foto['anuncio']);
+            header("Location: /anuncio/" . $foto['anuncio']);
             exit();
         }
     }
 
-    public function ultimosVistos() {
+    public function ultimosVistos()
+    {
         $ids = isset($_COOKIE['ultimosVistos']) ? $_COOKIE['ultimosVistos'] : null;
         $anunciosVisitados = [];
         if ($ids) {
@@ -136,24 +183,31 @@ class AnuncioController {
         include_once './src/views/templates/ultimoAnunciosVisitados.inc.php';
     }
 
-    public function eliminarAnuncio($id) {
+    public function eliminarAnuncio($id)
+    {
         include_once('./src/views/eliminarAnuncio.php');
     }
 
-    public function confirmarEliminarAnuncio($id,$password) {
-            if(Usuario::checkCredentials($_SESSION['user'], $password)){        Anuncio::eliminarAnuncio($id);
-            $_SESSION['flashdata'] = 'Anuncio eliminado con exito!';
-            
-            setcookie('ultimosVistos', '', time() + (86400 * 7), "/");
+    public function confirmarEliminarAnuncio($id, $password)
+    {
+        if (Usuario::checkCredentials($_SESSION['user'], $password)) {
 
-            header('Location: /perfil/'.$_SESSION['user']);
+            if (Anuncio::eliminarAnuncio($id)) {
+                setcookie('ultimosVistos', '', time() - 3600, "/", "", false, true);
+                $_SESSION['flashdata'] = 'Anuncio eliminado con exito!';
+                header("Location: /perfil/{$_SESSION['user']}");
+            } else {
+                $_SESSION['flashdata'] = 'Anuncio no eliminado.';
+                header("Location: /anuncio/{$id}");
+            }
         } else {
             $_SESSION['flashdata'] = 'No se ha podido eliminar el anuncio. Comprueba que la contraseña es correcta.';
-            header('Location: /anuncio/'.$id);
+            header("Location: /anuncio/{$id}");
         }
     }
 
-    public function modificarAnuncio($id) {
+    public function modificarAnuncio($id)
+    {
         $anuncio = Anuncio::getAnuncio($id);
         $paises = Paises::getPaises();
         $tipos_anuncio = Tipos::getTipoAnuncio();
@@ -161,7 +215,8 @@ class AnuncioController {
         include_once './src/views/modificarAnuncio.php';
     }
 
-    public function mandarModificarAnuncio($id) {
+    public function mandarModificarAnuncio($id)
+    {
         if (Usuario::checkCredentials($_SESSION['user'], $_SESSION['password'])) {
             $anuncioId = Anuncio::modificarAnuncio($id, $_POST);
 
@@ -177,5 +232,10 @@ class AnuncioController {
             header("Location: /modificar-anuncio/$id");
             exit();
         }
+    }
+
+    public function getAnuncio($id)
+    {
+        return Anuncio::getAnuncio($id);
     }
 }

@@ -84,9 +84,8 @@ class AuthController
         $fecha_nacimiento = $_POST['fecha_nacimiento'];
         $ciudad = $_POST['ciudad'];
         $pais = $_POST['pais'];
-        $foto_perfil = isset($_POST['foto_perfil']) ? $_POST['foto_perfil'] : null;
-
-
+        $foto_perfil = $_SESSION['foto_perfil'] ? $_SESSION['foto_perfil'] : null;
+        unset($_SESSION['foto_perfil']);
         // COMPROBACION DE ERRORES
         $errores = [];
 
@@ -179,7 +178,8 @@ class AuthController
         $fecha_nacimiento = $_POST['fecha_nacimiento'];
         $ciudad = $_POST['ciudad'];
         $pais = $_POST['pais'];
-        $foto_perfil = isset($_POST['foto_perfil']) ? $_POST['foto_perfil'] : null;
+        $foto_perfil = $_SESSION['foto_perfil'] ? $_SESSION['foto_perfil'] : null;
+        unset($_SESSION['foto_perfil']);
 
          // COMPROBACION DE ERRORES
          $errores = [];

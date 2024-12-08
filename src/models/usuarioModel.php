@@ -1,6 +1,6 @@
 <?php
 
-require_once("./src/models/dbModel.php");
+require_once "./src/models/dbModel.php";
 class Usuario
 {
     public static function getUsuario($email)
@@ -32,15 +32,9 @@ class Usuario
 
     public static function nuevoUsuario($email, $password, $nombre, $sexo, $fecha_nacimiento, $ciudad, $pais, $foto_perfil)
     {
-        if ($foto_perfil != null)  {
 
             $sql = "INSERT INTO usuarios (email, password, nombre, sexo, fecha_nacimiento, ciudad, pais, foto_perfil, fecha_registro) 
             VALUES (:email, :password, :nombre, :sexo, :fecha_nacimiento, :ciudad, :pais, :foto_perfil, NOW())";
-        }
-        else {
-            $sql = "INSERT INTO usuarios (email, password, nombre, sexo, fecha_nacimiento, ciudad, pais, fecha_registro) 
-            VALUES (:email, :password, :nombre, :sexo, :fecha_nacimiento, :ciudad, :pais, NOW())";
-        }
 
         $db = DB::getConnection();
         $stmt = $db->prepare($sql);
@@ -51,9 +45,11 @@ class Usuario
         $stmt->bindValue(':fecha_nacimiento', $fecha_nacimiento, PDO::PARAM_STR);
         $stmt->bindValue(':ciudad', $ciudad, PDO::PARAM_STR);
         $stmt->bindValue(':pais', $pais, PDO::PARAM_STR);
-        if( $foto_perfil != null ) {
-            $stmt->bindValue(':foto_perfil', $foto_perfil, PDO::PARAM_STR);
+        if( $foto_perfil == null || $foto_perfil == "") {
+            $foto_perfil = "https://www.shutterstock.com/image-vector/blank-avatar-photo-place-holder-600nw-1095249842.jpg";
         }
+        $stmt->bindValue(':foto_perfil', $foto_perfil, PDO::PARAM_STR);
+
         if ($stmt->execute()) {
             return true;
         } else {
@@ -76,27 +72,18 @@ class Usuario
             }
         }
 
-        if ($foto_perfil == null) {
-            $sql = "UPDATE usuarios 
-                    SET email = :nuevo_email, 
-                    password = :password, 
-                    nombre = :nombre, 
-                    sexo = :sexo, 
-                    fecha_nacimiento = :fecha_nacimiento, 
-                    ciudad = :ciudad, 
-                    pais = :pais 
-                    WHERE email = :email";
-        } else {
-            $sql = "UPDATE usuarios 
-                    SET email = :nuevo_email, 
-                    password = :password, 
-                    nombre = :nombre, 
-                    sexo = :sexo, 
-                    fecha_nacimiento = :fecha_nacimiento, 
-                    ciudad = :ciudad, 
-                    pais = :pais, 
-                    foto_perfil = :foto_perfil 
-                    WHERE email = :email";
+        $sql = "UPDATE usuarios 
+                SET email = :nuevo_email, 
+                password = :password, 
+                nombre = :nombre, 
+                sexo = :sexo, 
+                fecha_nacimiento = :fecha_nacimiento, 
+                ciudad = :ciudad, 
+                pais = :pais, 
+                foto_perfil = :foto_perfil 
+                WHERE email = :email";
+        if ($foto_perfil == null || $foto_perfil == "") {
+            $foto_perfil = "https://www.shutterstock.com/image-vector/blank-avatar-photo-place-holder-600nw-1095249842.jpg";
         }
         $db = DB::getConnection();
         $stmt = $db->prepare($sql);
@@ -123,7 +110,7 @@ class Usuario
 
     public static function updateUltimaConexion()
     {
-        $email = isset($_COOKIE['user']) ? $_COOKIE['user'] : (isset($_SESSION['user']) ? $_SESSION['user'] : null);
+        $email = $_COOKIE['user'] ?? $_SESSION['user'] ?? null;
         if ($email === null) {
             return false;
         }
@@ -158,6 +145,19 @@ class Usuario
     {
         $email = $_SESSION['user'];
         $sql = "DELETE FROM usuarios WHERE email = :email";
+        $db = DB::getConnection();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function eliminarFotoPerfil() {
+        $email = $_SESSION['user'];
+        $sql = "UPDATE usuarios SET foto_perfil = 'https://www.shutterstock.com/image-vector/blank-avatar-photo-place-holder-600nw-1095249842.jpg' WHERE email = :email";
         $db = DB::getConnection();
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':email', $email, PDO::PARAM_STR);

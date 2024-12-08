@@ -38,4 +38,10 @@ class UsuarioController {
         $usuario = Usuario::getUsuario($_SESSION['user']);
         include_once("./src/views/modificarDatos.php");
     }
+
+    public function eliminarFotoPerfil() {
+        Usuario::eliminarFotoPerfil();
+        $_SESSION['flashdata'] = "Foto de perfil eliminada correctamente.";
+        header('Location: /perfil/' . $_SESSION['user']);
+    }
 }

@@ -21,6 +21,28 @@ class Anuncio {
         }
     }
 
+    public static function getFavoritos($favoritos) {
+
+        if (!empty($favoritos)) {
+            $ids = implode(',', array_map('intval', $favoritos));
+            $sql = "SELECT a.*, f.url, f.alt 
+                    FROM anuncios a 
+                    LEFT JOIN fotos f ON a.id = f.anuncio AND f.principal = 1 
+                    WHERE a.id IN ($ids)";
+            
+            $db = DB::getConnection();
+            $stmt = $db->prepare($sql);
+            
+            if ($stmt->execute()) {
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } else {
+                return []; // Devuelve un array vacío en caso de error
+            }
+        } else {
+            return []; // Devuelve un array vacío si no hay favoritos
+        }
+    }
+
     public static function getResultados($queryParams) {
         
         $sql = "SELECT a.*, f.url, f.alt
@@ -157,12 +179,10 @@ class Anuncio {
     }
 
     public static function eliminarAnuncio($id) {
-        $sql = "DELETE FROM anuncios WHERE id = :id AND usuario = :usuario";
-        
+        $sql = "DELETE FROM fotos WHERE anuncio = :id; DELETE FROM anuncios WHERE id = :id";
         $db = DB::getConnection();
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-        $stmt->bindValue(':usuario', $_SESSION['user'], PDO::PARAM_STR);
         
         return $stmt->execute();
     }

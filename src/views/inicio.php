@@ -19,3 +19,24 @@ if (isset($_SESSION['flashdata'])) {
             <?php include('./src/views/templates/card.inc.php'); ?>
         <?php endforeach; ?>
 </div>
+
+
+<?php
+if (!empty($anuncios_favoritos)) {
+  $random_key = array_rand($anuncios_favoritos);
+  $anuncio_favorito = $anuncios_favoritos[$random_key];
+  include('./src/views/templates/recomendacion.inc copy.php');
+}
+?>
+<?php 
+$consejo_id = array_rand($consejos);
+$consejo = $consejos[$consejo_id];
+?>
+<div class="cool-quote">
+  <blockquote>
+    <h4>💡 Consejos para la <?php echo $consejo['categoria']?> de inmuebles</h4>
+    <h3><?php echo $consejo['titulo']?></h3>
+    <p><b>Importancia:</b> <?php echo $consejo['importancia']?></p>
+    <p><?php echo $consejo['descripcion']?></p>
+  </blockquote>
+</div>

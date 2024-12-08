@@ -538,6 +538,39 @@ form, #tarifas {
     align-items: start;
 }
 
+.cool-quote {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 15px;
+    background-color: var(--element-background-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    word-wrap: break-word;
+    width: 60%;
+}
+
+.cool-quote-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 50%;
+}
+
+.publisher_img {
+    margin-top:0.5rem;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
 
 #add-image-card, #post-image-card {
     margin: 0.2rem 50%;
