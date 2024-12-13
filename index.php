@@ -191,6 +191,9 @@ $routes = [
             echo "Formato no soportado.";
         }
     },
+    '/rss' => function () {
+        include_once './src/views/RSS.php';
+    },
 
 ];
 
