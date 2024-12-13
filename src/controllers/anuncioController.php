@@ -238,4 +238,131 @@ class AnuncioController
     {
         return Anuncio::getAnuncio($id);
     }
+
+    public function generarRSS() {
+        header("Content-Type: application/rss+xml; charset=UTF-8");
+        header('Content-Disposition: attachment; filename="feed.rss.xml"');
+    
+    
+        // Recuperar anuncios
+        $anuncios = Anuncio::getUltimos(5);
+    
+        // Crear el documento XML
+        $dom = new DOMDocument('1.0', 'UTF-8');
+        $dom->formatOutput = true;
+    
+        // Nodo raíz <rss>
+        $rss = $dom->createElement('rss');
+        $rss->setAttribute('version', '2.0');
+        $dom->appendChild($rss);
+    
+        // Nodo <channel>
+        $channel = $dom->createElement('channel');
+        $rss->appendChild($channel);
+    
+        // Elementos generales del canal
+        $title = $dom->createElement('title', 'Roofscout.one - Anuncios');
+        $channel->appendChild($title);
+    
+        $link = $dom->createElement('link', 'http://roofscout.one/');
+        $channel->appendChild($link);
+    
+        $description = $dom->createElement('description', 'Últimos anuncios publicados en Mi Sitio.');
+        $channel->appendChild($description);
+    
+        $lastBuildDate = $dom->createElement('lastBuildDate', date(DATE_RSS));
+        $channel->appendChild($lastBuildDate);
+    
+        $language = $dom->createElement('language', 'es-ES');
+        $channel->appendChild($language);
+    
+        // Entradas de anuncios
+        foreach ($anuncios as $anuncio) {
+            $item = $dom->createElement('item');
+    
+            $itemTitle = $dom->createElement('title', htmlspecialchars($anuncio['titulo']));
+            $item->appendChild($itemTitle);
+    
+            $itemLink = $dom->createElement('link', 'http://roofscout.one/anuncio/' . $anuncio['id']);
+            $item->appendChild($itemLink);
+    
+            $itemDescription = $dom->createElement('description', htmlspecialchars($anuncio['descripcion']));
+            $item->appendChild($itemDescription);
+    
+            $itemPubDate = $dom->createElement('pubDate', date(DATE_RSS, strtotime($anuncio['fecha'])));
+            $item->appendChild($itemPubDate);
+    
+            $itemGuid = $dom->createElement('guid', 'http://roofscout.one/anuncio/' . $anuncio['id']);
+            $item->appendChild($itemGuid);
+    
+            $channel->appendChild($item);
+        }
+    
+        // Salida XML
+        echo $dom->saveXML();
+    }
+    
+    
+    public function generarAtom() {
+        header("Content-Type: application/atom+xml; charset=UTF-8");
+        header('Content-Disposition: attachment; filename="feed.atom.xml"');
+    
+        // Recuperar anuncios
+        $anuncios = Anuncio::getUltimos(5);
+    
+        // Crear el documento XML
+        $dom = new DOMDocument('1.0', 'UTF-8');
+        $dom->formatOutput = true;
+    
+        $feed = $dom->createElement('feed');
+        $feed->setAttribute('xmlns', 'http://www.w3.org/2005/Atom');
+        $dom->appendChild($feed);
+    
+        // Elementos generales
+        $title = $dom->createElement('title', 'Roofscout.one - Anuncios');
+        $feed->appendChild($title);
+    
+        $link = $dom->createElement('link');
+        $link->setAttribute('href', 'http://roofscout.one/');
+        $feed->appendChild($link);
+    
+        $updated = $dom->createElement('updated', date(DATE_ATOM));
+        $feed->appendChild($updated);
+    
+        $author = $dom->createElement('author');
+        $name = $dom->createElement('name', 'Mi Sitio');
+        $author->appendChild($name);
+        $feed->appendChild($author);
+    
+        $id = $dom->createElement('id', 'http://roofscout.one/');
+        $feed->appendChild($id);
+    
+        // Entradas de anuncios
+        foreach ($anuncios as $anuncio) {
+            $entry = $dom->createElement('entry');
+    
+            $entryTitle = $dom->createElement('title', htmlspecialchars($anuncio['titulo']));
+            $entry->appendChild($entryTitle);
+    
+            $entryLink = $dom->createElement('link');
+            $entryLink->setAttribute('href', 'http://roofscout.one/anuncio/' . $anuncio['id']);
+            $entry->appendChild($entryLink);
+    
+            $entryId = $dom->createElement('id', 'http://roofscout.one/anuncio/' . $anuncio['id']);
+            $entry->appendChild($entryId);
+    
+            $entryUpdated = $dom->createElement('updated', date(DATE_ATOM, strtotime($anuncio['fecha'])));
+            $entry->appendChild($entryUpdated);
+    
+            $entrySummary = $dom->createElement('summary', htmlspecialchars($anuncio['descripcion']));
+            $entry->appendChild($entrySummary);
+    
+            $feed->appendChild($entry);
+        }
+    
+        // Salida XML
+        echo $dom->saveXML();
+    }
+    
+    
 }

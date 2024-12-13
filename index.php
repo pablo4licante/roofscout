@@ -1,6 +1,6 @@
 <!--
-    Archivo: index.php
-    Descripccion: ...
+    roofscout.one
+    Tu pagina de compraventa de inmuebles de confianza
     Creado por: Pablo Alicante y Leyre Wollstein el 27/10/2024
 -->
 
@@ -169,6 +169,28 @@ $routes = [
         $controller = new FotoController();
         $controller->hacerPrincipal($id);
     },
+    '/feed/([^/]+)' => function ($formato) {
+        $controller = new AnuncioController();
+        if($formato == 'rss') {
+            $controller->generarRSS();
+        } else if ($formato == 'atom') {
+            $controller->generarAtom();
+        } else {
+            http_response_code(404);
+            echo "Formato no soportado.";
+        }
+    },
+    '/user-export/([^/]+)' => function ($formato) {
+        $controller = new UsuarioController();
+        if($formato == 'rss') {
+            $controller->exportarUsuarioRSS();
+        } else if ($formato == 'atom') {
+            $controller->exportarUsuarioAtom();
+        } else {
+            http_response_code(404);
+            echo "Formato no soportado.";
+        }
+    },
 
 ];
 
@@ -198,6 +220,7 @@ $protectedRoutes = [
     '/auth-modificar',
     '/mensajes-anuncio/(\d+)',
     '/eliminar-foto-perfil',
+    '/user-export/([^/]+)',
 ];
 
 
@@ -221,10 +244,10 @@ if ($isProtected) {
         Usuario::updateUltimaConexion();
     }
 }
-
-include_once('./src/views/templates/cabecera.inc.php');
-include_once('./src/views/templates/navegacion.inc.php');
-
+if (!preg_match('@^/feed/[^/]+$@', $path) && !preg_match('@^/user-export/[^/]+$@', $path)) {
+    include_once './src/views/templates/cabecera.inc.php';
+    include_once './src/views/templates/navegacion.inc.php';
+}
 $matched = false;
 
 foreach ($routes as $route => $callback) {
@@ -247,6 +270,8 @@ if (!$matched) {
     header("Location: /");
     exit();
 }
+if (!preg_match('@^/feed/[^/]+$@', $path) && !preg_match('@^/user-export/[^/]+$@', $path)) {
+
 $controller = new anuncioController();
 $controller->ultimosVistos();
 if (!empty($anunciosVisitados)) {
@@ -255,4 +280,5 @@ if (!empty($anunciosVisitados)) {
 
 include_once('./src/views/templates/ultimoAnunciosVisitados.inc.php');
 include_once('./src/views/templates/footer.inc.php');
+}
 ?>

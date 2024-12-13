@@ -36,5 +36,14 @@ class Folleto {
             return false;
         }
     }
+
+    public static function dameFolletosPorUsuario($usuario) {
+        $sql = "SELECT * FROM solicitudes WHERE email = :usuario";
+        $db = DB::getConnection();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':usuario', $usuario, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }
 
